@@ -97,9 +97,11 @@
       
         <p>html, css, js 统称为前端三大语言，其中 html 和 css 之前了解过一些，两者架构相对更简单一些，大概可以 chat 的辅助下做一些简单产品，js 只知道一般写在 head 里面或者 body 后面。</p>
 <p>css 由于其功能性的缺少，会使用 “css 预处理器”，是一种更倾向于编程并把编程语言翻译成 css 文件的处理器。</p>
+<p>….</p>
 <p>后文大部分都是最近学习的 js 相关了</p>
 <p>js 是一种脚本语言，无需通过编译，直接在浏览器上运行，也就是可以在控制台编写测试，之前在学习漏洞时有过注入 js 代码的经历，对其在浏览器运行的特性有过一些了解。</p>
 <p>js 自由度非常高，比方说变量不用选择数据类型，但是很容易出奇奇怪怪的 bug。</p>
+<p>….</p>
 <p>DOM：浏览器对象类型</p>
 <ul>
 <li>window 代表浏览器窗口</li>
@@ -109,6 +111,7 @@
 <li>document 代表当前界面，html，dom 文档树，cookie</li>
 <li>history 代表浏览器历史记录</li>
 </ul>
+<p>….</p>
 <p>获得 DOM 节点</p>
 <script>
     var h1 = document.getElementsByTagName('h1');
@@ -118,6 +121,18 @@
 
 <p>控制台 xxx.children 来获得子节点</p>
 <p>可以通过修改节点文本的值来更改网页来更改网页内容</p>
+<p>….</p>
+<p>删除节点：先找到父节点，再通过父节点删除自己</p>
+<p>XX.parentElement </p>
+<p>xx.removechild ()</p>
+<p>father.removechild (father.children[0])</p>
+<p>father.removechild (father.children[1])</p>
+<p>father.removechild (father.children[2])</p>
+<p>以上形式不正确，js操作是动态的，(father.children[2])会不存在</p>
+<p>….</p>
+<p>插入节点：</p>
+<p>先获取一个节点a，b.appendchild(a)来把a追加到b的子节点</p>
+<p>或者xx.insertBefore（c，d）在d前插入节点c</p>
 
       
     </div>
