@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>php | Hexo</title>
+  <title>sql | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="用途 创建动态交互性网页，创建、打开、读取、写入、关闭服务器上的文件，收集表单数据，发送和接收 cookies，添加、删除、修改数据库中的数据。 语法 位于&lt;.?php?&gt;中间,句末要加分号，使用echo输出。 EOF：是一种特殊的字符串，用于表示文本结束符。它通常用于多行文本块中，以避免使用大量的引号和换行符。 EOF通常使用两个小于号（&lt;&lt;）和一个标识符来定义，该标识符">
+  <meta name="description" content="sql语句可以单行书写也可以多行书写，以分号结尾可使用空格，缩进增加可读性，sql对大小写不敏感 单行注释–，多行注释&#x2F;……&#x2F; 数据库-&gt;表-&gt;列-&gt;数据    查询所有数据库：show database； 查询当前数据库：select database（）； 创建:  create database    查询当前所有表： show tables; 查询表结">
 <meta property="og:type" content="article">
-<meta property="og:title" content="php">
-<meta property="og:url" content="http://example.com/2024/02/03/php/index.html">
+<meta property="og:title" content="sql">
+<meta property="og:url" content="http://example.com/2024/02/03/sql/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="用途 创建动态交互性网页，创建、打开、读取、写入、关闭服务器上的文件，收集表单数据，发送和接收 cookies，添加、删除、修改数据库中的数据。 语法 位于&lt;.?php?&gt;中间,句末要加分号，使用echo输出。 EOF：是一种特殊的字符串，用于表示文本结束符。它通常用于多行文本块中，以避免使用大量的引号和换行符。 EOF通常使用两个小于号（&lt;&lt;）和一个标识符来定义，该标识符">
+<meta property="og:description" content="sql语句可以单行书写也可以多行书写，以分号结尾可使用空格，缩进增加可读性，sql对大小写不敏感 单行注释–，多行注释&#x2F;……&#x2F; 数据库-&gt;表-&gt;列-&gt;数据    查询所有数据库：show database； 查询当前数据库：select database（）； 创建:  create database    查询当前所有表： show tables; 查询表结">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-02-03T13:48:02.000Z">
-<meta property="article:modified_time" content="2024-02-03T14:58:27.957Z">
+<meta property="article:published_time" content="2024-02-03T14:59:19.000Z">
+<meta property="article:modified_time" content="2024-02-03T15:13:28.503Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -75,10 +75,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-php" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-sql" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2024/02/03/php/" class="article-date">
-  <time class="dt-published" datetime="2024-02-03T13:48:02.000Z" itemprop="datePublished">2024-02-03</time>
+    <a href="/2024/02/03/sql/" class="article-date">
+  <time class="dt-published" datetime="2024-02-03T14:59:19.000Z" itemprop="datePublished">2024-02-03</time>
 </a>
     
   </div>
@@ -89,7 +89,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      php
+      sql
     </h1>
   
 
@@ -97,68 +97,69 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p><strong>用途</strong></p>
-<p>创建动态交互性网页，创建、打开、读取、写入、关闭服务器上的文件，收集表单数据，发送和接收 cookies，添加、删除、修改数据库中的数据。</p>
-<p><strong>语法</strong></p>
-<p>位于&lt;.?php?&gt;中间,句末要加分号，使用echo输出。</p>
-<p>EOF：是一种特殊的字符串，用于表示文本结束符。它通常用于多行文本块中，以避免使用大量的引号和换行符。</p>
-<p>EOF通常使用两个小于号（&lt;&lt;）和一个标识符来定义，该标识符可以是任何有效的字符串，通常是大写字母E后跟一个唯一的字符串，以指示这是一个EOF标识符。然后，在EOF标识符上方和下方放置多行文本，这些文本将被视为一个整体字符串。</p>
+        <p>sql语句可以单行书写也可以多行书写，以分号结尾可使用空格，缩进增加可读性，sql对大小写不敏感</p>
+<p>单行注释–，多行注释&#x2F;<em>……</em>&#x2F;</p>
+<p>数据库-&gt;表-&gt;列-&gt;数据</p>
 <ul>
 <li></li>
 </ul>
-<p>$变量名&#x3D;…创建变量</p>
-<p>var_dump()可以输出变量的数据类型和值</p>
+<p>查询所有数据库：show database；</p>
+<p>查询当前数据库：select database（）；</p>
+<p>创建:  create database</p>
 <ul>
 <li></li>
 </ul>
-<p>关联数组（带有指定键的数组，每个键关联一个值）：</p>
-<p>$a&#x3D;array(“ak”&#x3D;&gt;”6”,”g”&#x3D;&gt;’y’);</p>
-<p>$a[“ak”]&#x3D;’6’</p>
-<p>遍历方法</p>
-<p>foreach（$a as $x&#x3D;&gt; $x_value）</p>
-<p>echo $x(键值)  $x_value(键对应值)</p>
+<p>查询当前所有表： show tables;</p>
+<p>查询表结构：desc ()；</p>
+<p>查询指定表的建表语句： show create ()</p>
 <ul>
 <li></li>
 </ul>
-<p><strong>资源</strong></p>
-<p>PHP 资源 resource 是一种特殊变量，保存了到外部资源的一个引用。</p>
-<p>由于资源类型变量保存有为打开文件、数据库连接、图形画布区域等的特殊句柄，因此将其它类型的值转换为资源没有意义。</p>
-<p>使用 get_resource_type() 函数可以返回资源（resource）类型</p>
+<p>创建字段：create table</p>
+<p>添加字段:alter table表名 ADD 字段名  类型（长度）</p>
+<p>删除字段 ：alter table 表明 drop 字段名</p>
+<p>修改表名：alter table 表名 rename to 新表名；</p>
+<p>删除表：drop table  表名</p>
 <ul>
 <li></li>
 </ul>
-<p>三元运算符</p>
-<p>(expr1）? (expr2) : (expr3)</p>
-<p>(expr1）正确返回  (expr2)</p>
-<p>(expr1)  错误返回 (expr3)</p>
+<p>添加数据</p>
+<p>给指定字段添加数据:insert into表名（字段名1，字段名2）values （值1，值2）；</p>
+<p>给全部字段添加数据：insert into 表名 values（值1，值2）</p>
+<p>批量添加数据：insert into 表名（字段名1，字段名2….）values（值1，值2..），（值1，值2）</p>
+<p>insert into  表名 values（值1，值2），（值 1，值2）</p>
+<p>修改数据</p>
+<p>update 表名 set 字段名1&#x3D;值1，字段名2&#x3D;值2，…where 条件；</p>
+<p>删除数据</p>
+<p>delete from 表名 where 条件</p>
+<p>查询数据</p>
+<p>swlect 字段名 from 表名 where 条件</p>
 <ul>
 <li></li>
 </ul>
-<p>组合比较符</p>
-<p>$c &#x3D; $a &lt;&#x3D;&gt; $b;</p>
-<p>如果$a &gt; $b 则 $c&#x3D;1;</p>
-<p>如果$a &#x3D;&#x3D; $b 则 $c&#x3D;0;</p>
-<p>如果$a &lt; $b 则 $c&#x3D;-1;</p>
+<p>分组查询</p>
+<p>select 字段列表 from where条件 表名 group by 分组字段名 having条件</p>
+<p>排序查询</p>
+<p>swlect字段列表 from表名 other by 字段1 排序方式 字段2 排序方式（在字段1相同的情况下才会再去比较字段2）</p>
+<p>排序方式：升序desv  降序 asc</p>
+<p>分页查询</p>
+<p>select 字段列表 from表名 LIMIT 起始索引，查询记录数</p>
+<p>起始索引&#x3D;（查询页码-1）*每页显示记录数</p>
+<p>编写顺序 SELECT-&gt;FROM-&gt;WHERE-&gt;GROUP BY-&gt;HAVING-&gt;ORDER BY-&gt;LIMIT</p>
+<p>执行顺序：FROM-&gt;WHERE-&gt;GROUP BY-&gt;HAVING-&gt;SELECT-&gt;ORDER BY-&gt;LIMIT</p>
 <ul>
 <li></li>
 </ul>
-<p>x&#x3D;&#x3D;&#x3D;y  , x和y具有相同的键&#x2F;值对，并且顺序类型都相同,true</p>
-<ul>
-<li></li>
-</ul>
-<p>魔术常量<br>值随着其在代码的位置改变而改变</p>
-<p><em>LINE</em>   :  值为文件当前行号</p>
-<p><em>FILE</em>   ：文件的完整路径与文件名</p>
-<p><em>DIR</em>   ; 文件所在的目录。</p>
-<p><em>FUNCTION</em>  :函数名称.</p>
-<p><em>CLASS</em>  :   类的名称</p>
-<p><em>METHOD</em> : 类的方法名</p>
-<p><em>NAMESPACE</em> : 当前命名空间的名称</p>
+<p>管理用户</p>
+<p>查询用户：USE mysql；select* from user</p>
+<p>创建用户：create user 用户名 @ 主机名 identified by  密码 ；</p>
+<p>修改用户密码： alter user ”用户名 @ 主机名 identified with mysql_native_password BY  新密码 ；</p>
+<p>删除用户：drop user 用户名 @ 主机名；</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/03/php/" data-id="cls67uag80000mcb5ahgfgqk9" data-title="php" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/03/sql/" data-id="cls67uagb0003mcb58cvpdh5d" data-title="sql" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -168,19 +169,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2024/02/03/sql/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          sql
-        
-      </div>
-    </a>
   
-  
-    <a href="/2024/01/29/python/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2024/02/03/php/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">python</div>
+      <div class="article-nav-title">php</div>
     </a>
   
 </nav>
