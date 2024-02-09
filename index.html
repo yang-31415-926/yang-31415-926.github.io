@@ -73,6 +73,66 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-sql11-15" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/02/09/sql11-15/" class="article-date">
+  <time class="dt-published" datetime="2024-02-09T13:44:10.000Z" itemprop="datePublished">2024-02-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/02/09/sql11-15/">sql11~15</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><strong>第11关</strong></p>
+<p>相较于前面10关，这一关看到输入username和password可以推测出这关大概率使用_POST的方式</p>
+<p>账号密码都输入，用burp抓一下包，抓到‘uname&#x3D;admin&amp;passwd&#x3D;admin&amp;submit&#x3D;Submit’，在burp里面可以确定这一题是_POST的形式.</p>
+<p>uname&#x3D;admin&amp;passwd&#x3D;admin&amp;submit&#x3D;Submit把这一行post过去</p>
+<p>uname&#x3D;admin‘&amp;passwd&#x3D;admin&amp;submit&#x3D;Submit传入这一句，提示有sql语句错误，找到漏洞</p>
+<p>other by发现有两列，存在回显点</p>
+<p>既然找到注入漏洞和回显点接下来的操作和less1就大体上一样了</p>
+<p>在POST中涉及编码，因此注释使用#，而不是–+</p>
+<p><strong>第12关</strong></p>
+<p>第十二关和第十一关基本一样。把单引号换成双引号即可</p>
+<p><strong>第13关</strong></p>
+<p>输入账号密码，发现这次没有回显点了</p>
+<p>但是如果账号密码正确和账号密码错误的显示会有区别，需要用到盲注</p>
+<p>通过尝试，注入漏洞为（‘’）形式</p>
+<p>uname&#x3D;a’) or if(length(database()&gt;1),sleep(5)) #或者</p>
+<p>uname&#x3D;a’) or left(database(),1)&#x3D;’a’ #两种盲注方式和burp暴力破解均可。</p>
+<p><strong>第14关</strong></p>
+<p>和上一关大体一致，不过漏洞为双引号包裹</p>
+<p><strong>第15关</strong></p>
+<p>和上一关大体一致，不过漏洞为单引号包裹</p>
+<p><strong>第16关</strong></p>
+<p>和上一关大体一致，不过漏洞为括号双引号包裹</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/02/09/sql11-15/" data-id="clsep8v9n0003j8b561qqf4so" data-title="sql11~15" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-sql1-10" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/02/07/sql1-10/" class="article-date">
@@ -250,7 +310,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/07/sql1-10/" data-id="clsd7p0al000614b58o2waryd" data-title="sql1~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/07/sql1-10/" data-id="clsep8v9m0001j8b5cg7jbn5s" data-title="sql1~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -346,7 +406,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/03/sql/" data-id="clsd7p0ah000214b51g1k02bq" data-title="sql" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/03/sql/" data-id="clsep8v9r0007j8b5fert67kl" data-title="sql" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -441,7 +501,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/03/php/" data-id="clsd7p0ai000314b5c0ns7osv" data-title="php" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/03/php/" data-id="clsep8v9n0002j8b57x9mfagv" data-title="php" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -500,7 +560,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/29/python/" data-id="clsd7p0ae000014b5ds7rgjjm" data-title="python" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/01/29/python/" data-id="clsep8v9k0000j8b57nsl8suc" data-title="python" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -541,7 +601,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/22/baidu/" data-id="clsd7p0ag000114b52310e5k8" data-title="baidu" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/01/22/baidu/" data-id="clsep8v9o0005j8b54reaawwo" data-title="baidu" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -597,7 +657,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/21/%E4%BA%8C%E9%98%B6%E6%AE%B5/" data-id="clsd7p0ai000414b53gsshhhi" data-title="二阶段" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/01/21/%E4%BA%8C%E9%98%B6%E6%AE%B5/" data-id="clsep8v9o0004j8b5eir85t18" data-title="二阶段" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -673,7 +733,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/21/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/" data-id="clsd7p0ak000514b5h54w3zkt" data-title="前端基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/01/21/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/" data-id="clsep8v9q0006j8b52krlfzjg" data-title="前端基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -732,6 +792,10 @@
       <ul>
         
           <li>
+            <a href="/2024/02/09/sql11-15/">sql11~15</a>
+          </li>
+        
+          <li>
             <a href="/2024/02/07/sql1-10/">sql1~10</a>
           </li>
         
@@ -745,10 +809,6 @@
         
           <li>
             <a href="/2024/01/29/python/">python</a>
-          </li>
-        
-          <li>
-            <a href="/2024/01/22/baidu/">baidu</a>
           </li>
         
       </ul>
