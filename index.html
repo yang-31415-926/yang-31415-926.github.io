@@ -73,6 +73,63 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-xss1-3" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/02/12/xss1-3/" class="article-date">
+  <time class="dt-published" datetime="2024-02-12T06:23:28.000Z" itemprop="datePublished">2024-02-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/02/12/xss1-3/">xss1~3</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(&#x27;a&#x27;)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>第一关</strong></p>
+<p>直接注入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/xss/level1.php?name=&lt;script&gt;alert(‘a’)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>第二关</strong></p>
+<p>搜索框内搜索，发现</p>
+<p>没有找到和&lt;.script&gt;alert(‘a’)&lt;&#x2F;‘script&gt;相关的结果</p>
+<p>查看一下源代码</p>
+<p>发现&lt;.input name&#x3D;”keyword”  value&#x3D;”&lt;.script&gt;alert(‘a’)&lt;&#x2F;‘script&gt;”&gt;</p>
+<p>换成“&gt;&lt;.script&gt;alert(‘a’)&lt;&#x2F;‘script&gt;&#x2F;&#x2F;(注释掉后面)，成功惹</p>
+<p><strong>第三关</strong></p>
+<p>搜索框内搜索，发现</p>
+<p>没有找到和&lt;.script&gt;alert(‘a’)&lt;&#x2F;‘script&gt;相关的结果</p>
+<p>查看一下源代码发现单引号双引号被过滤(输入单引号会变成双引号)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=&quot;keyword&quot; value=&quot;&amp;quot;&gt;&lt;script&gt;alert(/a/)&lt;/script&gt;//&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>通过事件注入’ onblur&#x3D;’alert(&#x2F;1&#x2F;)’”(当鼠标离开输入框时执行内部代码)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=&quot;keyword&quot; value=&quot;&quot; onblur=&quot;alert(/1/)&quot; &quot;&#x27;=&quot;&quot;&gt;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/02/12/xss1-3/" data-id="clsiju5mg0003x4b5darm6u2i" data-title="xss1~3" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-sql16-20" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/02/11/sql16-20/" class="article-date">
@@ -131,7 +188,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/11/sql16-20/" data-id="clsgabnub0005ngb5c18s9svd" data-title="sql16~20" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/11/sql16-20/" data-id="clsiju5mg0004x4b5f6mc50zh" data-title="sql16~20" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -191,7 +248,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/09/sql11-15/" data-id="clsgabnu90001ngb5fhk1hbo7" data-title="sql11~15" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/09/sql11-15/" data-id="clsiju5mh0005x4b5dgolefdd" data-title="sql11~15" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -380,7 +437,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/07/sql1-10/" data-id="clsgabnuc0007ngb53skn4vn9" data-title="sql1~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/07/sql1-10/" data-id="clsiju5mi0008x4b50utkds4h" data-title="sql1~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -476,7 +533,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/03/sql/" data-id="clsgabnu60000ngb57tn15fe6" data-title="sql" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/03/sql/" data-id="clsiju5mf0001x4b565279gni" data-title="sql" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -571,7 +628,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/03/php/" data-id="clsgabnub0004ngb570ryhyex" data-title="php" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/03/php/" data-id="clsiju5mh0007x4b55zm14eht" data-title="php" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -630,7 +687,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/29/python/" data-id="clsgabnua0002ngb5aa9pa8dt" data-title="python" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/01/29/python/" data-id="clsiju5mf0002x4b5eghch082" data-title="python" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -671,7 +728,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/22/baidu/" data-id="clsgabnua0003ngb582x9atnv" data-title="baidu" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/01/22/baidu/" data-id="clsiju5mc0000x4b51qh906qk" data-title="baidu" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -727,7 +784,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/21/%E4%BA%8C%E9%98%B6%E6%AE%B5/" data-id="clsgabnud0009ngb5hkt4hdyf" data-title="二阶段" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/01/21/%E4%BA%8C%E9%98%B6%E6%AE%B5/" data-id="clsiju5mh0006x4b5h8ta0eva" data-title="二阶段" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -803,7 +860,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/21/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/" data-id="clsgabnub0006ngb5dwn536ea" data-title="前端基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/01/21/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/" data-id="clsiju5mk0009x4b5euw0313n" data-title="前端基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -862,6 +919,10 @@
       <ul>
         
           <li>
+            <a href="/2024/02/12/xss1-3/">xss1~3</a>
+          </li>
+        
+          <li>
             <a href="/2024/02/11/sql16-20/">sql16~20</a>
           </li>
         
@@ -875,10 +936,6 @@
         
           <li>
             <a href="/2024/02/03/sql/">sql</a>
-          </li>
-        
-          <li>
-            <a href="/2024/02/03/php/">php</a>
           </li>
         
       </ul>
