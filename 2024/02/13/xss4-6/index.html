@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>python | Hexo</title>
+  <title>xss4~6 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="数据类型 1， 变量没有类型不需要声明 ， 但必须赋值  2，number(数字)，string(字符串)，tuple(元组)。这些为不可变数据，list(列表)，dictionary(字典)，set(集合)，这些为可变数据 3，列表中的元素是可以直接改变 4，元组，和列表类似，但是元组中的元素不能改变 5，字典表示一种对应关系，不可重复且不可变 类 当我们无法用单一的一个量或者函数表达一个数据时">
+  <meta name="description" content="1&lt;script&gt;alert(&amp;#x27;a&amp;#x27;)&lt;&#x2F;script&gt;  第四关 直接搜索，发现&lt;符号被过滤掉了 使用第三关的方法，稍作一些修改 1&quot; onblur&#x3D;&amp;#x27;alert(&#x2F;1&#x2F;)&amp;#x27;&quot;  第五关 直接用之前的方法，发现on被过滤变成o_n；script被过滤成scr_ipt 尝试使用其他标签 1&quot;&gt;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python">
-<meta property="og:url" content="http://example.com/2024/01/29/python/index.html">
+<meta property="og:title" content="xss4~6">
+<meta property="og:url" content="http://example.com/2024/02/13/xss4-6/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="数据类型 1， 变量没有类型不需要声明 ， 但必须赋值  2，number(数字)，string(字符串)，tuple(元组)。这些为不可变数据，list(列表)，dictionary(字典)，set(集合)，这些为可变数据 3，列表中的元素是可以直接改变 4，元组，和列表类似，但是元组中的元素不能改变 5，字典表示一种对应关系，不可重复且不可变 类 当我们无法用单一的一个量或者函数表达一个数据时">
+<meta property="og:description" content="1&lt;script&gt;alert(&amp;#x27;a&amp;#x27;)&lt;&#x2F;script&gt;  第四关 直接搜索，发现&lt;符号被过滤掉了 使用第三关的方法，稍作一些修改 1&quot; onblur&#x3D;&amp;#x27;alert(&#x2F;1&#x2F;)&amp;#x27;&quot;  第五关 直接用之前的方法，发现on被过滤变成o_n；script被过滤成scr_ipt 尝试使用其他标签 1&quot;&gt;">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-01-29T14:11:03.000Z">
-<meta property="article:modified_time" content="2024-01-29T14:20:38.938Z">
+<meta property="article:published_time" content="2024-02-12T16:13:28.000Z">
+<meta property="article:modified_time" content="2024-02-12T16:13:59.995Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -75,10 +75,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-python" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-xss4-6" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2024/01/29/python/" class="article-date">
-  <time class="dt-published" datetime="2024-01-29T14:11:03.000Z" itemprop="datePublished">2024-01-29</time>
+    <a href="/2024/02/13/xss4-6/" class="article-date">
+  <time class="dt-published" datetime="2024-02-12T16:13:28.000Z" itemprop="datePublished">2024-02-13</time>
 </a>
     
   </div>
@@ -89,7 +89,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      python
+      xss4~6
     </h1>
   
 
@@ -97,32 +97,26 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p><strong>数据类型</strong></p>
-<p>1， 变量没有类型不需要声明 ， 但必须赋值 </p>
-<p>2，number(数字)，string(字符串)，tuple(元组)。这些为不可变数据，list(列表)，dictionary(字典)，set(集合)，这些为可变数据</p>
-<p>3，列表中的元素是可以直接改变</p>
-<p>4，元组，和列表类似，但是元组中的元素不能改变</p>
-<p>5，字典表示一种对应关系，不可重复且不可变</p>
-<p><strong>类</strong></p>
-<p>当我们无法用单一的一个量或者函数表达一个数据时，通过类的方式，把数据的特性组合在一起，称为一类，类里面含有对象和方法（函数）</p>
-<p><strong>面向对象</strong></p>
-<p>相比较函数，面向对象是更大的封装，根据职责在一个对象中封装多个方法</p>
-<p>1在完成某一个需求前，首先确定职责即要做的事情。</p>
-<p>2.根据职责确定不同的对象，在对象内部封装不同的方法</p>
-<p>3.最后完成的代码就是顺序的让不同的对象调用不同的方法</p>
-<p><strong>正则</strong></p>
-<p>目的是用更简便快捷的方式完成查找和抓取</p>
-<p>？可以存在零次或一次</p>
-<p>*可以存在零至无数次</p>
-<p>+可以存在一次至无数次</p>
-<p>{m，n} 可以存在m次到n次</p>
-<p>&lt;.+&gt;贪婪匹配“任意字符”</p>
-<p>&lt;.+?&gt;懒惰匹配“任意字符”</p>
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(&#x27;a&#x27;)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>第四关</strong></p>
+<p>直接搜索，发现&lt;符号被过滤掉了</p>
+<p>使用第三关的方法，稍作一些修改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot; onblur=&#x27;alert(/1/)&#x27;&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>第五关</strong></p>
+<p>直接用之前的方法，发现on被过滤变成o_n；script被过滤成scr_ipt</p>
+<p>尝试使用其他标签</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;&gt;&lt;a href=&quot;javascript:alert(&#x27;a&#x27;)&quot;&gt;click&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>第六关</strong></p>
+<p>相较于第五关给href也做了过滤</p>
+<p>Href像这样大小写混合输入注入，成功</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/29/python/" data-id="clsj4wn5a0004m0b5axg789zu" data-title="python" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/13/xss4-6/" data-id="clsj4wn5c0007m0b50a3x7bfe" data-title="xss4~6" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -132,19 +126,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2024/02/03/php/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          php
-        
-      </div>
-    </a>
   
-  
-    <a href="/2024/01/22/baidu/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2024/02/12/xss1-3/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">baidu</div>
+      <div class="article-nav-title">xss1~3</div>
     </a>
   
 </nav>
