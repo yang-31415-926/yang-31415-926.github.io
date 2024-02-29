@@ -73,6 +73,62 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-fc" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/02/29/fc/" class="article-date">
+  <time class="dt-published" datetime="2024-02-29T07:33:02.000Z" itemprop="datePublished">2024-02-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/02/29/fc/">fc</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><strong>文件包含漏洞</strong></p>
+<p>程序开发人员通常会把可重复使用的函数写到单个文件中，在使用某个函数的时候，直接调用此文件，无需再次编写，这种调用文件的过程通常称为包含 </p>
+<p>成因：文件包含函数加载的参数没有经过过滤或严格定义，可以被用户控制，包含其他恶意文件，导致了执行非预期代码。</p>
+<p>程序开发人员都希望代码更加灵活，所以通常会把被包含的文件设置为变量来进行动态调用，但正是由于这种灵活性，从而导致客户端可以调用任意文件，造成文件包含漏洞</p>
+<p><strong>文件包含函数</strong></p>
+<p>常用的文件包含函数有以下四种<br>include(),require(),include_once(),require_once() </p>
+<pre><code>require():找不到被包含的文件会产生致命错误，并停止脚本运行
+include():找不到被包含的文件只会产生警告，脚本继续执行
+require_once()与require()类似:唯一的区别是如果该文件的代码已经被包含，则不会再次包含
+include_once()与include()类似:唯一的区别是如果该文件的代码已经被包含，则不会再次包含
+</code></pre>
+<p><strong>php伪协议</strong></p>
+<p><strong>file:&#x2F;&#x2F;</strong> 用于访问本地文件系统，在CTF中通常用来读取本地文件的且不受allow_url_fopen与allow_url_include的影响 </p>
+<p><strong>php:&#x2F;&#x2F;filter</strong>用于读取源码。<br><strong>php:&#x2F;&#x2F;input</strong>用于执行php代码。 </p>
+<p><strong>php:&#x2F;&#x2F;input</strong> 可以访问请求的原始数据的只读流, 将post请求中的数据作为PHP代码执行。当传入的参数作为文件名打开时，可以将参数设为php:&#x2F;&#x2F;input,同时post想设置的文件内容，php执行时会将post内容当作文件内容。从而导致任意代码执行。 </p>
+<p><strong>zip:&#x2F;&#x2F;</strong> 可以访问压缩包里面的文件。当它与包含函数结合时，zip:&#x2F;&#x2F;流会被当作php文件执行。从而实现任意代码执行。 </p>
+<p><strong>data:&#x2F;&#x2F;</strong> 同样类似与php:&#x2F;&#x2F;input，可以让用户来控制输入流，当它与包含函数结合时，用户输入的data:&#x2F;&#x2F;流会被当作php文件执行。从而导致任意代码执行。 </p>
+<p><strong>phar:&#x2F;&#x2F;</strong> 不管后缀如何，都当作压缩包解压</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/02/29/fc/" data-id="clt6yy24k0002wob5fcjj05m4" data-title="fc" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-serialize" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/02/23/serialize/" class="article-date">
@@ -276,7 +332,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/23/serialize/" data-id="clsynde6d0001fob5aeu0bux3" data-title="serialize" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/23/serialize/" data-id="clt6yy24o000bwob58ib91fq1" data-title="serialize" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -378,7 +434,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/15/upload/" data-id="clsynde6g0005fob59v49fzu0" data-title="upload" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/15/upload/" data-id="clt6yy24n0009wob58m4p7qmn" data-title="upload" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -430,7 +486,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/13/xss-11-13/" data-id="clsynde6h000afob54xpf0gye" data-title="xss_11~13" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/13/xss-11-13/" data-id="clt6yy24l0004wob5di4c2kkm" data-title="xss_11~13" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -498,7 +554,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/13/xss-7-10/" data-id="clsynde6i000bfob5f7p10qt7" data-title="xss_7~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/13/xss-7-10/" data-id="clt6yy24o000cwob56a5xabnp" data-title="xss_7~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -551,7 +607,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/13/xss4-6/" data-id="clsynde6i000cfob53yi6423r" data-title="xss4~6" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/13/xss4-6/" data-id="clt6yy24q000hwob5466rajws" data-title="xss4~6" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -608,7 +664,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/12/xss1-3/" data-id="clsynde6h0008fob532y7cih7" data-title="xss1~3" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/12/xss1-3/" data-id="clt6yy24m0008wob5efm065kd" data-title="xss1~3" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -678,7 +734,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/11/sql16-20/" data-id="clsynde6g0007fob56j4ic68g" data-title="sql16~20" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/11/sql16-20/" data-id="clt6yy24o000dwob5f6c2hahy" data-title="sql16~20" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -738,7 +794,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/09/sql11-15/" data-id="clsynde6h0009fob5a0v138hx" data-title="sql11~15" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/09/sql11-15/" data-id="clt6yy24m0007wob5e1z5d3fy" data-title="sql11~15" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -927,103 +983,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/07/sql1-10/" data-id="clsynde6f0003fob5adiegza3" data-title="sql1~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-sql" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/02/03/sql/" class="article-date">
-  <time class="dt-published" datetime="2024-02-03T14:59:19.000Z" itemprop="datePublished">2024-02-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/02/03/sql/">sql</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>sql语句可以单行书写也可以多行书写，以分号结尾可使用空格，缩进增加可读性，sql对大小写不敏感</p>
-<p>单行注释–，多行注释&#x2F;<em>……</em>&#x2F;</p>
-<p>数据库-&gt;表-&gt;列-&gt;数据</p>
-<ul>
-<li></li>
-</ul>
-<p>查询所有数据库：show database；</p>
-<p>查询当前数据库：select database（）；</p>
-<p>创建:  create database</p>
-<ul>
-<li></li>
-</ul>
-<p>查询当前所有表： show tables;</p>
-<p>查询表结构：desc ()；</p>
-<p>查询指定表的建表语句： show create ()</p>
-<ul>
-<li></li>
-</ul>
-<p>创建字段：create table</p>
-<p>添加字段:alter table表名 ADD 字段名  类型（长度）</p>
-<p>删除字段 ：alter table 表明 drop 字段名</p>
-<p>修改表名：alter table 表名 rename to 新表名；</p>
-<p>删除表：drop table  表名</p>
-<ul>
-<li></li>
-</ul>
-<p>添加数据</p>
-<p>给指定字段添加数据:insert into表名（字段名1，字段名2）values （值1，值2）；</p>
-<p>给全部字段添加数据：insert into 表名 values（值1，值2）</p>
-<p>批量添加数据：insert into 表名（字段名1，字段名2….）values（值1，值2..），（值1，值2）</p>
-<p>insert into  表名 values（值1，值2），（值 1，值2）</p>
-<p>修改数据</p>
-<p>update 表名 set 字段名1&#x3D;值1，字段名2&#x3D;值2，…where 条件；</p>
-<p>删除数据</p>
-<p>delete from 表名 where 条件</p>
-<p>查询数据</p>
-<p>swlect 字段名 from 表名 where 条件</p>
-<ul>
-<li></li>
-</ul>
-<p>分组查询</p>
-<p>select 字段列表 from where条件 表名 group by 分组字段名 having条件</p>
-<p>排序查询</p>
-<p>swlect字段列表 from表名 other by 字段1 排序方式 字段2 排序方式（在字段1相同的情况下才会再去比较字段2）</p>
-<p>排序方式：升序desv  降序 asc</p>
-<p>分页查询</p>
-<p>select 字段列表 from表名 LIMIT 起始索引，查询记录数</p>
-<p>起始索引&#x3D;（查询页码-1）*每页显示记录数</p>
-<p>编写顺序 SELECT-&gt;FROM-&gt;WHERE-&gt;GROUP BY-&gt;HAVING-&gt;ORDER BY-&gt;LIMIT</p>
-<p>执行顺序：FROM-&gt;WHERE-&gt;GROUP BY-&gt;HAVING-&gt;SELECT-&gt;ORDER BY-&gt;LIMIT</p>
-<ul>
-<li></li>
-</ul>
-<p>管理用户</p>
-<p>查询用户：USE mysql；select* from user</p>
-<p>创建用户：create user 用户名 @ 主机名 identified by  密码 ；</p>
-<p>修改用户密码： alter user ”用户名 @ 主机名 identified with mysql_native_password BY  新密码 ；</p>
-<p>删除用户：drop user 用户名 @ 主机名；</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/03/sql/" data-id="clsynde6e0002fob5296v46jx" data-title="sql" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/07/sql1-10/" data-id="clt6yy24m0006wob54ly64krf" data-title="sql1~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1085,6 +1045,10 @@
       <ul>
         
           <li>
+            <a href="/2024/02/29/fc/">fc</a>
+          </li>
+        
+          <li>
             <a href="/2024/02/23/serialize/">serialize</a>
           </li>
         
@@ -1098,10 +1062,6 @@
         
           <li>
             <a href="/2024/02/13/xss-7-10/">xss_7~10</a>
-          </li>
-        
-          <li>
-            <a href="/2024/02/13/xss4-6/">xss4~6</a>
           </li>
         
       </ul>

@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>sql16~20 | Hexo</title>
+  <title>fc | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="第16关 和上一关大体一致，不过漏洞为括号双引号包裹 Updatexml()函数“updatexml(XML_document,XPath_string,new_value);”即sql语句为“select updatexml(1,concat(0x7e,(SELECT user()),0x7e),1”。 XML_document String格式，为XML文档对象的名称， DocXPath_st">
+  <meta name="description" content="文件包含漏洞 程序开发人员通常会把可重复使用的函数写到单个文件中，在使用某个函数的时候，直接调用此文件，无需再次编写，这种调用文件的过程通常称为包含  成因：文件包含函数加载的参数没有经过过滤或严格定义，可以被用户控制，包含其他恶意文件，导致了执行非预期代码。 程序开发人员都希望代码更加灵活，所以通常会把被包含的文件设置为变量来进行动态调用，但正是由于这种灵活性，从而导致客户端可以调用任意文件，造">
 <meta property="og:type" content="article">
-<meta property="og:title" content="sql16~20">
-<meta property="og:url" content="http://example.com/2024/02/11/sql16-20/index.html">
+<meta property="og:title" content="fc">
+<meta property="og:url" content="http://example.com/2024/02/29/fc/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="第16关 和上一关大体一致，不过漏洞为括号双引号包裹 Updatexml()函数“updatexml(XML_document,XPath_string,new_value);”即sql语句为“select updatexml(1,concat(0x7e,(SELECT user()),0x7e),1”。 XML_document String格式，为XML文档对象的名称， DocXPath_st">
+<meta property="og:description" content="文件包含漏洞 程序开发人员通常会把可重复使用的函数写到单个文件中，在使用某个函数的时候，直接调用此文件，无需再次编写，这种调用文件的过程通常称为包含  成因：文件包含函数加载的参数没有经过过滤或严格定义，可以被用户控制，包含其他恶意文件，导致了执行非预期代码。 程序开发人员都希望代码更加灵活，所以通常会把被包含的文件设置为变量来进行动态调用，但正是由于这种灵活性，从而导致客户端可以调用任意文件，造">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-02-10T16:20:08.000Z">
-<meta property="article:modified_time" content="2024-02-10T16:22:18.254Z">
+<meta property="article:published_time" content="2024-02-29T07:33:02.000Z">
+<meta property="article:modified_time" content="2024-02-29T08:30:57.355Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -75,10 +75,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-sql16-20" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-fc" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2024/02/11/sql16-20/" class="article-date">
-  <time class="dt-published" datetime="2024-02-10T16:20:08.000Z" itemprop="datePublished">2024-02-11</time>
+    <a href="/2024/02/29/fc/" class="article-date">
+  <time class="dt-published" datetime="2024-02-29T07:33:02.000Z" itemprop="datePublished">2024-02-29</time>
 </a>
     
   </div>
@@ -89,7 +89,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      sql16~20
+      fc
     </h1>
   
 
@@ -97,43 +97,29 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p><strong>第16关</strong></p>
-<p>和上一关大体一致，不过漏洞为括号双引号包裹</p>
-<p>Updatexml()函数“updatexml(XML_document,XPath_string,new_value);”<br>即sql语句为“select updatexml(1,concat(0x7e,(SELECT user()),0x7e),1”。</p>
-<p>XML_document String格式，为XML文档对象的名称，</p>
-<p>DocXPath_string Xpath格式的字符串</p>
-<p>new_value String格式，替换查找到的符合条件的数据</p>
-<p>报错注入原理：concat()函数是将其连成一个字符串，因此不会符合XPATH_string的格式，从而出现格式错误，爆出用户</p>
-<p>0x7e，实为<del>，upadtexml()报错信息为特殊字符、字母及之后的内容，为了前面字母丢失，开头连接一个特殊字符</del>。</p>
-<p><strong>第17关</strong></p>
-<p>输入用户名密码，显示‘密码已重置’，之后随便输入一个用户名，会显示登陆失败</p>
-<p>抓一下包，发现post的数据和之前一样</p>
-<p>在username处没有报错，后续知道username处存在检查过滤</p>
-<p>报错注入：查询语句 select updatexml(1,concat(0x7e,(语句)),1);</p>
-<p>查询字段内容： 1’ and updatexml(1,concat(0x7e,(select group_concat(username,id,password) from users),0x7e),1) #</p>
-<p>出现报错You can’t specify target table ‘users’ for update in FROM clause </p>
-<p>这个错误的原因是在MySQL中，不允许直接在UPDATE语句的子查询中引用正在更新的目标表。 </p>
-<p>在password处使用的是UPDATE，在MySQL中同一个语句不能先select表中内容再update表，因此这里可以用子查询的方式去替换 </p>
-<p> 子查询是指在SQL语句中嵌套使用的查询语句。也就是说，在一个SQL查询中包含了另一个完整的查询语句作为子查询，用来提供额外的数据或过滤条件。 </p>
-<p>1’ and updatexml(1,concat(0x7e,(select group_concat(username,id,password) from (select username,id,password from users)a),0x7e),1) #</p>
-<p><strong>第18关</strong></p>
-<p>打开第18关，输入正确密码，发现输出 Your User Agent </p>
-<p>尝试了一下，发现uname和upass都存在过滤，使用头部注入</p>
-<p>User Agent 在单引号中间，使用语句’ or updatexml(1,concat(0x7e,database(),0x7e),1) or ‘1’&#x3D;’1</p>
-<p>‘ or updatexml(1,concat(0x7e,database(),0x7e),1) ，’ ‘,’ ‘)# 效果一样</p>
-<p>在burp里面更改头部Your User Agent 部分，得到数据库信息</p>
-<p><strong>第19关</strong></p>
-<p>大体上和18关一样’ or updatexml(1,concat(0x7e,database(),0x7e),1) or ‘1’&#x3D;’1</p>
-<p><strong>第20关</strong></p>
-<p>输入用户名密码，出来一堆东西，发现关键词cookie</p>
-<p>cookie注入</p>
-<p>burp抓包发现Cookie: uname&#x3D;admin</p>
-<p>使用工具在cookie后面加上’，发生报错，说明存在注入漏洞，底部存在回显点，直接注入即可</p>
+        <p><strong>文件包含漏洞</strong></p>
+<p>程序开发人员通常会把可重复使用的函数写到单个文件中，在使用某个函数的时候，直接调用此文件，无需再次编写，这种调用文件的过程通常称为包含 </p>
+<p>成因：文件包含函数加载的参数没有经过过滤或严格定义，可以被用户控制，包含其他恶意文件，导致了执行非预期代码。</p>
+<p>程序开发人员都希望代码更加灵活，所以通常会把被包含的文件设置为变量来进行动态调用，但正是由于这种灵活性，从而导致客户端可以调用任意文件，造成文件包含漏洞</p>
+<p><strong>文件包含函数</strong></p>
+<p>常用的文件包含函数有以下四种<br>include(),require(),include_once(),require_once() </p>
+<pre><code>require():找不到被包含的文件会产生致命错误，并停止脚本运行
+include():找不到被包含的文件只会产生警告，脚本继续执行
+require_once()与require()类似:唯一的区别是如果该文件的代码已经被包含，则不会再次包含
+include_once()与include()类似:唯一的区别是如果该文件的代码已经被包含，则不会再次包含
+</code></pre>
+<p><strong>php伪协议</strong></p>
+<p><strong>file:&#x2F;&#x2F;</strong> 用于访问本地文件系统，在CTF中通常用来读取本地文件的且不受allow_url_fopen与allow_url_include的影响 </p>
+<p><strong>php:&#x2F;&#x2F;filter</strong>用于读取源码。<br><strong>php:&#x2F;&#x2F;input</strong>用于执行php代码。 </p>
+<p><strong>php:&#x2F;&#x2F;input</strong> 可以访问请求的原始数据的只读流, 将post请求中的数据作为PHP代码执行。当传入的参数作为文件名打开时，可以将参数设为php:&#x2F;&#x2F;input,同时post想设置的文件内容，php执行时会将post内容当作文件内容。从而导致任意代码执行。 </p>
+<p><strong>zip:&#x2F;&#x2F;</strong> 可以访问压缩包里面的文件。当它与包含函数结合时，zip:&#x2F;&#x2F;流会被当作php文件执行。从而实现任意代码执行。 </p>
+<p><strong>data:&#x2F;&#x2F;</strong> 同样类似与php:&#x2F;&#x2F;input，可以让用户来控制输入流，当它与包含函数结合时，用户输入的data:&#x2F;&#x2F;流会被当作php文件执行。从而导致任意代码执行。 </p>
+<p><strong>phar:&#x2F;&#x2F;</strong> 不管后缀如何，都当作压缩包解压</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/11/sql16-20/" data-id="clt6yy24o000dwob5f6c2hahy" data-title="sql16~20" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/29/fc/" data-id="clt6yy24k0002wob5fcjj05m4" data-title="fc" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -143,19 +129,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2024/02/12/xss1-3/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          xss1~3
-        
-      </div>
-    </a>
   
-  
-    <a href="/2024/02/09/sql11-15/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2024/02/23/serialize/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">sql11~15</div>
+      <div class="article-nav-title">serialize</div>
     </a>
   
 </nav>
