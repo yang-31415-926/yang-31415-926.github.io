@@ -73,6 +73,76 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-sql16-20" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/02/11/sql16-20/" class="article-date">
+  <time class="dt-published" datetime="2024-02-10T16:20:08.000Z" itemprop="datePublished">2024-02-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/02/11/sql16-20/">sql16~20</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><strong>第16关</strong></p>
+<p>和上一关大体一致，不过漏洞为括号双引号包裹</p>
+<p>Updatexml()函数“updatexml(XML_document,XPath_string,new_value);”<br>即sql语句为“select updatexml(1,concat(0x7e,(SELECT user()),0x7e),1”。</p>
+<p>XML_document String格式，为XML文档对象的名称，</p>
+<p>DocXPath_string Xpath格式的字符串</p>
+<p>new_value String格式，替换查找到的符合条件的数据</p>
+<p>报错注入原理：concat()函数是将其连成一个字符串，因此不会符合XPATH_string的格式，从而出现格式错误，爆出用户</p>
+<p>0x7e，实为<del>，upadtexml()报错信息为特殊字符、字母及之后的内容，为了前面字母丢失，开头连接一个特殊字符</del>。</p>
+<p><strong>第17关</strong></p>
+<p>输入用户名密码，显示‘密码已重置’，之后随便输入一个用户名，会显示登陆失败</p>
+<p>抓一下包，发现post的数据和之前一样</p>
+<p>在username处没有报错，后续知道username处存在检查过滤</p>
+<p>报错注入：查询语句 select updatexml(1,concat(0x7e,(语句)),1);</p>
+<p>查询字段内容： 1’ and updatexml(1,concat(0x7e,(select group_concat(username,id,password) from users),0x7e),1) #</p>
+<p>出现报错You can’t specify target table ‘users’ for update in FROM clause </p>
+<p>这个错误的原因是在MySQL中，不允许直接在UPDATE语句的子查询中引用正在更新的目标表。 </p>
+<p>在password处使用的是UPDATE，在MySQL中同一个语句不能先select表中内容再update表，因此这里可以用子查询的方式去替换 </p>
+<p> 子查询是指在SQL语句中嵌套使用的查询语句。也就是说，在一个SQL查询中包含了另一个完整的查询语句作为子查询，用来提供额外的数据或过滤条件。 </p>
+<p>1’ and updatexml(1,concat(0x7e,(select group_concat(username,id,password) from (select username,id,password from users)a),0x7e),1) #</p>
+<p><strong>第18关</strong></p>
+<p>打开第18关，输入正确密码，发现输出 Your User Agent </p>
+<p>尝试了一下，发现uname和upass都存在过滤，使用头部注入</p>
+<p>User Agent 在单引号中间，使用语句’ or updatexml(1,concat(0x7e,database(),0x7e),1) or ‘1’&#x3D;’1</p>
+<p>‘ or updatexml(1,concat(0x7e,database(),0x7e),1) ，’ ‘,’ ‘)# 效果一样</p>
+<p>在burp里面更改头部Your User Agent 部分，得到数据库信息</p>
+<p><strong>第19关</strong></p>
+<p>大体上和18关一样’ or updatexml(1,concat(0x7e,database(),0x7e),1) or ‘1’&#x3D;’1</p>
+<p><strong>第20关</strong></p>
+<p>输入用户名密码，出来一堆东西，发现关键词cookie</p>
+<p>cookie注入</p>
+<p>burp抓包发现Cookie: uname&#x3D;admin</p>
+<p>使用工具在cookie后面加上’，发生报错，说明存在注入漏洞，底部存在回显点，直接注入即可</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/02/11/sql16-20/" data-id="cltd4bl48000a98b5clyk6k0g" data-title="sql16~20" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-sql11-15" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/02/09/sql11-15/" class="article-date">
@@ -121,7 +191,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/09/sql11-15/" data-id="cltbi4nlj000dqgb55k0p9714" data-title="sql11~15" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/09/sql11-15/" data-id="cltd4bl48000c98b56tbp7ky4" data-title="sql11~15" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -310,7 +380,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/07/sql1-10/" data-id="cltbi4nli0008qgb563v355az" data-title="sql1~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/07/sql1-10/" data-id="cltd4bl47000798b5aykqgq1c" data-title="sql1~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -406,7 +476,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/03/sql/" data-id="cltbi4nlh0005qgb5djl3e8xf" data-title="sql" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/03/sql/" data-id="cltd4bl46000698b5hwzz89bw" data-title="sql" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -501,7 +571,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/03/php/" data-id="cltbi4nlh0006qgb5d1iw1f11" data-title="php" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/03/php/" data-id="cltd4bl47000898b5bu975smd" data-title="php" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -560,7 +630,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/29/python/" data-id="cltbi4nlg0003qgb5ga1u8di0" data-title="python" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/01/29/python/" data-id="cltd4bl46000498b58nnbedsm" data-title="python" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -601,7 +671,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/22/baidu/" data-id="cltbi4nlg0002qgb52diz5uja" data-title="baidu" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/01/22/baidu/" data-id="cltd4bl46000598b5dl3sfx7g" data-title="baidu" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -657,7 +727,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/21/%E4%BA%8C%E9%98%B6%E6%AE%B5/" data-id="cltbi4nlk000gqgb51ctx0944" data-title="二阶段" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/01/21/%E4%BA%8C%E9%98%B6%E6%AE%B5/" data-id="cltd4bl4a000h98b5bb7063t7" data-title="二阶段" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -733,7 +803,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/21/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/" data-id="cltbi4nlk000fqgb5hucod20k" data-title="前端基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/01/21/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/" data-id="cltd4bl4a000i98b52lnoapnx" data-title="前端基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -797,6 +867,10 @@
       <ul>
         
           <li>
+            <a href="/2024/03/04/phototype-1/">phototype</a>
+          </li>
+        
+          <li>
             <a href="/2024/03/03/phototype/">phototype</a>
           </li>
         
@@ -810,10 +884,6 @@
         
           <li>
             <a href="/2024/02/23/serialize/">serialize</a>
-          </li>
-        
-          <li>
-            <a href="/2024/02/15/upload/">upload</a>
           </li>
         
       </ul>
