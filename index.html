@@ -73,6 +73,62 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-phototype-1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/04/phototype-1/" class="article-date">
+  <time class="dt-published" datetime="2024-03-04T15:54:20.000Z" itemprop="datePublished">2024-03-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/03/04/phototype-1/">phototype_1</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>原型链污染的概念了解的差不多了，但是具体而言还不太会用，找道例题看下具体如何使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">const express = require(&#x27;express&#x27;);</span><br><span class="line">const bodyParser = require(&#x27;body-parser&#x27;);</span><br><span class="line">const session = require(&#x27;express-session&#x27;);</span><br><span class="line">const randomize = require(&#x27;randomatic&#x27;);</span><br><span class="line">const ejs = require(&#x27;ejs&#x27;);</span><br><span class="line">const path = require(&#x27;path&#x27;);</span><br><span class="line">const app = express();</span><br><span class="line"></span><br><span class="line">function merge(target, source) &#123;</span><br><span class="line">    for (let key in source) &#123;</span><br><span class="line">        // Prevent prototype pollution</span><br><span class="line">        if (key === &#x27;__proto__&#x27;) &#123;</span><br><span class="line">            throw new Error(&quot;Detected Prototype Pollution&quot;)</span><br><span class="line">        &#125;</span><br><span class="line">        if (key in source &amp;&amp; key in target) &#123;</span><br><span class="line">            merge(target[key], source[key])</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            target[key] = source[key]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app</span><br><span class="line">    .use(bodyParser.urlencoded(&#123;extended: true&#125;))</span><br><span class="line">    .use(bodyParser.json());</span><br><span class="line">app.set(&#x27;views&#x27;, path.join(__dirname, &quot;./views&quot;));</span><br><span class="line">app.set(&#x27;view engine&#x27;, &#x27;ejs&#x27;);</span><br><span class="line">app.use(session(&#123;</span><br><span class="line">    name: &#x27;session&#x27;,</span><br><span class="line">    secret: randomize(&#x27;aA0&#x27;, 16),</span><br><span class="line">    resave: false,</span><br><span class="line">    saveUninitialized: false</span><br><span class="line">&#125;))</span><br><span class="line"></span><br><span class="line">app.all(&quot;/login&quot;, (req, res) =&gt; &#123;</span><br><span class="line">    if (req.method == &#x27;POST&#x27;) &#123;</span><br><span class="line">        // save userinfo to session</span><br><span class="line">        let data = &#123;&#125;;</span><br><span class="line">        try &#123;</span><br><span class="line">            merge(data, req.body)</span><br><span class="line">        &#125; catch (e) &#123;</span><br><span class="line">            return res.render(&quot;login&quot;, &#123;message: &quot;Don&#x27;t pollution my shared diary!&quot;&#125;)</span><br><span class="line">        &#125;</span><br><span class="line">        req.session.data = data</span><br><span class="line"></span><br><span class="line">        // check password</span><br><span class="line">        let user = &#123;&#125;;</span><br><span class="line">        user.password = req.body.password;</span><br><span class="line">        if (user.password=== &quot;testpassword&quot;) &#123;</span><br><span class="line">            user.role = &#x27;admin&#x27;</span><br><span class="line">        &#125;</span><br><span class="line">        if (user.role === &#x27;admin&#x27;) &#123;</span><br><span class="line">            req.session.role = &#x27;admin&#x27;</span><br><span class="line">            return res.redirect(&#x27;/&#x27;)</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            return res.render(&quot;login&quot;, &#123;message: &quot;Login as admin or don&#x27;t touch my shared diary!&quot;&#125;)</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">    res.render(&#x27;login&#x27;, &#123;message: &quot;&quot;&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.all(&#x27;/&#x27;, (req, res) =&gt; &#123;</span><br><span class="line">    if (!req.session.data || !req.session.data.username || req.session.role !== &#x27;admin&#x27;) &#123;</span><br><span class="line">        return res.redirect(&quot;/login&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    if (req.method == &#x27;POST&#x27;) &#123;</span><br><span class="line">        let diary = ejs.render(`&lt;div&gt;$&#123;req.body.diary&#125;&lt;/div&gt;`)</span><br><span class="line">        req.session.diary = diary</span><br><span class="line">        return res.render(&#x27;diary&#x27;, &#123;diary: req.session.diary, username: req.session.data.username&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    return res.render(&#x27;diary&#x27;, &#123;diary: req.session.diary, username: req.session.data.username&#125;);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">app.listen(8888, &#x27;0.0.0.0&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p>这道题是 [HGAME 2023 week4]Shared Diary ，自带源码，登入网站后是用户名，密码输入（虽然没见过几道题，但好像见到的每个污染都是这么个界面）</p>
+<p>既然知道是原型链污染题型，直接找源代码里面漏洞易发现的merge（）部分</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function merge(target, source) &#123;</span><br><span class="line">    for (let key in source) &#123;</span><br><span class="line">        // Prevent prototype pollution</span><br><span class="line">        if (key === &#x27;__proto__&#x27;) &#123;</span><br><span class="line">            throw new Error(&quot;Detected Prototype Pollution&quot;)</span><br><span class="line">        &#125;</span><br><span class="line">        if (key in source &amp;&amp; key in target) &#123;</span><br><span class="line">            merge(target[key], source[key])</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            target[key] = source[key]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到把’<strong>ptoto</strong>‘ban掉了，但是存在平替prototype，constructor</p>
+<p>看后面部分：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> if (user.password=== &quot;testpassword&quot;) &#123;</span><br><span class="line">            user.role = &#x27;admin&#x27;</span><br><span class="line">        &#125;</span><br><span class="line">        if (user.role === &#x27;admin&#x27;) &#123;</span><br><span class="line">            req.session.role = &#x27;admin&#x27;</span><br><span class="line">            return res.redirect(&#x27;/&#x27;)</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            return res.render(&quot;login&quot;, &#123;message: &quot;Login as admin or don&#x27;t touch my shared diary!&quot;&#125;)</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">    res.render(&#x27;login&#x27;, &#123;message: &quot;&quot;&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>我们需要让user.role&#x3D;&#x3D;&#x3D;admin</p>
+<p>直接抓包替换payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;constructor&quot;: &#123;&quot;prototype&quot;: &#123;&quot;role&quot;: &quot;admin&quot;&#125;&#125;,&quot;username&quot;:&quot;admin&quot;,&quot;password&quot;:&quot;admin&quot;&#125; </span><br></pre></td></tr></table></figure>
+
+<p>记得把读取格式改成json</p>
+<p>然后就到第二部分了，这个部分还没了解过，未完待续</p>
+<p><img src="/" alt="/images/6.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/03/04/phototype-1/" data-id="cltd4gtow0002u8b516on0pb0" data-title="phototype_1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-phototype" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/03/03/phototype/" class="article-date">
@@ -127,7 +183,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/03/phototype/" data-id="cltd4dmg90002g0b5hybf7nax" data-title="phototype" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/03/phototype/" data-id="cltd4gtox0003u8b521to7msn" data-title="phototype" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -223,7 +279,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/03/n-ez-unserilize/" data-id="cltd4dmga0003g0b51g1l4vov" data-title="n_ez_unserilize" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/03/n-ez-unserilize/" data-id="cltd4gtox0004u8b5avjm9h8i" data-title="n_ez_unserilize" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -279,7 +335,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/29/fc/" data-id="cltd4dmg80001g0b51i211izt" data-title="fc" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/29/fc/" data-id="cltd4gtow0001u8b5gwxsb08t" data-title="fc" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -494,7 +550,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/23/serialize/" data-id="cltd4dmga0004g0b582144nvj" data-title="serialize" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/23/serialize/" data-id="cltd4gtoz0009u8b522t9gkax" data-title="serialize" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -596,7 +652,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/15/upload/" data-id="cltd4dmgb0009g0b5du2h9grn" data-title="upload" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/15/upload/" data-id="cltd4gtp0000cu8b56685dswi" data-title="upload" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -648,7 +704,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/13/xss-11-13/" data-id="cltd4dmgc000cg0b5gvnxbsab" data-title="xss_11~13" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/13/xss-11-13/" data-id="cltd4gtp0000eu8b56fmmgzch" data-title="xss_11~13" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -716,7 +772,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/13/xss-7-10/" data-id="cltd4dmgd000dg0b50ll1d4ym" data-title="xss_7~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/13/xss-7-10/" data-id="cltd4gtp0000du8b5hlfy8v4e" data-title="xss_7~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -769,7 +825,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/13/xss4-6/" data-id="cltd4dmgf000ig0b578vs6xga" data-title="xss4~6" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/13/xss4-6/" data-id="cltd4gtp1000hu8b5d5f67bac" data-title="xss4~6" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -826,77 +882,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/12/xss1-3/" data-id="cltd4dmgd000eg0b50zis2tsa" data-title="xss1~3" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-sql16-20" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/02/11/sql16-20/" class="article-date">
-  <time class="dt-published" datetime="2024-02-10T16:20:08.000Z" itemprop="datePublished">2024-02-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/02/11/sql16-20/">sql16~20</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><strong>第16关</strong></p>
-<p>和上一关大体一致，不过漏洞为括号双引号包裹</p>
-<p>Updatexml()函数“updatexml(XML_document,XPath_string,new_value);”<br>即sql语句为“select updatexml(1,concat(0x7e,(SELECT user()),0x7e),1”。</p>
-<p>XML_document String格式，为XML文档对象的名称，</p>
-<p>DocXPath_string Xpath格式的字符串</p>
-<p>new_value String格式，替换查找到的符合条件的数据</p>
-<p>报错注入原理：concat()函数是将其连成一个字符串，因此不会符合XPATH_string的格式，从而出现格式错误，爆出用户</p>
-<p>0x7e，实为<del>，upadtexml()报错信息为特殊字符、字母及之后的内容，为了前面字母丢失，开头连接一个特殊字符</del>。</p>
-<p><strong>第17关</strong></p>
-<p>输入用户名密码，显示‘密码已重置’，之后随便输入一个用户名，会显示登陆失败</p>
-<p>抓一下包，发现post的数据和之前一样</p>
-<p>在username处没有报错，后续知道username处存在检查过滤</p>
-<p>报错注入：查询语句 select updatexml(1,concat(0x7e,(语句)),1);</p>
-<p>查询字段内容： 1’ and updatexml(1,concat(0x7e,(select group_concat(username,id,password) from users),0x7e),1) #</p>
-<p>出现报错You can’t specify target table ‘users’ for update in FROM clause </p>
-<p>这个错误的原因是在MySQL中，不允许直接在UPDATE语句的子查询中引用正在更新的目标表。 </p>
-<p>在password处使用的是UPDATE，在MySQL中同一个语句不能先select表中内容再update表，因此这里可以用子查询的方式去替换 </p>
-<p> 子查询是指在SQL语句中嵌套使用的查询语句。也就是说，在一个SQL查询中包含了另一个完整的查询语句作为子查询，用来提供额外的数据或过滤条件。 </p>
-<p>1’ and updatexml(1,concat(0x7e,(select group_concat(username,id,password) from (select username,id,password from users)a),0x7e),1) #</p>
-<p><strong>第18关</strong></p>
-<p>打开第18关，输入正确密码，发现输出 Your User Agent </p>
-<p>尝试了一下，发现uname和upass都存在过滤，使用头部注入</p>
-<p>User Agent 在单引号中间，使用语句’ or updatexml(1,concat(0x7e,database(),0x7e),1) or ‘1’&#x3D;’1</p>
-<p>‘ or updatexml(1,concat(0x7e,database(),0x7e),1) ，’ ‘,’ ‘)# 效果一样</p>
-<p>在burp里面更改头部Your User Agent 部分，得到数据库信息</p>
-<p><strong>第19关</strong></p>
-<p>大体上和18关一样’ or updatexml(1,concat(0x7e,database(),0x7e),1) or ‘1’&#x3D;’1</p>
-<p><strong>第20关</strong></p>
-<p>输入用户名密码，出来一堆东西，发现关键词cookie</p>
-<p>cookie注入</p>
-<p>burp抓包发现Cookie: uname&#x3D;admin</p>
-<p>使用工具在cookie后面加上’，发生报错，说明存在注入漏洞，底部存在回显点，直接注入即可</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/11/sql16-20/" data-id="cltd4dmgc000bg0b59d7hgciq" data-title="sql16~20" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/12/xss1-3/" data-id="cltd4gtp0000fu8b5904d5xt6" data-title="xss1~3" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -958,6 +944,10 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       <ul>
         
           <li>
+            <a href="/2024/03/04/phototype-1/">phototype_1</a>
+          </li>
+        
+          <li>
             <a href="/2024/03/03/phototype/">phototype</a>
           </li>
         
@@ -971,10 +961,6 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
         
           <li>
             <a href="/2024/02/23/serialize/">serialize</a>
-          </li>
-        
-          <li>
-            <a href="/2024/02/15/upload/">upload</a>
           </li>
         
       </ul>
