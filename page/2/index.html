@@ -73,6 +73,59 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-xss4-6" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/02/13/xss4-6/" class="article-date">
+  <time class="dt-published" datetime="2024-02-12T16:13:28.000Z" itemprop="datePublished">2024-02-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/02/13/xss4-6/">xss4~6</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(&#x27;a&#x27;)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>第四关</strong></p>
+<p>直接搜索，发现&lt;符号被过滤掉了</p>
+<p>使用第三关的方法，稍作一些修改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot; onblur=&#x27;alert(/1/)&#x27;&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>第五关</strong></p>
+<p>直接用之前的方法，发现on被过滤变成o_n；script被过滤成scr_ipt</p>
+<p>尝试使用其他标签</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;&gt;&lt;a href=&quot;javascript:alert(&#x27;a&#x27;)&quot;&gt;click&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>第六关</strong></p>
+<p>相较于第五关给href也做了过滤</p>
+<p>Href像这样大小写混合输入注入，成功</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/02/13/xss4-6/" data-id="clth5apxv000kksb5bc5yddb6" data-title="xss4~6" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-xss1-3" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/02/12/xss1-3/" class="article-date">
@@ -118,7 +171,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/12/xss1-3/" data-id="cltedumml000ev8b5bqwmehk6" data-title="xss1~3" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/12/xss1-3/" data-id="clth5apxs000eksb532mfhdpk" data-title="xss1~3" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -188,7 +241,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/11/sql16-20/" data-id="cltedummk000av8b5ffyk6c0i" data-title="sql16~20" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/11/sql16-20/" data-id="clth5apxt000fksb57t566acp" data-title="sql16~20" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -248,7 +301,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/09/sql11-15/" data-id="cltedummj0008v8b5drh71dee" data-title="sql11~15" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/09/sql11-15/" data-id="clth5apxr000aksb5bkfy9dqb" data-title="sql11~15" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -437,7 +490,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/07/sql1-10/" data-id="cltedummj0009v8b59lakdjpk" data-title="sql1~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/07/sql1-10/" data-id="clth5apxq0006ksb510vigxvw" data-title="sql1~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -533,7 +586,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/03/sql/" data-id="cltedummi0005v8b5hkmzfcgt" data-title="sql" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/03/sql/" data-id="clth5apxr0009ksb5bek864ds" data-title="sql" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -628,7 +681,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/03/php/" data-id="cltedummj0007v8b56j671mop" data-title="php" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/03/php/" data-id="clth5apxq0005ksb5e0zq84fa" data-title="php" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -687,7 +740,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/29/python/" data-id="cltedummh0003v8b5b9f18snd" data-title="python" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/01/29/python/" data-id="clth5apxp0002ksb554uffeee" data-title="python" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -728,7 +781,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/22/baidu/" data-id="cltedummg0001v8b5e854exnn" data-title="baidu" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/01/22/baidu/" data-id="clth5apxm0000ksb52eya8l37" data-title="baidu" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -784,88 +837,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/21/%E4%BA%8C%E9%98%B6%E6%AE%B5/" data-id="cltedumml000gv8b53inwhxdq" data-title="二阶段" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/01/21/%E4%BA%8C%E9%98%B6%E6%AE%B5/" data-id="clth5apxt000gksb560fd4bdr" data-title="二阶段" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-前端基础" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/01/21/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/" class="article-date">
-  <time class="dt-published" datetime="2024-01-20T16:06:02.000Z" itemprop="datePublished">2024-01-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/01/21/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/">前端基础</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>html, css, js 统称为前端三大语言，其中 html 和 css 之前了解过一些，两者架构相对更简单一些，大概可以 chat 的辅助下做一些简单产品，js 只知道一般写在 head 里面或者 body 后面。</p>
-<p>css 由于其功能性的缺少，会使用 “css 预处理器”，是一种更倾向于编程并把编程语言翻译成 css 文件的处理器。</p>
-<p>….</p>
-<p>后文大部分都是最近学习的 js 相关了</p>
-<p>js 是一种脚本语言，无需通过编译，直接在浏览器上运行，也就是可以在控制台编写测试，之前在学习漏洞时有过注入 js 代码的经历，对其在浏览器运行的特性有过一些了解。</p>
-<p>js 自由度非常高，比方说变量不用选择数据类型，但是很容易出奇奇怪怪的 bug。</p>
-<p>….</p>
-<p>DOM：浏览器对象类型</p>
-<ul>
-<li>window 代表浏览器窗口</li>
-<li>navigator 封装了浏览器信息</li>
-<li>screen 代表屏幕尺寸</li>
-<li>location 代表当前界面 URL 信息</li>
-<li>document 代表当前界面，html，dom 文档树，cookie</li>
-<li>history 代表浏览器历史记录</li>
-</ul>
-<p>….</p>
-<p>获得 DOM 节点</p>
-<script>
-    var h1 = document.getElementsByTagName('h1');
-    var p1 = document.getElementsByClassName('p1');
-    var g1 = document.getElementById('g1');
-</script>
-
-<p>控制台 xxx.children 来获得子节点</p>
-<p>可以通过修改节点文本的值来更改网页来更改网页内容</p>
-<p>….</p>
-<p>删除节点：先找到父节点，再通过父节点删除自己</p>
-<p>XX.parentElement </p>
-<p>xx.removechild ()</p>
-<p>father.removechild (father.children[0])</p>
-<p>father.removechild (father.children[1])</p>
-<p>father.removechild (father.children[2])</p>
-<p>以上形式不正确，js操作是动态的，(father.children[2])会不存在</p>
-<p>….</p>
-<p>插入节点：</p>
-<p>先获取一个节点a，b.appendchild(a)来把a追加到b的子节点</p>
-<p>或者xx.insertBefore（c，d）在d前插入节点c</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/21/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/" data-id="cltedummm000iv8b5hzsjfx14" data-title="前端基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html-css-js%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" rel="tag">html, css, js基础学习</a></li></ul>
-
     </footer>
   </div>
   
@@ -878,7 +853,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -924,6 +899,10 @@
       <ul>
         
           <li>
+            <a href="/2024/03/07/ssrf/">ssrf</a>
+          </li>
+        
+          <li>
             <a href="/2024/03/05/%E5%8E%9F%E7%94%9F%E7%B1%BB/">原生类</a>
           </li>
         
@@ -937,10 +916,6 @@
         
           <li>
             <a href="/2024/03/03/n-ez-unserilize/">n_ez_unserilize</a>
-          </li>
-        
-          <li>
-            <a href="/2024/02/29/fc/">fc</a>
           </li>
         
       </ul>
