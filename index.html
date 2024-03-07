@@ -95,11 +95,26 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        
+        <p><strong>映射</strong></p>
+<p>主要用于使位于局域网（内网）的计算机或服务器可以通过公网的地址进行访问 </p>
+<p><strong>SSRF漏洞</strong></p>
+<p>在学习ssrf漏洞之前大抵是见过一次这种题型的，在NSSCTF上叫做ez_ssrf，不过感觉上来说更像是文件包含漏洞，分不清楚惹…</p>
+<p><strong>什么是SSRF漏洞</strong></p>
+<p>SSRF(Server-Side Request Forgery:<strong>服务器端请求伪造</strong>) 是一种由攻击者构造形成由服务端发起请求的一个<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E&spm=1001.2101.3001.7020">安全漏洞</a>。<strong>一般情况下，SSRF攻击的目标是从外网无法访问的内部系统。</strong></p>
+<hr>
+<p><strong>SSRF漏洞原理</strong></p>
+<p>SSRF的形成大多是由于服务端提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制。例如，黑客操作服务端从指定URL地址获取网页文本内容，加载指定地址的图片等，利用的是服务端的请求伪造。SSRF利用存在缺陷的Web 应用作为代理攻击远程和本地的服务器。</p>
+<hr>
+<p>file伪协议：文件包含漏洞那里记过，就不赘述了<br>dict伪协议：字典服务协议，访问字典资源，可用于扫描端口<br>http伪协议：以只读方式访问资源</p>
+<p>gophr伪协议：利用范围较广“get&#x2F;post&#x2F;redis&#x2F;fastcgi&#x2F;sql”，*这个协议会吞掉第一个字符abcd-&gt;_abcd才能完整提交。</p>
+<p>那么为什么要用gophr伪协议而不用get&#x2F;post呢？其原因为很多时候不能直接get到内网区域，但是可以通过有ssrf漏洞的地方使用该伪协议提交数据</p>
+<p>但是，以get举例，其必须要有特定的头部信息，比如路径和目标ip地址，使用协议时需要注意构造并且url编码一次，注意ip地址后面需要有端口号，在HTTP包最后要加%0d%0a代表消息结束</p>
+<p>如果使用burp发包，要url编码两次（浏览器会自带一次编码）</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/07/ssrf/" data-id="clth5apxq0007ksb5h3n8588g" data-title="ssrf" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/07/ssrf/" data-id="clth90jg6000c1wb5d8e14ecz" data-title="ssrf" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -244,7 +259,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/05/%E5%8E%9F%E7%94%9F%E7%B1%BB/" data-id="clth5apxw000mksb5ff110zcz" data-title="原生类" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/05/%E5%8E%9F%E7%94%9F%E7%B1%BB/" data-id="clth90jga000l1wb51bljdgke" data-title="原生类" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -300,7 +315,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/04/phototype-1/" data-id="clth5apxp0004ksb5c4ryb29k" data-title="phototype_1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/04/phototype-1/" data-id="clth90jg000001wb5aaol91o1" data-title="phototype_1" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -366,7 +381,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/03/phototype/" data-id="clth5apxo0001ksb5h8i3d76f" data-title="phototype" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/03/phototype/" data-id="clth90jg400051wb55ob3depg" data-title="phototype" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -462,7 +477,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/03/n-ez-unserilize/" data-id="clth5apxp0003ksb5646g65v5" data-title="n_ez_unserilize" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/03/n-ez-unserilize/" data-id="clth90jg300011wb5dyjn0p7p" data-title="n_ez_unserilize" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -518,7 +533,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/29/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" data-id="clth5apxt000iksb5eargavqr" data-title="文件上传" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/29/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" data-id="clth90jg8000j1wb52lmjgkkb" data-title="文件上传" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -733,7 +748,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/23/serialize/" data-id="clth5apxr0008ksb57yqc5dol" data-title="serialize" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/23/serialize/" data-id="clth90jg500081wb5gygf74w2" data-title="serialize" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -835,7 +850,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/15/upload/" data-id="clth5apxs000cksb5eyprf0fv" data-title="upload" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/15/upload/" data-id="clth90jg7000d1wb59jiidzvk" data-title="upload" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -887,7 +902,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/13/xss-11-13/" data-id="clth5apxs000bksb5bhp6akap" data-title="xss_11~13" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/13/xss-11-13/" data-id="clth90jg6000b1wb55s0mbhcv" data-title="xss_11~13" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -955,7 +970,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/13/xss-7-10/" data-id="clth5apxs000dksb52hmr4eqr" data-title="xss_7~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/13/xss-7-10/" data-id="clth90jg7000f1wb53gq3384s" data-title="xss_7~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
