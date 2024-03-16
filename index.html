@@ -73,6 +73,122 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Java基础" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/15/Java%E5%9F%BA%E7%A1%80/" class="article-date">
+  <time class="dt-published" datetime="2024-03-15T15:42:17.000Z" itemprop="datePublished">2024-03-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/03/15/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Java是一门主要用来进行后端开发的人语言，相对于PHP，其产品更为大型。Java同样是面向对象的语言，需要编译，后文会注重于其相较于其他语言特殊的地方，之后会在安全的方面着重讲讲。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class HelloWorld &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        System.out.println(&quot;Hello, World!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面是经典helloword代码</p>
+<p>1、 public class HelloWorld：定义一个名为HelloWorld的公共类。<br>2、 public static void main(String[] args)：定义一个名为main的公共静态方法，该方法接受一个字符串数组作为参数。这是Java程序的入口点。<br>3.、System.out.println(“Hello, World!”);：使用System类的out对象输出”Hello, World!”到控制台。（真复杂）</p>
+<p>如果使用System.out.printf的话，其格式、作用和printf类似，都是（“%d”，…）</p>
+<hr>
+<p>输入方式：next(),nextline()，前者读到空格结束，后者读到换行结束</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Scanner;</span><br><span class="line">public class Input &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Scanner in = new Scanner(System.in);//定义scanner，等待输入</span><br><span class="line">		System.out.println(&quot;请输入你的姓名:&quot;);</span><br><span class="line">		String name = in.nextLine();//字符类型的输入方式</span><br><span class="line">		System.out.println(name);</span><br><span class="line">		System.out.println(&quot;请输入你的年龄：&quot;);</span><br><span class="line">		int age = in.nextInt();//整数类型的输入方式</span><br><span class="line">		System.out.println(age);</span><br><span class="line">		System.out.println(&quot;请输入你的身高：&quot;);</span><br><span class="line">		double height = in.nextDouble();//小数类型的输入方式</span><br><span class="line">		System.out.println(height);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（还是好复杂）</p>
+<hr>
+<p>循环判断区别不大，就不写了</p>
+<p>foreach循环：自动遍历数组每个成员，对于集合也有用，集合相关放在后面</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int[] numbers = &#123;1, 2, 3, 4, 5&#125;;</span><br><span class="line">for (int number : numbers) &#123;</span><br><span class="line">    System.out.println(number);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>类：</p>
+<p>类的格式和c++基本没有区别<br>当在 Java 类中存在同名变量时，根据就近原则，将优先使用最接近的变量。 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class VariableScopeExample &#123;</span><br><span class="line">    private int x = 10; // 类成员变量</span><br><span class="line"></span><br><span class="line">    public void printX() &#123;</span><br><span class="line">        int x = 20; // 方法内局部变量，与类成员变量同名</span><br><span class="line">        System.out.println(&quot;局部变量 x: &quot; + x); // 输出方法内的局部变量 x</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void printMemberX() &#123;</span><br><span class="line">        System.out.println(&quot;类成员变量 x: &quot; + x); // 直接访问类成员变量 x</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        VariableScopeExample example = new VariableScopeExample();</span><br><span class="line">        example.printX(); // 输出方法内的局部变量 x</span><br><span class="line">        example.printMemberX(); // 输出类成员变量 x</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">当调用 printX 方法时，输出的是方法内的局部变量 x 的值（20）；当调用 printMemberX 方法时，输出的是类成员变量 x 的值（10）。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在 Java 中，一个源文件中只能有一个公共类（public class），并且该类的类名必须与文件名相同。这是 Java 语言规范的要求。</span><br><span class="line">除了公共类之外，一个 Java 源文件还可以包含任意数量的非公共类。这些非公共类可以被同一包中的其他类使用，但不能被其他包中的类访问，因为它们不是公共的。</span><br><span class="line">这一点有点像c语言里面只能有一个main函数，有助于结构优化。</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>继承</strong></p>
+<p>继承（inheritance）是面向对象编程的一个重要概念，允许一个类（子类）继承另一个类（父类）的属性和方法。通过继承，子类可以复用父类的代码，并且可以拓展父类的功能或者覆盖父类的方法。 </p>
+<ol>
+<li><strong>extends 关键字</strong>：在 Java 中，使用关键字 extends 可以声明一个类继承自另一个类。例如，class SubClass extends SuperClass&#96; 表示 SubClass 类继承自 SuperClass 类。</li>
+<li><strong>单继承</strong>：Java 不支持多重继承，一个类只能继承一个直接父类，但是可以多层继承。</li>
+<li><strong>super 关键字</strong>：在子类中使用 super 关键字可以调用父类的构造方法、属性和方法。不写也存在，必须在第一行</li>
+<li><strong>方法重写</strong>：子类可以重写（override）父类的方法，实现子类对特定方法的定制化实现。子类重写的方法必须与父类中被重写的方法具有相同的名称、参数列表和返回类型。</li>
+<li><strong>访问修饰符</strong>：子类继承父类的成员时，需要考虑成员的访问权限。子类可以访问父类的公共（public）和受保护（protected）成员，不能访问私有（private）成员。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">// 父类</span><br><span class="line">class Person &#123;</span><br><span class="line">    String name;</span><br><span class="line">    int age;</span><br><span class="line"></span><br><span class="line">    public Person(String name, int age) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void displayInfo() &#123;</span><br><span class="line">        System.out.println(&quot;Name: &quot; + name);</span><br><span class="line">        System.out.println(&quot;Age: &quot; + age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 子类继承父类</span><br><span class="line">class Student extends Person &#123;</span><br><span class="line">    String studentId;</span><br><span class="line"></span><br><span class="line">    public Student(String name, int age, String studentId) &#123;</span><br><span class="line">        super(name, age); // 调用父类构造方法</span><br><span class="line">        this.studentId = studentId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void displayStudentInfo() &#123;</span><br><span class="line">        displayInfo(); // 调用父类方法</span><br><span class="line">        System.out.println(&quot;Student ID: &quot; + studentId);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Student student = new Student(&quot;Alice&quot;, 20, &quot;S12345&quot;);</span><br><span class="line">        student.displayStudentInfo();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Parent &#123;</span><br><span class="line">    public Parent() &#123;</span><br><span class="line">        System.out.println(&quot;父类无参构造方法被调用&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Child extends Parent &#123;</span><br><span class="line">    public Child() &#123;</span><br><span class="line">        System.out.println(&quot;子类无参构造方法被调用&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Child child = new Child();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">先访问父类中无参构造方法，再执行自己</span><br><span class="line">如果是带参构造那应该是main-&gt;子类-&gt;父类</span><br></pre></td></tr></table></figure>
+
+<p><strong>抽象类，抽象方法</strong></p>
+<p>子类可能需要对继承而来的方法进行定制化的行为，以满足特定需求。这时候需要重写方法，当父类使用抽象方法时如果子类没有重写，就会报错</p>
+<p>抽象类里面不一定存在抽象方法，但是有抽象方法一定是抽象类</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">abstract class Animal &#123;</span><br><span class="line">    // 抽象方法，子类必须实现</span><br><span class="line">    public abstract void makeSound();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>接口</strong> </p>
+<p>在 Java 中，接口（Interface）是一种抽象类型，它定义了一组方法的规范，但没有具体的实现。接口可以包含常量和抽象方法，但不能包含普通变量和普通方法的实现。类可以实现一个或多个接口，从而遵循接口定义的方法规范。 </p>
+<p>特点：</p>
+<ol>
+<li>接口中的方法默认为 public abstract，变量默认为 public static final。</li>
+<li>接口中的方法不能包含方法体，因此所有方法都是抽象方法。</li>
+<li>类通过关键字 implements 来实现接口，一个类可以实现多个接口。</li>
+<li>接口可以继承其他接口，使用关键字 extends。</li>
+<li>接口之间形成多继承，一个接口可以继承多个接口。</li>
+<li>接口不能实例化</li>
+<li>接口子类要么重写所有抽象方法，要么就是抽象类</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">// 定义一个接口</span><br><span class="line">interface Animal &#123;</span><br><span class="line">    // 接口中的抽象方法</span><br><span class="line">    void eat();</span><br><span class="line">    void sleep();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 实现接口</span><br><span class="line">class Dog implements Animal &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void eat() &#123;</span><br><span class="line">        System.out.println(&quot;Dog is eating&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void sleep() &#123;</span><br><span class="line">        System.out.println(&quot;Dog is sleeping&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 实现多个接口</span><br><span class="line">interface Jumpable &#123;</span><br><span class="line">    void jump();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Cat implements Animal, Jumpable &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void eat() &#123;</span><br><span class="line">        System.out.println(&quot;Cat is eating&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void sleep() &#123;</span><br><span class="line">        System.out.println(&quot;Cat is sleeping&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void jump() &#123;</span><br><span class="line">        System.out.println(&quot;Cat is jumping&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>集合</strong></p>
+<p>在 Java 中，集合（Collection）是一组对象的容器，用于存储、检索和操作多个对象。Java 提供了许多集合类和接口，这些类和接口位于 <code>java.util</code> 包中。常见的 Java 集合框架包括 List、Set、Map 等，它们各自有不同的实现类和接口。 </p>
+<ol>
+<li>List 接口：List 是有序的集合，可以包含重复元素。常见的 List 实现类包括 ArrayList、LinkedList 和 Vector。</li>
+<li>Set 接口：Set 是不允许包含重复元素的集合。常见的 Set 实现类包括 HashSet、LinkedHashSet 和 TreeSet。</li>
+<li>Map 接口：Map 是键值对的集合，每个键最多只能映射到一个值。常见的 Map 实现类包括 HashMap、LinkedHashMap 和 TreeMap。</li>
+<li>Collection 接口<ul>
+<li><strong>java.util.Collection</strong> 接口是所有集合类的根接口，它代表一组对象，这些对象通常被称为集合元素。Collection 接口扩展了 Iterable 接口，因此它可以被迭代，允许使用迭代器来遍历集合中的元素。</li>
+<li>Collection 接口定义了一系列操作集合的方法，包括添加、删除、查询等。常见的实现类有 List 和 Set。</li>
+<li>一些常见的方法包括：add、remove、contains、isEmpty、size 等。</li>
+</ul>
+</li>
+<li>Queue 接口</li>
+</ol>
+<ul>
+<li><strong>java.util.Queue</strong> 接口继承自 Collection 接口，代表一种先进先出（FIFO）的队列数据结构。</li>
+<li>Queue 接口提供了在队列头部添加元素、在队列尾部删除元素等队列特有的操作。常见的实现类有 LinkedList 和 PriorityQueue。</li>
+<li>一些常见的方法包括：offer、poll、peek、element 等。</li>
+</ul>
+<p>例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Collection;</span><br><span class="line"></span><br><span class="line">public class CollectionExample &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        // 创建一个 Collection 对象</span><br><span class="line">        Collection&lt;String&gt; collection = new ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        // 添加元素到集合</span><br><span class="line">        collection.add(&quot;Java&quot;);</span><br><span class="line">        collection.add(&quot;Python&quot;);</span><br><span class="line">        collection.add(&quot;C++&quot;);</span><br><span class="line"></span><br><span class="line">        // 遍历集合并打印每个元素</span><br><span class="line">        for (String item : collection) &#123;</span><br><span class="line">            System.out.println(item);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 检查集合是否包含某个元素</span><br><span class="line">        boolean containsJava = collection.contains(&quot;Java&quot;);</span><br><span class="line">        System.out.println(&quot;集合中是否包含 Java: &quot; + containsJava);</span><br><span class="line"></span><br><span class="line">        // 获取集合的大小</span><br><span class="line">        int size = collection.size();</span><br><span class="line">        System.out.println(&quot;集合的大小: &quot; + size);</span><br><span class="line"></span><br><span class="line">        // 从集合中删除一个元素</span><br><span class="line">        collection.remove(&quot;Python&quot;);</span><br><span class="line"></span><br><span class="line">        // 清空集合中的所有元素</span><br><span class="line">        collection.clear();</span><br><span class="line"></span><br><span class="line">        // 检查集合是否为空</span><br><span class="line">        boolean isEmpty = collection.isEmpty();</span><br><span class="line">        System.out.println(&quot;集合是否为空: &quot; + isEmpty);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/03/15/Java%E5%9F%BA%E7%A1%80/" data-id="cltu5bw360001q0b58pq552f3" data-title="Java基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-XXE" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/03/12/XXE/" class="article-date">
@@ -129,7 +245,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/12/XXE/" data-id="clto5uld50000twb5cu721t2l" data-title="XXE" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/12/XXE/" data-id="cltu5bw330000q0b5a8emhu9l" data-title="XXE" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -192,7 +308,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/07/ssrf/" data-id="clto5uldc000ctwb525y66kr8" data-title="ssrf" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/07/ssrf/" data-id="cltu5bw3b000gq0b56joi8rtq" data-title="ssrf" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -337,7 +453,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/05/%E5%8E%9F%E7%94%9F%E7%B1%BB/" data-id="clto5uldh000mtwb53j5573d1" data-title="原生类" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/05/%E5%8E%9F%E7%94%9F%E7%B1%BB/" data-id="cltu5bw3e000oq0b560p8aqd7" data-title="原生类" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -393,7 +509,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/04/phototype-1/" data-id="clto5uld90003twb559fqg18b" data-title="phototype_1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/04/phototype-1/" data-id="cltu5bw370002q0b5dscjashd" data-title="phototype_1" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -459,7 +575,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/03/phototype/" data-id="clto5ulda0005twb569fp8ikl" data-title="phototype" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/03/phototype/" data-id="cltu5bw380006q0b59kna8ktd" data-title="phototype" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -555,7 +671,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/03/n-ez-unserilize/" data-id="clto5uld80001twb589190ssm" data-title="n_ez_unserilize" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/03/n-ez-unserilize/" data-id="cltu5bw370003q0b54ltyfe24" data-title="n_ez_unserilize" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -611,7 +727,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/29/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" data-id="clto5ulde000ktwb5da6cgz6u" data-title="文件上传" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/29/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" data-id="cltu5bw3e000nq0b52mhj8943" data-title="文件上传" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -826,7 +942,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/23/serialize/" data-id="clto5uldc000atwb5cyrray6f" data-title="serialize" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/23/serialize/" data-id="cltu5bw39000aq0b584e3dtfz" data-title="serialize" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -928,59 +1044,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/15/upload/" data-id="clto5uldd000dtwb5hq0wh3sd" data-title="upload" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-xss-11-13" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/02/13/xss-11-13/" class="article-date">
-  <time class="dt-published" datetime="2024-02-13T15:23:10.000Z" itemprop="datePublished">2024-02-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/02/13/xss-11-13/">xss_11~13</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(&#x27;a&#x27;)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">onblur=&#x27;alert(/1/)&#x27;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;javascript:alert(&#x27;a&#x27;)&quot;&gt;click&lt;/a&gt;</span><br></pre></td></tr></table></figure>
-
-<p><strong>第十一关</strong></p>
-<p>和第十关一样，先找哪个能接收get，发现是t_sort，但是注入之后没有显示按钮，原因是‘ “被过滤</p>
-<p>看源代码发现t_re会接收记录的第十关的refrer，即为上一个界面的url地址</p>
-<p>使用burp抓包，修改refrer即可</p>
-<p><strong>第十二关</strong></p>
-<p>和上一关类似，这次换成ua头了</p>
-<p><strong>第十三关</strong></p>
-<p>和上一关类似，这次换成cookie了</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/13/xss-11-13/" data-id="clto5uldd000etwb581521a5f" data-title="xss_11~13" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/15/upload/" data-id="cltu5bw3a000cq0b520l4f9yl" data-title="upload" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1042,6 +1106,10 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       <ul>
         
           <li>
+            <a href="/2024/03/15/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+          </li>
+        
+          <li>
             <a href="/2024/03/12/XXE/">XXE</a>
           </li>
         
@@ -1055,10 +1123,6 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
         
           <li>
             <a href="/2024/03/04/phototype-1/">phototype_1</a>
-          </li>
-        
-          <li>
-            <a href="/2024/03/03/phototype/">phototype</a>
           </li>
         
       </ul>
