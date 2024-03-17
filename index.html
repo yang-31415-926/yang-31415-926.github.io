@@ -73,6 +73,108 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-java稍进阶" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/17/java%E7%A8%8D%E8%BF%9B%E9%98%B6/" class="article-date">
+  <time class="dt-published" datetime="2024-03-17T04:24:56.000Z" itemprop="datePublished">2024-03-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/03/17/java%E7%A8%8D%E8%BF%9B%E9%98%B6/">java稍进阶</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><strong>flie类和io流</strong></p>
+<p>File 类：</p>
+<p><code>File</code> 类代表文件或目录的路径名抽象表示。它主要用于查询文件属性、创建或删除文件、以及获取文件信息等操作。以下是一些常见的 <code>File</code> 类方法：</p>
+<ul>
+<li><code>exists()</code>：检查文件或目录是否存在。</li>
+<li><code>isFile()</code> 和 <code>isDirectory()</code>：判断当前对象是否代表文件或目录。</li>
+<li><code>createNewFile()</code>：创建新文件。</li>
+<li><code>mkdir()</code> 和 <code>mkdirs()</code>：创建新目录。</li>
+<li><code>delete()</code>：删除文件或目录。</li>
+<li><code>getName()</code>、<code>getPath()</code>、<code>getAbsolutePath()</code>：获取文件名、路径等信息。</li>
+</ul>
+<p>I&#x2F;O 流：</p>
+<p>I&#x2F;O 流是用于在 Java 程序中进行输入和输出操作的机制。它主要分为字节流和字符流两种类型：</p>
+<ul>
+<li>字节流：以字节为单位进行读写操作，适用于处理二进制数据。 <ul>
+<li><code>InputStream</code> 和 <code>OutputStream</code> 是字节输入流和输出流的父类。</li>
+</ul>
+</li>
+<li>字符流：以字符为单位进行读写操作，适用于处理文本数据。 <ul>
+<li><code>Reader</code> 和 <code>Writer</code> 是字符输入流和输出流的父类。</li>
+</ul>
+</li>
+</ul>
+<p>常见的 I&#x2F;O 流类有 <code>FileInputStream</code>、<code>FileOutputStream</code>、<code>FileReader</code>、<code>FileWriter</code> 等，用于从文件中读取数据或向文件中写入数据。</p>
+<p>下面是一个简单示例，演示了如何使用 <code>File</code> 类和 I&#x2F;O 流来读取文件内容并输出到控制台：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import java.io.*;</span><br><span class="line"></span><br><span class="line">public class FileIOExample &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        File file = new File(&quot;example.txt&quot;);</span><br><span class="line"></span><br><span class="line">        try (BufferedReader reader = new BufferedReader(new FileReader(file))) &#123;</span><br><span class="line">            String line;</span><br><span class="line">            while ((line = reader.readLine()) != null) &#123;</span><br><span class="line">                System.out.println(line);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>反射</strong></p>
+<p>反射是指在运行时检查或修改类或对象的能力。通过反射，我们可以动态地获取类的信息、调用类的方法、访问类的属性等，而无需在编译时确定这些操作。</p>
+<p>反射提供了以下一些重要的类和接口来实现这些功能：</p>
+<ol>
+<li><code>Class</code> 类：<code>Class</code> 类代表一个类或接口，在运行时，Java 虚拟机为每个加载的类维护一个对应的 <code>Class</code> 对象，通过该对象可以获取类的信息。</li>
+<li><code>Field</code> 类：<code>Field</code> 类表示类的成员变量，可以用于获取和设置对象的字段值。</li>
+<li><code>Method</code> 类：<code>Method</code> 类表示类的方法，可以用于调用类的方法。</li>
+<li><code>Constructor</code> 类：<code>Constructor</code> 类表示类的构造方法，可以用于实例化对象。</li>
+</ol>
+<p>class（）是私有属性，不能直接new class（）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line">public class ReflectionExample &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        // 获取 String 类的 Class 对象</span><br><span class="line">        Class&lt;?&gt; stringClass = String.class;</span><br><span class="line"></span><br><span class="line">        // 输出类的名称</span><br><span class="line">        System.out.println(&quot;Class Name: &quot; + stringClass.getName());</span><br><span class="line"></span><br><span class="line">        // 获取类的所有方法</span><br><span class="line">        Method[] methods = stringClass.getMethods();</span><br><span class="line">        System.out.println(&quot;Methods:&quot;);</span><br><span class="line">        for (Method method : methods) &#123;</span><br><span class="line">            System.out.println(method.getName());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 调用 String 类的 length() 方法</span><br><span class="line">        Method lengthMethod = stringClass.getMethod(&quot;length&quot;);</span><br><span class="line">        String str = &quot;Hello, Reflection!&quot;;</span><br><span class="line">        int length = (int) lengthMethod.invoke(str);</span><br><span class="line">        System.out.println(&quot;String length: &quot; + length);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>获取class类还可以使用getclass（）方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class GetClassExample &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String str = &quot;Hello, getClass()!&quot;;</span><br><span class="line">        Class&lt;?&gt; strClass = str.getClass();</span><br><span class="line">        </span><br><span class="line">        System.out.println(&quot;Class Name: &quot; + strClass.getName());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>和 Class.forName() </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String className = &quot;com.example.myapp.MyClass&quot;;</span><br><span class="line">Class&lt;?&gt; myClass = Class.forName(className);</span><br></pre></td></tr></table></figure>
+
+<p><strong>通过反射实例化对象</strong></p>
+<p>使用 <code>newInstance()</code> 方法创建类的实例，并且使用 <code>invoke()</code> 方法执行方法 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">import java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            // 创建类对象</span><br><span class="line">            Class&lt;?&gt; myClass = Class.forName(&quot;com.example.myapp.MyClass&quot;);</span><br><span class="line">            </span><br><span class="line">            // 创建实例</span><br><span class="line">            Object instance = myClass.newInstance();</span><br><span class="line">            </span><br><span class="line">            // 获取要调用的方法</span><br><span class="line">            Method method = myClass.getMethod(&quot;myMethod&quot;);</span><br><span class="line">            </span><br><span class="line">            // 执行方法</span><br><span class="line">            method.invoke(instance);</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MyClass &#123;</span><br><span class="line">    public void myMethod() &#123;</span><br><span class="line">        System.out.println(&quot;Executing myMethod...&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>**setAccessible(true) **</p>
+<p>当使用 Java 反射机制访问私有成员时，可以通过 <code>setAccessible(true)</code> 方法来解除访问限制 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">import java.lang.reflect.Field;</span><br><span class="line"></span><br><span class="line">public class MyClass &#123;</span><br><span class="line">    private String privateField = &quot;私有字段&quot;;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        MyClass myObject = new MyClass();</span><br><span class="line"></span><br><span class="line">        // 获取 Class 对象</span><br><span class="line">        Class&lt;?&gt; myClass = myObject.getClass();</span><br><span class="line"></span><br><span class="line">        // 获取私有字段</span><br><span class="line">        Field field = myClass.getDeclaredField(&quot;privateField&quot;);</span><br><span class="line"></span><br><span class="line">        // 解除访问限制</span><br><span class="line">        field.setAccessible(true);</span><br><span class="line"></span><br><span class="line">        // 获取字段的值并输出</span><br><span class="line">        String value = (String) field.get(myObject);</span><br><span class="line">        System.out.println(&quot;私有字段的原始值：&quot; + value);</span><br><span class="line"></span><br><span class="line">        // 修改字段的值</span><br><span class="line">        field.set(myObject, &quot;修改后的值&quot;);</span><br><span class="line"></span><br><span class="line">        // 再次获取字段的值并输出</span><br><span class="line">        String updatedValue = (String) field.get(myObject);</span><br><span class="line">        System.out.println(&quot;修改后的私有字段的值：&quot; + updatedValue);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>反序列化</strong></p>
+<p>反序列化具体作用再php相关部分提到过，就不赘述了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.ObjectInputStream;</span><br><span class="line"></span><br><span class="line">public class DeserializationExample &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            // 创建输入流对象</span><br><span class="line">            FileInputStream fileInputStream = new FileInputStream(&quot;serializedObject.ser&quot;);</span><br><span class="line">            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);</span><br><span class="line"></span><br><span class="line">            // 反序列化对象</span><br><span class="line">            MyObject myObject = (MyObject) objectInputStream.readObject();</span><br><span class="line"></span><br><span class="line">            // 关闭输入流</span><br><span class="line">            objectInputStream.close();</span><br><span class="line"></span><br><span class="line">            // 使用反序列化得到的对象</span><br><span class="line">            System.out.println(&quot;反序列化得到的对象：&quot;);</span><br><span class="line">            System.out.println(&quot;属性1：&quot; + myObject.getProperty1());</span><br><span class="line">            System.out.println(&quot;属性2：&quot; + myObject.getProperty2());</span><br><span class="line"></span><br><span class="line">        &#125; catch (IOException | ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面介绍一下类似魔术方法的方法</p>
+<ol>
+<li><code>private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException</code>：如果一个类实现了这个方法，那么在对象进行反序列化时，<code>readObject()</code> 方法会被调用，允许你手动控制对象的反序列化过程。</li>
+<li><code>private void readObjectNoData() throws ObjectStreamException</code>：如果一个类实现了这个方法，那么在对象进行反序列化时，如果没有可用的默认数据，<code>readObjectNoData()</code> 方法会被调用。</li>
+</ol>
+<p>**transient **</p>
+<p>在 Java 中，<code>transient</code> 是一个关键字，用于修饰类的成员变量。当一个成员变量被声明为 <code>transient</code> 时，它将被标记为瞬态的，即在对象的序列化过程中会被忽略，不会被保存到输出流中。 </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/03/17/java%E7%A8%8D%E8%BF%9B%E9%98%B6/" data-id="cltvdkkir0002msb5dhfa7ng4" data-title="java稍进阶" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Java基础" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/03/15/Java%E5%9F%BA%E7%A1%80/" class="article-date">
@@ -177,7 +279,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/15/Java%E5%9F%BA%E7%A1%80/" data-id="cltu5bw360001q0b58pq552f3" data-title="Java基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/15/Java%E5%9F%BA%E7%A1%80/" data-id="cltvdkkio0000msb55ohc400m" data-title="Java基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -245,7 +347,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/12/XXE/" data-id="cltu5bw330000q0b5a8emhu9l" data-title="XXE" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/12/XXE/" data-id="cltvdkkit0005msb551dhboou" data-title="XXE" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -308,7 +410,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/07/ssrf/" data-id="cltu5bw3b000gq0b56joi8rtq" data-title="ssrf" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/07/ssrf/" data-id="cltvdkkiv000cmsb523rg4vqq" data-title="ssrf" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -453,7 +555,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/05/%E5%8E%9F%E7%94%9F%E7%B1%BB/" data-id="cltu5bw3e000oq0b560p8aqd7" data-title="原生类" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/05/%E5%8E%9F%E7%94%9F%E7%B1%BB/" data-id="cltvdkkj0000pmsb545bvebbj" data-title="原生类" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -509,7 +611,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/04/phototype-1/" data-id="cltu5bw370002q0b5dscjashd" data-title="phototype_1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/04/phototype-1/" data-id="cltvdkkis0004msb590iodd9e" data-title="phototype_1" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -575,7 +677,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/03/phototype/" data-id="cltu5bw380006q0b59kna8ktd" data-title="phototype" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/03/phototype/" data-id="cltvdkkit0008msb58eai43dw" data-title="phototype" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -671,7 +773,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/03/n-ez-unserilize/" data-id="cltu5bw370003q0b54ltyfe24" data-title="n_ez_unserilize" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/03/n-ez-unserilize/" data-id="cltvdkkiu0009msb5aaby3wsh" data-title="n_ez_unserilize" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -727,7 +829,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/29/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" data-id="cltu5bw3e000nq0b52mhj8943" data-title="文件上传" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/29/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" data-id="cltvdkkiz000nmsb5cvbob47c" data-title="文件上传" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -942,109 +1044,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/23/serialize/" data-id="cltu5bw39000aq0b584e3dtfz" data-title="serialize" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-upload" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/02/15/upload/" class="article-date">
-  <time class="dt-published" datetime="2024-02-15T15:39:23.000Z" itemprop="datePublished">2024-02-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/02/15/upload/">upload</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><strong>第一关</strong></p>
-<p>先用burp抓包，发现上传文件之后的弹窗是js弹窗，并且抓包没抓到东西，判断为前端选择器</p>
-<p>将文件名改成.jpg形式，上传成功</p>
-<p>在burp里面将.jpg改回原来的格式，发送</p>
-<p>在uplode文件夹中找到已上传文件，成功。</p>
-<p><strong>第二关</strong></p>
-<p>先用burp抓包，点击上传直接能抓到，判断为后端选择器</p>
-<p>在burp的content-type里面改成jpg，还是不成功</p>
-<p>查看源代码之后把content-type内容改成image&#x2F;jpeg，成功</p>
-<p><strong>第三关</strong></p>
-<p>要求上传脚本文件，但是php不允许上传</p>
-<p>改用.phtml拓展名，成功</p>
-<p><strong>第四关</strong></p>
-<p>这次脚本后缀基本全部过滤了</p>
-<p>使用htaccess文件</p>
-<p>其为apache服务器的一个配置文件</p>
-<p>比如：SetHandler application&#x2F;x-httpd-php</p>
-<p>设置当前文件都使用php解析，那么无论上传任何文件，只要代码符合php规范，就会被当作php执行</p>
-<p>首先要配置apache</p>
-<p>写入代码<br>SetHandler application&#x2F;x-httpd-php</p>
-<p>上传.htaccess文件</p>
-<p>之后将php文件后缀名改成能上传的就可以了</p>
-<p>但是这关实际操作时失败了，应该是配置文件出了问题</p>
-<p><strong>第五关</strong></p>
-<p>大小写漏洞，php-&gt;Php</p>
-<p><strong>第六关</strong></p>
-<p>再后缀名后面加一个空格</p>
-<p>但是windows存储时会去掉空格，所以需要抓包</p>
-<p>在抓的包内添加</p>
-<p><strong>第七关</strong></p>
-<p>再后缀名后面加一个.</p>
-<p>但是windows存储时会去掉.，所以需要抓包</p>
-<p>在抓的包内添加</p>
-<p><strong>第八关</strong></p>
-<p>在文件名后面加上::$DATA</p>
-<p>和上一关一样</p>
-<p><strong>第九关</strong></p>
-<p>删除末尾的.了，但是只删除一个</p>
-<p>双写.</p>
-<p>其他与上一关一样</p>
-<p><strong>第十关</strong></p>
-<p>因为黑名单的后缀名会替换为空，所以存在双写漏洞改成phphpp</p>
-<p><strong>第十一关</strong></p>
-<p>00截断</p>
-<p>0x00为16进制的00，解析后为空；%00url解码之后为空</p>
-<p>当一个字符串中间出现空格，后面的那部分会被忽略</p>
-<p>_GET传递时会自动编码，所以用%00</p>
-<p>_POST传递时不会自动编码，所以用0x00</p>
-<p>先看源代码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$file_ext = substr($_FILES[&#x27;upload_file&#x27;][&#x27;name&#x27;],strrpos($_FILES[&#x27;upload_file&#x27;]</span><br><span class="line">[&#x27;name&#x27;],&quot;.&quot;)+1);</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$img_path = $_GET[&#x27;save_path&#x27;].&quot;/&quot;.rand(10, 99).date(&quot;YmdHis&quot;).&quot;.&quot;.$file_ext;</span><br></pre></td></tr></table></figure>
-
-<p>最终生成的<code>$img_path</code>变量将包含完整的文件路径和文件名，供后续的文件保存操作使用。</p>
-<p>burp抓包</p>
-<p>改save_path为..&#x2F;upload&#x2F;123.php%00</p>
-<p>这样文件路径和文件名连在一起，123.jpg被忽略</p>
-<p><strong>第十二关</strong></p>
-<p>和第11关相似，不过是_POST</p>
-<p>使用0x00即可</p>
-<p>因为POST不会解码，%00编码一下成%25%30%30也行</p>
-<p><strong>第十三关</strong></p>
-<p>图片马，在cmd里面使用copy的方法将代码和图片结合在一起生成新文件</p>
-<p>上传新文件即可</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/15/upload/" data-id="cltu5bw3a000cq0b520l4f9yl" data-title="upload" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/23/serialize/" data-id="cltvdkkit0006msb572xa4hsk" data-title="serialize" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1106,6 +1106,10 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       <ul>
         
           <li>
+            <a href="/2024/03/17/java%E7%A8%8D%E8%BF%9B%E9%98%B6/">java稍进阶</a>
+          </li>
+        
+          <li>
             <a href="/2024/03/15/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
           </li>
         
@@ -1119,10 +1123,6 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
         
           <li>
             <a href="/2024/03/05/%E5%8E%9F%E7%94%9F%E7%B1%BB/">原生类</a>
-          </li>
-        
-          <li>
-            <a href="/2024/03/04/phototype-1/">phototype_1</a>
           </li>
         
       </ul>

@@ -73,6 +73,108 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-upload" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/02/15/upload/" class="article-date">
+  <time class="dt-published" datetime="2024-02-15T15:39:23.000Z" itemprop="datePublished">2024-02-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/02/15/upload/">upload</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><strong>第一关</strong></p>
+<p>先用burp抓包，发现上传文件之后的弹窗是js弹窗，并且抓包没抓到东西，判断为前端选择器</p>
+<p>将文件名改成.jpg形式，上传成功</p>
+<p>在burp里面将.jpg改回原来的格式，发送</p>
+<p>在uplode文件夹中找到已上传文件，成功。</p>
+<p><strong>第二关</strong></p>
+<p>先用burp抓包，点击上传直接能抓到，判断为后端选择器</p>
+<p>在burp的content-type里面改成jpg，还是不成功</p>
+<p>查看源代码之后把content-type内容改成image&#x2F;jpeg，成功</p>
+<p><strong>第三关</strong></p>
+<p>要求上传脚本文件，但是php不允许上传</p>
+<p>改用.phtml拓展名，成功</p>
+<p><strong>第四关</strong></p>
+<p>这次脚本后缀基本全部过滤了</p>
+<p>使用htaccess文件</p>
+<p>其为apache服务器的一个配置文件</p>
+<p>比如：SetHandler application&#x2F;x-httpd-php</p>
+<p>设置当前文件都使用php解析，那么无论上传任何文件，只要代码符合php规范，就会被当作php执行</p>
+<p>首先要配置apache</p>
+<p>写入代码<br>SetHandler application&#x2F;x-httpd-php</p>
+<p>上传.htaccess文件</p>
+<p>之后将php文件后缀名改成能上传的就可以了</p>
+<p>但是这关实际操作时失败了，应该是配置文件出了问题</p>
+<p><strong>第五关</strong></p>
+<p>大小写漏洞，php-&gt;Php</p>
+<p><strong>第六关</strong></p>
+<p>再后缀名后面加一个空格</p>
+<p>但是windows存储时会去掉空格，所以需要抓包</p>
+<p>在抓的包内添加</p>
+<p><strong>第七关</strong></p>
+<p>再后缀名后面加一个.</p>
+<p>但是windows存储时会去掉.，所以需要抓包</p>
+<p>在抓的包内添加</p>
+<p><strong>第八关</strong></p>
+<p>在文件名后面加上::$DATA</p>
+<p>和上一关一样</p>
+<p><strong>第九关</strong></p>
+<p>删除末尾的.了，但是只删除一个</p>
+<p>双写.</p>
+<p>其他与上一关一样</p>
+<p><strong>第十关</strong></p>
+<p>因为黑名单的后缀名会替换为空，所以存在双写漏洞改成phphpp</p>
+<p><strong>第十一关</strong></p>
+<p>00截断</p>
+<p>0x00为16进制的00，解析后为空；%00url解码之后为空</p>
+<p>当一个字符串中间出现空格，后面的那部分会被忽略</p>
+<p>_GET传递时会自动编码，所以用%00</p>
+<p>_POST传递时不会自动编码，所以用0x00</p>
+<p>先看源代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$file_ext = substr($_FILES[&#x27;upload_file&#x27;][&#x27;name&#x27;],strrpos($_FILES[&#x27;upload_file&#x27;]</span><br><span class="line">[&#x27;name&#x27;],&quot;.&quot;)+1);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$img_path = $_GET[&#x27;save_path&#x27;].&quot;/&quot;.rand(10, 99).date(&quot;YmdHis&quot;).&quot;.&quot;.$file_ext;</span><br></pre></td></tr></table></figure>
+
+<p>最终生成的<code>$img_path</code>变量将包含完整的文件路径和文件名，供后续的文件保存操作使用。</p>
+<p>burp抓包</p>
+<p>改save_path为..&#x2F;upload&#x2F;123.php%00</p>
+<p>这样文件路径和文件名连在一起，123.jpg被忽略</p>
+<p><strong>第十二关</strong></p>
+<p>和第11关相似，不过是_POST</p>
+<p>使用0x00即可</p>
+<p>因为POST不会解码，%00编码一下成%25%30%30也行</p>
+<p><strong>第十三关</strong></p>
+<p>图片马，在cmd里面使用copy的方法将代码和图片结合在一起生成新文件</p>
+<p>上传新文件即可</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/02/15/upload/" data-id="cltvdkkiw000hmsb5e6dhb7y0" data-title="upload" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-xss-11-13" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/02/13/xss-11-13/" class="article-date">
@@ -113,7 +215,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/13/xss-11-13/" data-id="cltu5bw3b000fq0b5flxl8vcz" data-title="xss_11~13" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/13/xss-11-13/" data-id="cltvdkkiv000emsb5f3fmcgj3" data-title="xss_11~13" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -181,7 +283,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/13/xss-7-10/" data-id="cltu5bw3b000hq0b5gw609vxr" data-title="xss_7~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/13/xss-7-10/" data-id="cltvdkkiw000kmsb583f0da80" data-title="xss_7~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -234,7 +336,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/13/xss4-6/" data-id="cltu5bw3e000mq0b53gpo1vwf" data-title="xss4~6" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/13/xss4-6/" data-id="cltvdkkiz000omsb5fj32g3vk" data-title="xss4~6" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -291,7 +393,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/12/xss1-3/" data-id="cltu5bw3a000dq0b56znfh0nu" data-title="xss1~3" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/12/xss1-3/" data-id="cltvdkkiw000gmsb51b3pezic" data-title="xss1~3" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -361,7 +463,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/11/sql16-20/" data-id="cltu5bw3a000eq0b520hs86d8" data-title="sql16~20" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/11/sql16-20/" data-id="cltvdkkiu000bmsb5gu6n292j" data-title="sql16~20" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -421,7 +523,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/09/sql11-15/" data-id="cltu5bw390009q0b58x9ocr28" data-title="sql11~15" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/09/sql11-15/" data-id="cltvdkkiu000amsb558mgcw05" data-title="sql11~15" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -610,7 +712,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/07/sql1-10/" data-id="cltu5bw3a000bq0b5gyqadgfd" data-title="sql1~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/07/sql1-10/" data-id="cltvdkkiv000fmsb5dqdi68p2" data-title="sql1~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -706,7 +808,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/03/sql/" data-id="cltu5bw380007q0b5azbk3rzx" data-title="sql" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/03/sql/" data-id="cltvdkkit0007msb59qeh9mbv" data-title="sql" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -801,66 +903,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/03/php/" data-id="cltu5bw380005q0b58w0d9tbz" data-title="php" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-python" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/01/29/python/" class="article-date">
-  <time class="dt-published" datetime="2024-01-29T14:11:03.000Z" itemprop="datePublished">2024-01-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/01/29/python/">python</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><strong>数据类型</strong></p>
-<p>1， 变量没有类型不需要声明 ， 但必须赋值 </p>
-<p>2，number(数字)，string(字符串)，tuple(元组)。这些为不可变数据，list(列表)，dictionary(字典)，set(集合)，这些为可变数据</p>
-<p>3，列表中的元素是可以直接改变</p>
-<p>4，元组，和列表类似，但是元组中的元素不能改变</p>
-<p>5，字典表示一种对应关系，不可重复且不可变</p>
-<p><strong>类</strong></p>
-<p>当我们无法用单一的一个量或者函数表达一个数据时，通过类的方式，把数据的特性组合在一起，称为一类，类里面含有对象和方法（函数）</p>
-<p><strong>面向对象</strong></p>
-<p>相比较函数，面向对象是更大的封装，根据职责在一个对象中封装多个方法</p>
-<p>1在完成某一个需求前，首先确定职责即要做的事情。</p>
-<p>2.根据职责确定不同的对象，在对象内部封装不同的方法</p>
-<p>3.最后完成的代码就是顺序的让不同的对象调用不同的方法</p>
-<p><strong>正则</strong></p>
-<p>目的是用更简便快捷的方式完成查找和抓取</p>
-<p>？可以存在零次或一次</p>
-<p>*可以存在零至无数次</p>
-<p>+可以存在一次至无数次</p>
-<p>{m，n} 可以存在m次到n次</p>
-<p>&lt;.+&gt;贪婪匹配“任意字符”</p>
-<p>&lt;.+?&gt;懒惰匹配“任意字符”</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/29/python/" data-id="cltu5bw380004q0b50ei1glgf" data-title="python" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/03/php/" data-id="cltvdkkiv000dmsb5anqehgdb" data-title="php" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -922,6 +965,10 @@
       <ul>
         
           <li>
+            <a href="/2024/03/17/java%E7%A8%8D%E8%BF%9B%E9%98%B6/">java稍进阶</a>
+          </li>
+        
+          <li>
             <a href="/2024/03/15/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
           </li>
         
@@ -935,10 +982,6 @@
         
           <li>
             <a href="/2024/03/05/%E5%8E%9F%E7%94%9F%E7%B1%BB/">原生类</a>
-          </li>
-        
-          <li>
-            <a href="/2024/03/04/phototype-1/">phototype_1</a>
           </li>
         
       </ul>
