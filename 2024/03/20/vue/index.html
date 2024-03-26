@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>vue | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="简单学学，简单记 插值语法 123456789101112131415&lt;div id&#x3D;&quot;root&quot;&gt;    &lt;h1&gt;Hello,&amp;#123;&amp;#123;name&amp;#125;&amp;#125;&lt;&#x2F;h1&gt;&lt;&#x2F;div&gt;&lt;script type&#x3D;&quot;text&#x2F;javascript&quot; &gt;    Vue.config.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue">
+<meta property="og:url" content="http://example.com/2024/03/20/vue/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="简单学学，简单记 插值语法 123456789101112131415&lt;div id&#x3D;&quot;root&quot;&gt;    &lt;h1&gt;Hello,&amp;#123;&amp;#123;name&amp;#125;&amp;#125;&lt;&#x2F;h1&gt;&lt;&#x2F;div&gt;&lt;script type&#x3D;&quot;text&#x2F;javascript&quot; &gt;    Vue.config.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-03-20T11:10:42.000Z">
+<meta property="article:modified_time" content="2024-03-26T01:38:24.819Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-vue" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/20/vue/" class="article-date">
+  <time class="dt-published" datetime="2024-03-20T11:10:42.000Z" itemprop="datePublished">2024-03-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      vue
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>简单学学，简单记</p>
+<p><strong>插值语法</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;root&quot;&gt;</span><br><span class="line">    &lt;h1&gt;Hello,&#123;&#123;name&#125;&#125;&lt;/h1&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;script type=&quot;text/javascript&quot; &gt;</span><br><span class="line">    Vue.config.productionTip = false //阻止vue在启动时生成生产提示</span><br><span class="line"></span><br><span class="line">    new Vue(&#123;  </span><br><span class="line">            el:&#x27;#root&#x27;,//el用于指定当前vue实例为哪个容器服务，值通常为css选择器字符串</span><br><span class="line">            data:&#123;//用于存储数据，用于el储存的容器使用，值暂时先写成一个对象</span><br><span class="line">                name:&#x27;123&#x27;</span><br><span class="line">            &#125; </span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>以上是vue基本格式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1&gt;Hello,&#123;&#123;name&#125;&#125;&lt;/h1&gt;，这里面&#123;&#123;name&#125;&#125;叫插值语法，使页面动态，灵活，大括号里面写js表达式</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">el:&#x27;#root&#x27;这部分只能单对单，如果需要单对多，会使用组件</span><br></pre></td></tr></table></figure>
+
+<p><strong>指令语法</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;a v-bind:href=&quot;url&quot;&gt;点我去...&lt;/a&gt;</span><br><span class="line">new Vue(&#123;  </span><br><span class="line">    el:&#x27;#root&#x27;,</span><br><span class="line">    data:&#123;</span><br><span class="line">        url:&#x27;http://.....&#x27;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>用于解析标签，v-bind用于单向绑定</p>
+<p><strong>绑定</strong></p>
+<p>分为单向绑定和双向绑定<br>双向绑定举例v-model，特点是可以做到数据影响页面的同时页面也影响数据<br>v-model不支持一定类型，只能应用于表单类元素（有输入值的）</p>
+<p><strong>el和data的两种写法</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">new Vue(&#123;  </span><br><span class="line">    el:&#x27;#root&#x27;,</span><br><span class="line">    data:&#123;</span><br><span class="line">        url:&#x27;http://.....&#x27;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;)</span><br><span class="line">等同于</span><br><span class="line">const v = new Vue(&#123;  </span><br><span class="line">    data:&#123;</span><br><span class="line">        url:&#x27;http://.....&#x27;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;)</span><br><span class="line">v.$mount(&#x27;#root&#x27;)</span><br><span class="line">第二种灵活点</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">data:&#123;</span><br><span class="line">        url:&#x27;http://.....&#x27;</span><br><span class="line">    &#125; </span><br><span class="line">等同于</span><br><span class="line">data:function()&#123;</span><br><span class="line">	return&#123;</span><br><span class="line">		url:&#x27;http://.....&#x27;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面data的第二种不能写成箭头函数，一旦写了箭头函数，this就不再是Vue实例变成window了<br>茴香豆.jpg</p>
+<p><strong>MVVM模型</strong></p>
+<p>链接dom和数据</p>
+<p><strong>Object.defineProprety方法</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">    let person=&#123;</span><br><span class="line">        name:&#x27;张三&#x27;,</span><br><span class="line">        sex:&#x27;男&#x27;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    Object.defineProperty(person,&#x27;age&#x27;,&#123;</span><br><span class="line">        value:18</span><br><span class="line">    &#125;)</span><br><span class="line">    console.log(person)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这种方法不参与遍历</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Object.defineProperty(person,&#x27;age&#x27;,&#123;</span><br><span class="line">            value:18,</span><br><span class="line">            enumerable:true</span><br><span class="line">        &#125;)</span><br><span class="line">这样就行</span><br></pre></td></tr></table></figure>
+
+<p>这种方法不能通过控制台修改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Object.defineProperty(person,&#x27;age&#x27;,&#123;</span><br><span class="line">            value:18,</span><br><span class="line">            writable:true</span><br><span class="line">        &#125;)</span><br><span class="line">这样就行</span><br></pre></td></tr></table></figure>
+
+<p>同理,删除-&gt;configurable:true</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;object&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">        let number=18</span><br><span class="line">        let person=&#123;</span><br><span class="line">            name:&#x27;张三&#x27;,</span><br><span class="line">            sex:&#x27;男&#x27;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        Object.defineProperty(person,&#x27;age&#x27;,&#123;</span><br><span class="line">            get:function()&#123;</span><br><span class="line">                console.log(&#x27;读取了&#x27;)</span><br><span class="line">                return number</span><br><span class="line">            &#125;,</span><br><span class="line">            set:function(value)&#123;</span><br><span class="line">                console.log(&#x27;有人修改了age属性&#x27;)</span><br><span class="line">                number=value</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        console.log(person)</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>用Object.defineProperty这个方法可以把’number’和’person’联系起来<br>这里面两个方法有点像魔术方法捏</p>
+<p><strong>事件处理</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">methods:&#123;</span><br><span class="line">	ShowInfo:(event)&#123;</span><br><span class="line">		console.log(event.target)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>事件修饰符</strong></p>
+<ol>
+<li><code>.stop</code> 修饰符阻止事件继续传播。</li>
+<li><code>.prevent</code> 修饰符阻止事件的默认行为。</li>
+<li><code>.capture</code> 修饰符将事件侦听器添加到父元素而不是子元素。</li>
+<li><code>.self</code> 修饰符只有在事件是从侦听器绑定的元素本身触发时才触发回调。</li>
+<li><code>.once</code> 修饰符只会执行一次事件处理函数。</li>
+<li><code>.passive</code> 修饰符告诉浏览器你不想阻止事件默认行为。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;button v-on:click.stop=&quot;doSomething&quot;&gt;&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>键盘事件</strong></p>
+<ol>
+<li><code>enter</code> - 回车键</li>
+<li><code>tab</code> - 制表键</li>
+<li><code>delete</code> - 删除键</li>
+<li><code>esc</code> - ESC 键</li>
+<li><code>space</code> - 空格键</li>
+<li><code>up</code> - 向上箭头键</li>
+<li><code>down</code> - 向下箭头键</li>
+<li><code>left</code> - 向左箭头键</li>
+<li><code>right</code> - 向右箭头键</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@keyup.esc=&quot;showInfo&quot;</span><br><span class="line">Vue.config.keyCodes.huiche = 13//自定义一个别名按键</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/03/20/vue/" data-id="clu7pl2pz000iq8b59cccevb5" data-title="vue" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/03/25/%E6%97%A0%E5%88%97%E5%90%8D%E6%B3%A8%E5%85%A5/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          无列名注入
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/03/17/java%E7%A8%8D%E8%BF%9B%E9%98%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">java稍进阶</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-css-js%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" rel="tag">html, css, js基础学习</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/html-css-js%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">html, css, js基础学习</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">January 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/03/26/NKCTF-vm/">NKCTF-vm</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/25/%E6%97%A0%E5%88%97%E5%90%8D%E6%B3%A8%E5%85%A5/">无列名注入</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/20/vue/">vue</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/17/java%E7%A8%8D%E8%BF%9B%E9%98%B6/">java稍进阶</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/15/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

