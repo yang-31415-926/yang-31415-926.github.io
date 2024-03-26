@@ -127,7 +127,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/26/NKCTF-vm/" data-id="clu7pl2pu0002q8b5aiq9et2s" data-title="NKCTF-vm" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/26/NKCTF-vm/" data-id="clu890fu70000pob51fjnhu3m" data-title="NKCTF-vm" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -173,7 +173,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/25/%E6%97%A0%E5%88%97%E5%90%8D%E6%B3%A8%E5%85%A5/" data-id="clu7pl2q1000pq8b5ap6gfg96" data-title="无列名注入" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/25/%E6%97%A0%E5%88%97%E5%90%8D%E6%B3%A8%E5%85%A5/" data-id="clu890fui000ppob58sok2ft1" data-title="无列名注入" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -271,11 +271,20 @@
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@keyup.esc=&quot;showInfo&quot;</span><br><span class="line">Vue.config.keyCodes.huiche = 13//自定义一个别名按键</span><br></pre></td></tr></table></figure>
 
+<p><strong>计算属性</strong><br>某一绑定属性可以由 data 中其他两个数据计算得到。<br>定义：要用的属性不存在，要通过已有属性计算得来。</p>
+<p><strong>监视属性</strong><br>1．当被监视的属性变化时，回调函数自动调用，进行相关操作<br>2．监视的属性必须存在，才能进行监视</p>
+<p><strong>条件渲染</strong><br>1.v- if </p>
+<p>(1). v - if &#x3D;”表达式”<br>(2). v - else - if &#x3D;”表达式”<br>(3). v - else &#x3D;”表达式”</p>
+<p>2.v- show </p>
+<p> v - show &#x3D;”表达式”<br>特点：不展示的 DOM 元素未被移除，仅仅会隐藏掉</p>
+<p> **v - for **<br>用于展示列表数据<br>v - for &#x3D;”( item , index ) in xxx “: key &#x3D;” yyy “<br>例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;tr v-for=&quot;(item, index) in dataList&quot; :key=&quot;index&quot;&gt;</span><br><span class="line">                &lt;td&gt;&#123;&#123; index + 2 &#125;&#125;&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;&#123;&#123; item.data1 &#125;&#125;&lt;/td&gt;</span><br><span class="line">                &lt;td&gt;&#123;&#123; item.data2 &#125;&#125;&lt;/td&gt;</span><br><span class="line">                &lt;/tr&gt;</span><br><span class="line">              </span><br><span class="line">              </span><br><span class="line">              methods: &#123;</span><br><span class="line">                addRow() &#123;</span><br><span class="line">                    const newIndex = this.dataList.length + 1;</span><br><span class="line">                    this.dataList.push(&#123;</span><br><span class="line">                        id: newIndex,</span><br><span class="line">                        data1: this.Value1,</span><br><span class="line">                        data2: this.Value2</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/20/vue/" data-id="clu7pl2pz000iq8b59cccevb5" data-title="vue" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/20/vue/" data-id="clu890fue000epob5hbbu8rk8" data-title="vue" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -377,7 +386,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/17/java%E7%A8%8D%E8%BF%9B%E9%98%B6/" data-id="clu7pl2pw0005q8b5crd40k89" data-title="java稍进阶" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/17/java%E7%A8%8D%E8%BF%9B%E9%98%B6/" data-id="clu890fuc0006pob5ffmi0gdp" data-title="java稍进阶" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -493,7 +502,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/15/Java%E5%9F%BA%E7%A1%80/" data-id="clu7pl2pr0000q8b5684adalu" data-title="Java基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/15/Java%E5%9F%BA%E7%A1%80/" data-id="clu890fua0002pob56qlm0fj1" data-title="Java基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -561,7 +570,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/12/XXE/" data-id="clu7pl2pu0001q8b5c7hw33m3" data-title="XXE" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/12/XXE/" data-id="clu890fub0004pob5envf7lvn" data-title="XXE" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -624,7 +633,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/07/ssrf/" data-id="clu7pl2pz000gq8b5bjn76vod" data-title="ssrf" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/07/ssrf/" data-id="clu890fue000fpob54z9v56ix" data-title="ssrf" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -769,7 +778,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/05/%E5%8E%9F%E7%94%9F%E7%B1%BB/" data-id="clu7pl2q0000mq8b5gmmygy3h" data-title="原生类" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/05/%E5%8E%9F%E7%94%9F%E7%B1%BB/" data-id="clu890fui000rpob5b0in83d1" data-title="原生类" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -825,7 +834,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/04/phototype-1/" data-id="clu7pl2py000bq8b5gxdnax8e" data-title="phototype_1" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/04/phototype-1/" data-id="clu890fu90001pob5dxpvfaye" data-title="phototype_1" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -891,7 +900,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/03/phototype/" data-id="clu7pl2pw0007q8b5c3elecki" data-title="phototype" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/03/03/phototype/" data-id="clu890fuc0009pob5388kahem" data-title="phototype" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
